@@ -1,0 +1,12 @@
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\bin\Debug\net6.0\TiendaConect.deps.json
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\bin\Debug\net6.0\TiendaConect.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\bin\Debug\net6.0\TiendaConect.pdb
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\TiendaConect.csproj.AssemblyReference.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\TiendaConect.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\TiendaConect.AssemblyInfoInputs.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\TiendaConect.AssemblyInfo.cs
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\TiendaConect.csproj.CoreCompileInputs.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\TiendaConect.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\refint\TiendaConect.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\TiendaConect.pdb
+C:\Users\Henry\source\repos\TiendaMisVentas\TiendaConect\obj\Debug\net6.0\ref\TiendaConect.dll
