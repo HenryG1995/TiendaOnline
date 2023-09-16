@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace ClassDB.ConnectDB.ConectionDecider
+namespace ModelsStore.DbConn.DbConect
 {
     public class ConectionDecider
     {

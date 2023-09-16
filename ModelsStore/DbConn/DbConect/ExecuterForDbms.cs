@@ -13,10 +13,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ClassDB.ConnectDB.OraConnect;
+using static ModelsStore.DbConn.DbConect.OraConnect;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace ClassDB.ConnectDB
+namespace ModelsStore.DbConn.DbConect
 {
     public class ExecuteFromDBMSProvider
     {
@@ -27,7 +27,6 @@ namespace ClassDB.ConnectDB
         {
             try
             {
-
 
                 var DbmsProvider = Environment.GetEnvironmentVariable("PROVIDER");
                 if (DbmsProvider == null)

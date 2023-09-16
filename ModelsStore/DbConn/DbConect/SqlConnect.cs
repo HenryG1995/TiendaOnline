@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 
-namespace ClassDB.ConnectDB
+namespace ModelsStore.DbConn.DbConect
 {
     public class SqlConnect
     {

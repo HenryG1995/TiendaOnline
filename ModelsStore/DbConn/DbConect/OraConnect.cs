@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Oracle.ManagedDataAccess;
 using Oracle.ManagedDataAccess.Client;
-namespace ClassDB.ConnectDB
+namespace ModelsStore.DbConn.DbConect
 {
     public class OraConnect
     {

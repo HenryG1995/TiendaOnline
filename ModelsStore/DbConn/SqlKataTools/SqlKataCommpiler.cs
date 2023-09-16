@@ -8,7 +8,7 @@ using SqlKata;
 using SqlKata.Compilers;
 namespace ClassDB.SqlKataTools
 {
-    internal class SqlKataCommpiler
+    public class SqlKataCommpiler
     {
         private static SqlServerCompiler _compilerSQL = new SqlServerCompiler();
         private static PostgresCompiler _compilerPsg = new PostgresCompiler();
