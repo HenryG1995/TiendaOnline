@@ -1,0 +1,260 @@
+.space {
+  width: 96%;
+  max-width: 100%;
+  margin: 0em auto;
+  font: 0.9em/1.2 Arial, Helvetica, sans-serif;
+  background-color: rgba(246, 247, 251, 255);
+}
+
+.contenedor {
+  width: 70%;
+  max-width: 100%;
+  margin: 0em auto;
+  font: 0.9em/1.2 Arial, Helvetica, sans-serif;
+  background-color: rgba(246, 247, 251, 255);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 150px;
+  gap: 10px;
+  height: 100%;
+  width: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container > mat-card {
+  border: none;
+  box-shadow: none;
+  margin: 0 0 0 0;
+  background-color: #ffffff;
+  width: 100%;
+  height: 70%;
+}
+
+.contenedorBotones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8vh;
+  margin: 20px 0px 20px 0px;
+  transition: background-color 0.3s; /* Transición suave de color de fondo */
+}
+
+.boton {
+  font: 1em/1.2 Arial, Helvetica, sans-serif;
+  color: #373636;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.02);
+}
+
+.boton.boton-seleccionado {
+  background-color: rgba(112, 117, 217, 255) !important;
+  color: #ffffff !important;
+}
+
+.boton:hover {
+  background-color: rgba(112, 117, 217, 255);
+  color: #ffffff;
+}
+
+table {
+    width: 100%;
+  }
+
+/* Estilos para el cuadro con el icono */
+.cuadro-con-icono {
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  float: left; /* Hace que el cuadro flote a la izquierda */
+}
+
+.centrado-verticalmente {
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  height: 100%;
+}
+
+.numero-container {
+  display: grid;
+  grid-template-rows: 1fr auto 1fr; /* Dos espacios iguales alrededor del número */
+  align-items: center;
+}
+
+.numero {
+  color: #4246478c;
+  font-size: 28px;
+  text-align: center;
+  align-items: center;
+}
+
+/* Estilos para el texto "clientes" */
+.texto {
+  color: #4246478c;
+  font-size: 18px;
+  text-align: center;
+}
+
+.fa-user,
+.fa-tags,
+.fa-shopping-cart,
+.fashiping {
+  color: white;
+  font-size: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/*Animación de vibrar*/
+.vibrar {
+  animation: vibrar 0.2s ease infinite;
+}
+
+@keyframes vibrar {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px) rotate(0.4deg);
+  }
+
+  50% {
+    transform: translateX(3px) rotate(-0.4deg);
+  }
+
+  75% {
+    transform: translateX(-3px) rotate(0.4deg);
+  }
+
+  100% {
+    transform: translateX(3px) rotate(-0.4deg);
+  }
+}
+
+
+
+
+
+
+/* Media query para pantallas pequeñas (hasta 767px de ancho) */
+@media (max-width: 767px) {
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center;
+    }
+  
+    .cuadro-con-icono {
+      width: 25px;
+      height: 25px;
+      margin-right: 5px;
+      font-size: 12px;
+    }
+  
+    .contenedorBotones {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+    }
+  
+    .container > mat-card {
+      height: auto;
+      max-width: 150px;
+      text-align: center;
+    }
+    
+    .mat-card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  }
+  
+  /* Media query para pantallas medianas (768px - 1023px de ancho) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+      grid-template-columns: repeat(3, 1fr);
+      justify-content: center;
+    }
+  
+    .cuadro-con-icono {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+  
+    .contenedorBotones {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      margin: 20px 0px 20px 0px;
+    }
+  
+    .boton {
+      width: auto;
+      height: auto;
+      margin: 5px;
+    }
+  
+    .container > mat-card {
+      height: auto;
+      max-width: 200px;
+      text-align: center;
+    }
+    
+    .mat-card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  }
+  
+  /* Media query para pantallas más grandes (1024px en adelante) */
+  @media (min-width: 1024px) {
+    .container {
+      grid-template-columns: repeat(4, 1fr);
+      justify-content: space-between;
+    }
+  
+    .cuadro-con-icono {
+      width: 45px;
+      height: 45px;
+      margin-right: 12px;
+      font-size: 20px;
+    }
+  
+    .container > mat-card {
+      max-width: 250px;
+    }
+  }
+  
+
+
+
+
+
+  

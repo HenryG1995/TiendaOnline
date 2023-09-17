@@ -82,7 +82,7 @@
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff;
+    background-color: #fafafa;
   }
   
   [tabindex="-1"]:focus {
@@ -4513,7 +4513,7 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
   }
   .navbar > .container,
   .navbar > .container-fluid {
@@ -10722,7 +10722,7 @@
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   }
