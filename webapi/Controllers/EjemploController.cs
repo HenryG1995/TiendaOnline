@@ -9,7 +9,7 @@ namespace webapi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ConsultaInventariosController : ControllerBase
+    public class EjemploController : ControllerBase
     {
         [HttpGet("PostConsultaInventarios")]
         public IActionResult PostConsultaInventarios([FromBody] INVENTARIO request)
