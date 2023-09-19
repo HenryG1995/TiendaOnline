@@ -8,9 +8,9 @@ namespace ModelsStore.DTO.TABLES
 {
     public class PRECIOS
     {
-        string CODIGO_PRODUCTO { get; set; }
-        float PRECIO { get; set; }
-        int DESCUENTO { get; set; }
-        int ACTIVO { get; set; }
+        public string CODIGO_PRODUCTO { get; set; }
+        public float PRECIO { get; set; }
+        public int DESCUENTO { get; set; }
+        public int ACTIVO { get; set; }
     }
 }

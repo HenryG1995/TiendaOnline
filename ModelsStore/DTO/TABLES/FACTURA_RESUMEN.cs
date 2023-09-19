@@ -9,13 +9,13 @@ namespace ModelsStore.DTO.TABLES
     public class FACTURA_RESUMEN
     {
 
-        string CODIGO_VENTA { get; set; }
-        int NO_ITEM { get; set; }
-        string CODIGO_PRODUCTO { get; set; }
-        string CODIGO_PRECIO { get; set; }
-        int CANTIDAD { get; set; }
-        int TOTAL { get; set; }
-        double FECHA_EMISION { get; set; }
+        public string CODIGO_VENTA { get; set; }
+        public int NO_ITEM { get; set; }
+        public string CODIGO_PRODUCTO { get; set; }
+        public string CODIGO_PRECIO { get; set; }
+        public int CANTIDAD { get; set; }
+        public int TOTAL { get; set; }
+        public double FECHA_EMISION { get; set; }
 
     }
 }

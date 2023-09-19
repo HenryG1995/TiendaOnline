@@ -23,44 +23,15 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    //public IEnumerable<WeatherForecast> Get()
-    //{
-    //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-    //    {
-    //        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-    //        TemperatureC = Random.Shared.Next(-20, 55),
-    //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-    //    })
-    //    .ToArray();
-    //}
-
-    [HttpGet (Name = "ConsultaInventario")]
-    public async Task<IActionResult> inventarios([FromBody] INVENTARIO request) 
+    public IEnumerable<WeatherForecast> Get()
     {
-        ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-        var lista = new List<INVENTARIO>();
-
-        var inventariocl = new INVENTARIO();
-
-        var connection = new ConectionDecider();
-
-        connection.InitRead();
-
-        var query = new Query("INVENTARIO").Select("*").Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO);
-
-        var sql = execute.ExecuterCompiler(query);
-
-        execute.DataReader(sql, reader =>
+        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
-            lista = DataReaderMapper<INVENTARIO>.MapToList(reader);
-        });
-
-        execute.DataReader(sql, reader =>
-        {
-            inventariocl = DataReaderMapper<INVENTARIO>.MapToObject(reader);
-        });
-
-        return StatusCode(StatusCodes.Status200OK,inventariocl);
+            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        })
+        .ToArray();
     }
+
 }

@@ -8,8 +8,8 @@ namespace ModelsStore.DTO.TABLES
 {
     public class ESTADOS
     {
-        string CODIGO_ESTADO { get; set; }
-        string ESTADO { get; set; }
-        int ACTIVO { get; set; }
+        public string CODIGO_ESTADO { get; set; }
+        public string ESTADO { get; set; }
+        public int ACTIVO { get; set; }
     }
 }

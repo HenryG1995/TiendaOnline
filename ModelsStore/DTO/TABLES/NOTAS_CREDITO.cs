@@ -8,9 +8,9 @@ namespace ModelsStore.DTO.TABLES
 {
     public class NOTAS_CREDITO
     {
-        string CODIGO_NOTA { get; set; }
-        float VALOR_NOTA { get; set; }
-        string DESCRIPCION_NOTA { get; set; }
+        public string CODIGO_NOTA { get; set; }
+        public float VALOR_NOTA { get; set; }
+        public string DESCRIPCION_NOTA { get; set; }
 
 
     }

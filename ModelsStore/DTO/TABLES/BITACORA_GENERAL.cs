@@ -4,9 +4,9 @@ namespace ModelsStore.DTO.TABLES
 {
     public class BITACORA_GENERAL
     {
-        string CODIGO_USUARIO { get; set; }
-        string DESCRIPCION { get; set; }
-        string ACCION { get; set; }
-        DateTime FECHA { get; set; }
+        public string CODIGO_USUARIO { get; set; }
+        public string DESCRIPCION { get; set; }
+        public string ACCION { get; set; }
+        public DateTime FECHA { get; set; }
     }
 }

@@ -8,8 +8,8 @@ namespace ModelsStore.DTO.TABLES
 {
     public class CATALOGO_CATEGORIAS
     {
-        string CODIGO_CATEGORIA { get; set; }
-        string NOMBRE_CATEGORIA { get; set; }
-        int ACTIVO { get; set; }
+        public string CODIGO_CATEGORIA { get; set; }
+        public string NOMBRE_CATEGORIA { get; set; }
+        public int ACTIVO { get; set; }
     }
 }

@@ -8,14 +8,14 @@ namespace ModelsStore.DTO.TABLES
 {
     internal class CLIENTE
     {
-        string CODIGO_CLIENTE { get; set; }
-        string PRIMER_NOMBRE { get; set; }
-        string SEGUNDO_NOMBRE { get; set; }
-        string PRIMER_APELLIDO { get; set; }
-        string SEGUNDO_APELLIDO { get; set; }
-        int NIT { get; set; }
-        string DIRECCION_CLIENTE { get; set; }
-        string CODIGO_ESTADO { get; set; }
-        string CODIGO_CATEGORIA { get; set; }
+        public string CODIGO_CLIENTE { get; set; }
+        public string PRIMER_NOMBRE { get; set; }
+        public string SEGUNDO_NOMBRE { get; set; }
+        public string PRIMER_APELLIDO { get; set; }
+        public string SEGUNDO_APELLIDO { get; set; }
+        public int NIT { get; set; }
+        public string DIRECCION_CLIENTE { get; set; }
+        public string CODIGO_ESTADO { get; set; }
+        public string CODIGO_CATEGORIA { get; set; }
     }
 }
