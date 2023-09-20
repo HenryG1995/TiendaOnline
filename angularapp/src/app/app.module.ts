@@ -4,9 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { NgSwitch, NgSwitchCase, AsyncPipe } from '@angular/common';
 
 //importacion de angular material
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +13,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { StepperOrientation, MatStepperModule } from '@angular/material/stepper';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule, SortDirection, matSortAnimations } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgIf, DatePipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 
 //componentes
 import { AppComponent } from './app.component';
@@ -37,7 +48,7 @@ import { IngresoEntregaComponent } from './componentes/EntregasPaquete/ingreso-e
 import { SeguimientoEntregaComponent } from './componentes/EntregasPaquete/seguimiento-entrega/seguimiento-entrega.component';
 import { ConsultaBitacoraEntregaComponent } from './componentes/EntregasPaquete/consulta-bitacora-entrega/consulta-bitacora-entrega.component';
 import { NosotrosComponent } from './componentes/nosotros/nosotros.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -78,8 +89,27 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    NgSwitch,
+    NgSwitchCase,
+    MatStepperModule,
+    FormsModule,
+    AsyncPipe,
+    MatPaginatorModule,
+    NgIf,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    DatePipe,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MomentDateAdapter },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
