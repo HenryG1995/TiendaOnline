@@ -11,7 +11,7 @@ using System.Threading.Tasks;
     public string USER_ID { get; set; }
     public string PASSWORD_USER { get; set; }
     public string CORREO { get; set; }
-
+    public string ESTADO { get; set; }
 
 }
 

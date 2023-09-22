@@ -94,8 +94,8 @@ namespace ModelsStore.DbConn.DbConect
                 OracleCommand ora_Command = new OracleCommand(sqlQuery, ora.OracleContext);
                 ora_Command.CommandType = CommandType.Text;
                 ora_Command.CommandText = sqlQuery;
-
                 ora_Command.ExecuteNonQuery();
+                ora.OracleContext.Close();
                 return true;
 
             }
@@ -113,7 +113,7 @@ namespace ModelsStore.DbConn.DbConect
 
             try
             {
-                var DbmsProvider = Environment.GetEnvironmentVariable("PROVIDER");
+                var DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
 
                 if (DbmsProvider == null)
                 {
@@ -248,8 +248,9 @@ namespace ModelsStore.DbConn.DbConect
                                         action(reader);
                                     }
                                     string log = "success " + cmdQuery.ToString();
-
+                                    ora.OracleContext.Close();
                                     Console.WriteLine("success " + cmdQuery.ToString());
+                                    
                                 }
                                 else
                                 {

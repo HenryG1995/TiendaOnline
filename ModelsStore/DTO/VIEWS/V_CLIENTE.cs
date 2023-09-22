@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelsStore.DTO.TABLES
 {
-    public class CLIENTE
+    public class V_CLIENTE
     {
         public string CODIGO_CLIENTE { get; set; }
         public string PRIMER_NOMBRE { get; set; }

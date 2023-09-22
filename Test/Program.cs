@@ -2,6 +2,7 @@
 using ClassDB.SqlKataTools;
 using ModelsStore;
 using ModelsStore.DbConn.DbConect;
+using ModelsStore.DbConn.Utilities;
 using ModelsStore.DTO.TABLES;
 using SqlKata;
 
@@ -19,37 +20,46 @@ var constr = string.Format("USER ID={0};PASSWORD={1};DATA SOURCE= (DESCRIPTION =
 Console.WriteLine(constr);
 
 
-
+var connection = new ConectionDecider();
 
 ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-var lista = new List<INVENTARIO>();
-
-var inventariocl = new INVENTARIO();
-var connection = new ConectionDecider();
 connection.InitRead();
 
-var query = new Query("INVENTARIO").Select("*");
 
-var sql = execute.ExecuterCompiler(query);
+var value = "Hola123@";
+var encrypt = new EncryptData();
 
-execute.DataReader(sql, reader =>
-{
-    lista = DataReaderMapper<INVENTARIO>.MapToList(reader);
-});
+value = encrypt.Encrypt(value);
 
-var fin = lista.Count;
+Console.WriteLine(value);
 
-while (fin > 0)
-{   fin--;
-    Console.WriteLine("UUID_ESTADO :" + lista[fin].UUID_ESTADO);
-    Console.WriteLine("CADUCIDAD :" + lista[fin].CADUCIDAD);
-    Console.WriteLine("ACTIVO :" + lista[fin].ACTIVO);
-    Console.WriteLine("CODIGO_PRODUCTO :"+lista[fin].CODIGO_PRODUCTO);
-    Console.WriteLine("CODIGO_PROVEEDOR :" + lista[fin].CODIGO_PROVEEDOR);
-    Console.WriteLine("DESCRIPCION_PRODUCTO :" +lista[fin].DESCRIPCION_PRODUCTO);
-    
-}
+
+//var lista = new List<INVENTARIO>();
+
+//var inventariocl = new INVENTARIO();
+//
+
+//var query = new Query("INVENTARIO").Select("*");
+
+//var sql = execute.ExecuterCompiler(query);
+
+//execute.DataReader(sql, reader =>
+//{
+//    lista = DataReaderMapper<INVENTARIO>.MapToList(reader);
+//});
+
+//var fin = lista.Count;
+
+//while (fin > 0)
+//{   fin--;
+//    Console.WriteLine("UUID_ESTADO :" + lista[fin].UUID_ESTADO);
+//    Console.WriteLine("CADUCIDAD :" + lista[fin].CADUCIDAD);
+//    Console.WriteLine("ACTIVO :" + lista[fin].ACTIVO);
+//    Console.WriteLine("CODIGO_PRODUCTO :"+lista[fin].CODIGO_PRODUCTO);
+//    Console.WriteLine("CODIGO_PROVEEDOR :" + lista[fin].CODIGO_PROVEEDOR);
+//    Console.WriteLine("DESCRIPCION_PRODUCTO :" +lista[fin].DESCRIPCION_PRODUCTO);
+
+//}
 
 Console.WriteLine("pausa");
 

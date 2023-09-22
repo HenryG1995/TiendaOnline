@@ -15,24 +15,75 @@ namespace webapi.Controllers
         public ActionResult Get()
         {
 
-            return Ok();
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+            var connection = new ConectionDecider();
+
+            try
+            {
+
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
         }
         [HttpPost]
         public ActionResult Post()
         {
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-            return Ok();
+            var connection = new ConectionDecider();
+
+            try
+            {
+
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
         }
         [HttpPut]
         public ActionResult Put()
         {
 
-            return Ok();
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+            var connection = new ConectionDecider();
+
+            try
+            {
+
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
         }
         [HttpDelete]
         public ActionResult Delete()
         {
-            return Ok();
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+            var connection = new ConectionDecider();
+
+            try
+            {
+
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
         }
 
 
