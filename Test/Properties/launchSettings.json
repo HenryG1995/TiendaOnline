@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Test": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DbmsProvider": "oracle",
+        "STR": "USER ID=db_tienda;PASSWORD=password2;DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.225.132)(PORT = 1521))(CONNECT_DATA = (SID =DBORCL))) ;"
+      }
+    }
+  }
+}

@@ -57,9 +57,9 @@
               "target": "Package",
               "version": "[7.0.4, )"
             },
-            "Oracle.ManagedDataAccess": {
+            "Oracle.ManagedDataAccess.Core": {
               "target": "Package",
-              "version": "[21.11.0, )"
+              "version": "[3.21.110, )"
             },
             "SqlKata": {
               "target": "Package",
@@ -148,9 +148,9 @@
               "target": "Package",
               "version": "[7.0.4, )"
             },
-            "Oracle.ManagedDataAccess": {
+            "Oracle.ManagedDataAccess.Core": {
               "target": "Package",
-              "version": "[21.11.0, )"
+              "version": "[3.21.110, )"
             },
             "SqlKata": {
               "target": "Package",

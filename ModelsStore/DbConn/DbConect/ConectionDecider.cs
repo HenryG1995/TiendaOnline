@@ -24,17 +24,17 @@ namespace ModelsStore.DbConn.DbConect
 
             // Confirm that the value can only be retrieved from the process
             // environment block if running on a Windows system.
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                Console.WriteLine("Attempting to retrieve DbmsProvider from:");
-                foreach (EnvironmentVariableTarget enumValue in
-                                  Enum.GetValues(typeof(EnvironmentVariableTarget)))
-                {
-                    DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider", enumValue);
-                    Console.WriteLine($"   {enumValue}: {(DbmsProvider != null ? "found" : "not found")}");
-                }
-                Console.WriteLine();
-            }
+            //if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            //{
+            //    Console.WriteLine("Attempting to retrieve DbmsProvider from:");
+            //    foreach (EnvironmentVariableTarget enumValue in
+            //                      Enum.GetValues(typeof(EnvironmentVariableTarget)))
+            //    {
+            //        DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider", enumValue);
+            //        Console.WriteLine($"   {enumValue}: {(DbmsProvider != null ? "found" : "not found")}");
+            //    }
+            //    Console.WriteLine();
+            //}
 
             OraConnect ora = new OraConnect();
             PostgresSqlConnect psg = new PostgresSqlConnect();

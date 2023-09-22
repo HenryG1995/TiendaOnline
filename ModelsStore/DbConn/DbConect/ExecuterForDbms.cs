@@ -28,7 +28,7 @@ namespace ModelsStore.DbConn.DbConect
             try
             {
 
-                var DbmsProvider = Environment.GetEnvironmentVariable("PROVIDER");
+                var DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
                 if (DbmsProvider == null)
                 {
                     Console.WriteLine("No tiene cargado el DbmsProvider");
@@ -215,7 +215,7 @@ namespace ModelsStore.DbConn.DbConect
         {
 
 
-            var DbmsProvider = Environment.GetEnvironmentVariable("PROVIDER");
+            var DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
 
 
 
