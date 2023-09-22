@@ -13,7 +13,7 @@ namespace ModelsStore.DTO.TABLES
         public string SEGUNDO_NOMBRE { get; set; }
         public string PRIMER_APELLIDO { get; set; }
         public string SEGUNDO_APELLIDO { get; set; }
-        public int NIT { get; set; }
+        public string NIT { get; set; }
         public string DIRECCION_CLIENTE { get; set; }
         public string CODIGO_ESTADO { get; set; }
         public string CODIGO_CATEGORIA { get; set; }
