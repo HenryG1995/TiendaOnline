@@ -10,11 +10,11 @@ namespace ModelsStore.DTO.TABLES
     {
 
         public string CODIGO_VENTA { get; set; }
-        public int NO_ITEM { get; set; }
+        public Int32 NO_ITEM { get; set; }
         public string CODIGO_PRODUCTO { get; set; }
         public string CODIGO_PRECIO { get; set; }
-        public int CANTIDAD { get; set; }
-        public int TOTAL { get; set; }
+        public Int64 CANTIDAD { get; set; }
+        public Int64 TOTAL { get; set; }
         public double FECHA_EMISION { get; set; }
 
     }

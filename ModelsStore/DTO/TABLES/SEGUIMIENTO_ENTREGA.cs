@@ -13,7 +13,7 @@ namespace ModelsStore.DTO.TABLES
         public string DESCRIPCION { get; set; }
         public DateTime FECHA_ENTREGA { get; set; }
         public DateTime FECHA_SALIDA { get; set; }
-        public int ESTADO { get; set; }
+        public Int32 ESTADO { get; set; }
         public DateTime FECHA_REGISTRA { get; set; }
 
     }

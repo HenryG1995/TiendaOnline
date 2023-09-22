@@ -11,6 +11,6 @@ namespace ModelsStore.DTO.TABLES
 
         public string CODIGO_PROVEEDOR { get; set; }
         public string NOMBRE_PROVEEDOR { get; set; }
-        public int ACTIVO { get; set; }
+        public Int32 ACTIVO { get; set; }
     }
 }

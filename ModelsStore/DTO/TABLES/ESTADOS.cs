@@ -10,6 +10,6 @@ namespace ModelsStore.DTO.TABLES
     {
         public string CODIGO_ESTADO { get; set; }
         public string ESTADO { get; set; }
-        public int ACTIVO { get; set; }
+        public Int32 ACTIVO { get; set; }
     }
 }
