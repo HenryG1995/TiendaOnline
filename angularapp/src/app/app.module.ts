@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { NgSwitch, NgSwitchCase, AsyncPipe } from '@angular/common';
+import { Moment } from 'moment';
 
 //importacion de angular material
 import { MatButtonModule } from '@angular/material/button';

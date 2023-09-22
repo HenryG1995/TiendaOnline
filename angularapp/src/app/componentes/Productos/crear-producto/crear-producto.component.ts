@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { Moment } from 'moment';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -16,14 +17,17 @@ import * as _moment from 'moment';
 })
 export class CrearProductoComponent {
   fechaVencimiento: Date | null = null;
-  
-  constructor(private dateAdapter: DateAdapter<Date>){
+
+  constructor(private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('es')
   }
 
-  onFechaVencimientoChange(event: any){
-    console.log('fecha seleccionada: ', event.value);
-  }
+  onFechaVencimientoChange(event: any) {
+    const m: Moment = event.value;
+    if (m) {
+      console.log('fecha seleccionada: ', m.toDate());
+    }
 
+  }
 
 }
