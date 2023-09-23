@@ -4,6 +4,8 @@ using ModelsStore.DbConn.DbConect;
 using SqlKata;
 using ClassDB.SqlKataTools;
 using Microsoft.AspNetCore.Http;
+using System;
+using Azure.Core;
 
 namespace webapi.Controllers
 {
@@ -11,8 +13,8 @@ namespace webapi.Controllers
     [ApiController]
     public class InventariosController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("GetAllInventario")]
+        public IActionResult GetAllInventario()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -21,36 +23,55 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("INVENTARIO").Select("*").Where("ACTIVO", 1);
 
+                var list = new List<INVENTARIO>();
 
-                return Ok();
+                var sql = execute.ExecuterCompiler(query);
+
+                execute.DataReader(sql, reader =>
+                {
+                    list = DataReaderMapper<INVENTARIO>.MapToList(reader);
+                });
+
+                return Ok(list.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public ActionResult Post()
-        {
 
+        [HttpPost("ConsultaProducto")]
+        public IActionResult ConsultaProducto([FromBody] INVENTARIO request)
+        {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
             var connection = new ConectionDecider();
 
             try
             {
+                var query = new Query("INVENTARIO").Select("*").Where("CODIGO_PRODUCTO",request.CODIGO_PRODUCTO).Where("ACTIVO",1);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                var lista = new List<INVENTARIO>();
+
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<INVENTARIO>.MapToList(reader);
+                });
+
+                return Ok(lista.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPut]
-        public ActionResult Put()
+
+        [HttpPost("GuardaProducto")]
+        public IActionResult GuardaProducto([FromBody] INVENTARIO request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -59,17 +80,54 @@ namespace webapi.Controllers
 
             try
             {
+                request.CODIGO_PRODUCTO = Guid.NewGuid().ToString();
 
+                var query = new Query("INVENTARIO").AsInsert(request);
 
-                return Ok();
+                var sql = execute.ExecuterCompiler(query);
+
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpPut("ActualizaProducto")]
+        public IActionResult ActualizaProducto([FromBody] INVENTARIO request)
+        {
+
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+            var connection = new ConectionDecider();
+
+            try
+            {
+                var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO).AsUpdate(new
+                {
+                       
+                        NOMBRE_PRODUCTO = request.NOMBRE_PRODUCTO,
+                        DESCRIPCION_PRODUCTO = request.DESCRIPCION_PRODUCTO,
+                        UNIDADES_EXISTENTES = request.UNIDADES_EXISTENTES,
+                        FECHA_CARGA = request.FECHA_CARGA,
+                        FECHA_INGRESO = request.FECHA_INGRESO,
+                        UUID_ESTADO = request.UUID_ESTADO,
+                        ACTIVO = request.ACTIVO,
+                        CADUCIDAD = request.CADUCIDAD
+
+                });
+
+                var sql = execute.ExecuterCompiler(query);
+
+                return Ok(execute.ExecuteDecider(sql));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
+        }
+        [HttpDelete("BajaProducto")]
+        public IActionResult BajaProducto([FromBody] INVENTARIO request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -77,9 +135,13 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO",request.CODIGO_PRODUCTO).AsUpdate(new{
+                    ACTIVO = 0
+                });
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {

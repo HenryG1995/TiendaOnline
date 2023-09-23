@@ -11,8 +11,8 @@ namespace webapi.Controllers
     [ApiController]
     public class EstadosController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("GetAllStates")]
+        public IActionResult GetAllStates()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -21,17 +21,26 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("ESTADOS").Select("*");
+             
+                var sql = execute.ExecuterCompiler(query);
+                
+                var estados = new List<ESTADOS>();
 
+                execute.DataReader(sql, reader =>
+                {
+                    estados = DataReaderMapper<ESTADOS>.MapToList(reader);
+                });
 
-                return Ok();
+                return Ok(estados.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPost("ObtenerEstado")]
+        public IActionResult ObtenerEstado([FromBody] ESTADOS request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -40,17 +49,26 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("ESTADOS").Select("*").Where("CODIGO_ESTADO",request.CODIGO_ESTADO);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                var list = new List<ESTADOS>();
+
+                execute.DataReader(sql, reader =>
+                {
+                    list = DataReaderMapper<ESTADOS>.MapToList(reader);
+                });
+
+                return Ok(list.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPut]
-        public ActionResult Put()
+        [HttpPut("CrearEstado")]
+        public IActionResult CrearEstado([FromBody] ESTADOS request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -59,17 +77,21 @@ namespace webapi.Controllers
 
             try
             {
+                request.CODIGO_ESTADO = Guid.NewGuid().ToString();
 
+                var query = new Query().AsInsert(request);
+                var sql = execute.ExecuterCompiler(query);
+                
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("DesactivaEstado")]
+        public IActionResult DesactivaEstado([FromBody] ESTADOS request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -77,9 +99,12 @@ namespace webapi.Controllers
 
             try
             {
+                request.ACTIVO = 0;
+                var query = new Query("ESTADOS").Where("CODIGO_ESTADO",request.CODIGO_ESTADO).AsUpdate(request);
+                var sql = execute.ExecuterCompiler(query);
 
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {

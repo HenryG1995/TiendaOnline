@@ -11,8 +11,8 @@ namespace webapi.Controllers
     [ApiController]
     public class CatalogoCategoriasController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("GetAllCat")]
+        public IActionResult GetAllCat()
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -20,7 +20,16 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("CATALOGO_CATEGORIAS").Select("*");
 
+                var sql = execute.ExecuterCompiler(query);
+
+                var list = new List<CATALOGO_CATEGORIAS>();
+
+                execute.DataReader(sql, reader =>
+                {
+                    list = DataReaderMapper<CATALOGO_CATEGORIAS>.MapToList(reader);
+                });
 
                 return Ok();
             }
@@ -29,8 +38,8 @@ namespace webapi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPost("GuardaCat")]
+        public ActionResult GuardaCat([FromBody] CATALOGO_CATEGORIAS request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -39,17 +48,22 @@ namespace webapi.Controllers
 
             try
             {
+                request.CODIGO_CATEGORIA = Guid.NewGuid().ToString();
+                
+                var query = new Query("CATALOGO_CATEGORIAS").AsInsert(request);
 
+                var sql = execute.ExecuterCompiler(query);
+                
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPut]
-        public ActionResult Put()
+        [HttpPut("ActualizaCat")]
+        public ActionResult ActualizaCat([FromBody] CATALOGO_CATEGORIAS request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -57,17 +71,23 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("CATALOGO_CATEGORIAS")
+                    .Where("CODIGO_CATEGORIA",request.CODIGO_CATEGORIA)
+                    .AsUpdate(request);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                
+
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("BajaCategoria")]
+        public ActionResult BajaCategoria([FromBody] CATALOGO_CATEGORIAS request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -76,8 +96,25 @@ namespace webapi.Controllers
             try
             {
 
+                var estado = new ESTADOS();
 
-                return Ok();
+                var query2 = new Query("ESTADOS").Select("CODIGO_ESTADO").Where("ACTIVO", 1).Where("ESTADO", "BAJA").Limit(1);
+
+                var sql2 = execute.ExecuterCompiler(query2);
+
+                execute.DataReader(sql2, reader =>
+                {
+                    estado = DataReaderMapper<ESTADOS>.MapToObject(reader);
+                });
+
+                var query = new Query("CATALOGO_CATEGORIAS").Where("CODIGO_CATEGORIA", request.CODIGO_CATEGORIA).AsUpdate(new
+                {
+                    ESTADO = estado.CODIGO_ESTADO
+                });
+
+                var sql = execute.ExecuterCompiler(query);
+
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
