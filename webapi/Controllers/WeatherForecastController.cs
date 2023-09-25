@@ -1,4 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using ModelsStore.DTO.TABLES;
+using ModelsStore.DbConn.DbConect;
+using SqlKata;
+using ClassDB.SqlKataTools;
 
 namespace webapi.Controllers;
 
@@ -29,4 +33,5 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
+
 }

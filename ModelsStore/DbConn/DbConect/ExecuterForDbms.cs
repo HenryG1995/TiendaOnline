@@ -13,10 +13,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ClassDB.ConnectDB.OraConnect;
+using static ModelsStore.DbConn.DbConect.OraConnect;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace ClassDB.ConnectDB
+namespace ModelsStore.DbConn.DbConect
 {
     public class ExecuteFromDBMSProvider
     {
@@ -28,8 +28,7 @@ namespace ClassDB.ConnectDB
             try
             {
 
-
-                var DbmsProvider = Environment.GetEnvironmentVariable("PROVIDER");
+                var DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
                 if (DbmsProvider == null)
                 {
                     Console.WriteLine("No tiene cargado el DbmsProvider");
@@ -95,8 +94,8 @@ namespace ClassDB.ConnectDB
                 OracleCommand ora_Command = new OracleCommand(sqlQuery, ora.OracleContext);
                 ora_Command.CommandType = CommandType.Text;
                 ora_Command.CommandText = sqlQuery;
-
                 ora_Command.ExecuteNonQuery();
+                ora.OracleContext.Close();
                 return true;
 
             }
@@ -114,7 +113,7 @@ namespace ClassDB.ConnectDB
 
             try
             {
-                var DbmsProvider = Environment.GetEnvironmentVariable("PROVIDER");
+                var DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
 
                 if (DbmsProvider == null)
                 {
@@ -216,7 +215,7 @@ namespace ClassDB.ConnectDB
         {
 
 
-            var DbmsProvider = Environment.GetEnvironmentVariable("PROVIDER");
+            var DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
 
 
 
@@ -249,8 +248,9 @@ namespace ClassDB.ConnectDB
                                         action(reader);
                                     }
                                     string log = "success " + cmdQuery.ToString();
-
+                                    ora.OracleContext.Close();
                                     Console.WriteLine("success " + cmdQuery.ToString());
+                                    
                                 }
                                 else
                                 {
