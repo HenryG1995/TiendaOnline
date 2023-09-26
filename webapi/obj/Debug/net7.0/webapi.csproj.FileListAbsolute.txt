@@ -144,3 +144,11 @@ C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\refint
 C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.pdb
 C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.genruntimeconfig.cache
 C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\ref\webapi.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.DirectoryServices.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.DirectoryServices.Protocols.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.DirectoryServices.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll

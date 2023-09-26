@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ModelsStore": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DbmsProvider": "Oracle",
+        "STR": "USER ID=db_tienda;PASSWORD=Andromeda12/;DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.225.132)(PORT = 1521))(CONNECT_DATA = (SERVICE_NAME =DBORCL))) ;"
+      }
+    }
+  }
+}

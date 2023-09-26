@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace ModelsStore.DTO.TABLES
 {
-    internal class SEGUIMIENTO_ENTREGA
+    public class SEGUIMIENTO_ENTREGA
     {
 
-        string CODIGO_ENTREGA { get; set; }
-        string DESCRIPCION { get; set; }
-        DateTime FECHA_ENTREGA { get; set; }
-        DateTime FECHA_SALIDA { get; set; }
-        int ESTADO { get; set; }
-        DateTime FECHA_REGISTRA { get; set; }
+        public string CODIGO_ENTREGA { get; set; }
+        public string DESCRIPCION { get; set; }
+        public DateTime FECHA_ENTREGA { get; set; }
+        public DateTime FECHA_SALIDA { get; set; }
+        public Int32 ESTADO { get; set; }
+        public DateTime FECHA_REGISTRA { get; set; }
 
     }
 }

@@ -9,7 +9,7 @@ using Npgsql;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
-namespace ClassDB.ConnectDB
+namespace ModelsStore.DbConn.DbConect
 {
     internal class PostgresSqlConnect
     {
