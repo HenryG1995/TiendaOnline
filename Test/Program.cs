@@ -6,11 +6,11 @@ using ModelsStore.DbConn.Utilities;
 using ModelsStore.DTO.TABLES;
 using SqlKata;
 
-var UserID = "db_tienda";
+var UserID = "db_tienda_2";
 var Pass = "password2";
-var Host = "192.168.225.132";
+var Host = "192.168.0.33";
 var Port = "1521";
-var ServiceName = "DBORCL";
+var ServiceName = "XE";
 
 var constr = string.Format("USER ID={0};PASSWORD={1};DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = {2})(PORT = {3}))(CONNECT_DATA = (SERVICE_NAME ={4}))) ;", UserID, Pass, Host, Port, ServiceName);
 //ConnectionStringOracle = string.Format("CONNECTION TIMEOUT=120;PASSWORD={1};DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = {2})(PORT = {3}))(CONNECT_DATA = (SID ={4} ))) ;USER ID={0}", UserID, Pass, Host, Port,SID);

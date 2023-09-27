@@ -31,7 +31,7 @@ namespace webapi.Controllers
                     list = DataReaderMapper<CATALOGO_CATEGORIAS>.MapToList(reader);
                 });
 
-                return Ok();
+                return Ok(list.ToList());
             }
             catch (Exception ex)
             {

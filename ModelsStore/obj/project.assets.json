@@ -3824,24 +3824,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Henry\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Ron\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
+      "projectUniqueName": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
       "projectName": "ModelsStore",
-      "projectPath": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
-      "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\obj\\",
+      "projectPath": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
+      "packagesPath": "C:\\Users\\Ron\\.nuget\\packages\\",
+      "outputPath": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Ron\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3849,7 +3844,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3905,7 +3899,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }
