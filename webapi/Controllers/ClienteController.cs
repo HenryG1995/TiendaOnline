@@ -75,6 +75,31 @@ namespace webapi.Controllers
             }
 
         }
+        [HttpPut("CreaCliente")]
+        public IActionResult CreaCliente([FromBody] CLIENTE request)
+        {
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+            var connection = new ConectionDecider();
+            try
+            {
+                connection.InitRead();
+
+                var query = new Query("CLIENTES").AsInsert(request);
+
+                var sql = execute.ExecuterCompiler(query);
+
+
+                return Ok(execute.ExecuteDecider(sql));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+
+            }
+
+        }
 
         [HttpPut("ActualizaCliente")]
         public IActionResult ActualizaCliente([FromBody] CLIENTE request)
