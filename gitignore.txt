@@ -28,6 +28,9 @@
 !.vscode/extensions.json
 .history/*
 
+# Ignorar archivos con extensión .vsidx
+*.vsidx
+
 # Miscellaneous
 /angularapp/.angular/cache
 .sass-cache/
