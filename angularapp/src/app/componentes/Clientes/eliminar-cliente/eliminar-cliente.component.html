@@ -1,0 +1,85 @@
+<div class="contenedor">
+    <h4><strong>ELIMINAR CLIENTE</strong></h4>
+    <div class="busqueda" style="display: block; align-items: center; text-align: center;">
+        <mat-form-field appearance="outline" style="margin-top: 20px; margin-right: 25px;">
+            <mat-label>Ingresar código</mat-label>
+            <input matInput placeholder="Consulta por código">
+        </mat-form-field>
+        <button mat-raised-button color="primary">Buscar cliente</button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="containerNombre" style="text-align: center;">
+        <mat-form-field appearance="outline" style="text-align: center;">
+            <mat-label>Nombre completo</mat-label>
+            <input matInput placeholder="Nombre completo" disabled="true" style="text-align: center;">
+        </mat-form-field>
+    </div>
+    <div class="infcontainer">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Número de NIT</mat-label>
+            <input matInput placeholder="No. NIT" disabled="true">
+        </mat-form-field>
+
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput placeholder="adc@guatex.com" disabled="true">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <input matInput disabled="true">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <input matInput disabled="true">
+        </mat-form-field>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="isTableEmpty">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="numeral">
+            <th mat-header-cell *matHeaderCellDef> Avenida / numeral </th>
+            <td mat-cell *matCellDef="let element"> {{element.numeral}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="tdireccion">
+            <th mat-header-cell *matHeaderCellDef> Tipo de dirección </th>
+            <td mat-cell *matCellDef="let element"> {{element.tdireccion}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="zona">
+            <th mat-header-cell *matHeaderCellDef> Zona </th>
+            <td mat-cell *matCellDef="let element"> {{element.zona}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="departamento">
+            <th mat-header-cell *matHeaderCellDef> Departamento </th>
+            <td mat-cell *matCellDef="let element"> {{element.departamento}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="municipio">
+            <th mat-header-cell *matHeaderCellDef> Municipio </th>
+            <td mat-cell *matCellDef="let element"> {{element.municipio}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="busqueda" style="display: block; align-items: center; text-align: center; margin-top: 25px;">
+        <button mat-raised-button color="primary">Eliminar cliente</button>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="contenedor">
+    <div class="wrapper d-flex align-items-stretch">
+
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <a  class="img logo rounded-circle mb-5" href="/home"
+                    style="background-image: url(assets/logitohome.png);"></a>
+
+                <ul class="list-unstyled components mb-5">
+                    <li class="">
+                        <a (click)="toggleSubmenu('clienteSubmenu')" data-toggle="collapse"
+                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Clientes</a>
+                        <ul *ngIf="submenusState.clienteSubmenu && submenuAbierto === 'clienteSubmenu'"
+                            class=" list-unstyled">
+                            <li>
+                                <a href="clientes/crearCliente"><i class="fa fa-user-plus"></i>
+                                    Crear cliente</a>
+                            </li>
+                            <li>
+                                <a href="clientes/consultarCliente"><i class="fa fa-search"></i>
+                                    Consulta cliente</a>
+                            </li>
+                            <li>
+                                <a href="clientes/actualizarCliente"><i class="fa fa-edit"></i>
+                                    Actualizar cliente</a>
+                            </li>
+                            <li>
+                                <a href="clientes/eliminarCliente"><i class="fa fa-trash"></i>
+                                    Eliminar cliente</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a (click)="toggleSubmenu('productoSubmenu')"  data-toggle="collapse"
+                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-tags"></i> Productos</a>
+                        <ul *ngIf="submenusState.productoSubmenu && submenuAbierto === 'productoSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/crearProducto">Crear producto</a>
+                            </li>
+                            <li>
+                                <a href="/consultarProducto">Consultar producto</a>
+                            </li>
+                            <li>
+                                <a href="/actualizarProducto">Actualizar producto</a>
+                            </li>
+                            <li>
+                                <a href="/eliminarProducto">Eliminar producto</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a (click)="toggleSubmenu('ventaSubmenu')"  data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-shopping-cart"></i> Ventas</a>
+                        <ul *ngIf="submenusState.ventaSubmenu && submenuAbierto === 'ventaSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/ventaMayor">Venta por mayor</a>
+                            </li>
+                            <li>
+                                <a href="/ventaMenor">Venta por menor</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a (click)="toggleSubmenu('notaCreditoSubmenu')"  data-toggle="collapse"
+                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-history"></i>
+                            Nota de crédito</a>
+                        <ul *ngIf="submenusState.notaCreditoSubmenu && submenuAbierto === 'notaCreditoSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/anularVenta">Anular venta</a>
+                            </li>
+                            <li>
+                                <a href="/devolucionProducto">Devolución de producto</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a (click)="toggleSubmenu('entregaPaqueteSubmenu')"  data-toggle="collapse"
+                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-truck"></i>
+                            Entrega de paquetes</a>
+                        <ul *ngIf="submenusState.entregaPaqueteSubmenu && submenuAbierto === 'entregaPaqueteSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/ingresoEntrega">Ingreso de entrega</a>
+                            </li>
+                            <li>
+                                <a href="/seguimientoEntrega">Seguimiento de entrega</a>
+                            </li>
+                            <li>
+                                <a href="/bitacoraEntrega">Consulta de bitácora de entrega</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="nosotros"><i class="fa fa-info-circle"></i>
+                            Nosotros</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" >Mi perfil</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" >Log out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <router-outlet></router-outlet>
+            
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
