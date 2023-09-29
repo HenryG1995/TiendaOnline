@@ -1,0 +1,236 @@
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\appsettings.json
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\webapi.exe
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\webapi.deps.json
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\webapi.runtimeconfig.json
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\webapi.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\webapi.pdb
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.csproj.AssemblyReference.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.AssemblyInfoInputs.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.AssemblyInfo.cs
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.csproj.CoreCompileInputs.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\staticwebassets\msbuild.webapi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\staticwebassets\msbuild.build.webapi.props
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.webapi.props
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.webapi.props
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\scopedcss\bundle\webapi.styles.css
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.csproj.CopyComplete
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\refint\webapi.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.pdb
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\webapi.genruntimeconfig.cache
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\obj\Debug\net7.0\ref\webapi.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Npgsql.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\Oracle.ManagedDataAccess.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\SqlKata.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Henry\source\repos\TiendaMisVentas\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\appsettings.json
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\webapi.exe
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\webapi.deps.json
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\webapi.runtimeconfig.json
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\webapi.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\webapi.pdb
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Npgsql.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Oracle.ManagedDataAccess.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\SqlKata.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\ModelsStore.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\ModelsStore.pdb
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.csproj.AssemblyReference.cache
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.AssemblyInfoInputs.cache
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.AssemblyInfo.cs
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.csproj.CoreCompileInputs.cache
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.webapi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.build.webapi.props
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.webapi.props
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.webapi.props
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\scopedcss\bundle\webapi.styles.css
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.csproj.CopyComplete
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\refint\webapi.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.pdb
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\webapi.genruntimeconfig.cache
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\obj\Debug\net7.0\ref\webapi.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.DirectoryServices.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\System.DirectoryServices.Protocols.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.DirectoryServices.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\appsettings.Development.json
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\appsettings.json
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\webapi.exe
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\webapi.deps.json
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\webapi.runtimeconfig.json
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\webapi.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\webapi.pdb
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Azure.Core.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Azure.Identity.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Npgsql.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Oracle.ManagedDataAccess.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\SqlKata.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Diagnostics.PerformanceCounter.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.DirectoryServices.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.DirectoryServices.Protocols.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Memory.Data.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.DirectoryServices.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\ModelsStore.dll
+C:\PROJECTS\TiendaOnline\webapi\bin\Debug\net7.0\ModelsStore.pdb
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.csproj.AssemblyReference.cache
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.AssemblyInfoInputs.cache
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.AssemblyInfo.cs
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.csproj.CoreCompileInputs.cache
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.MvcApplicationPartsAssemblyInfo.cs
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.MvcApplicationPartsAssemblyInfo.cache
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.webapi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.build.webapi.props
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.webapi.props
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.webapi.props
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets.pack.json
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets.build.json
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\staticwebassets.development.json
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\scopedcss\bundle\webapi.styles.css
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.csproj.CopyComplete
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.dll
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\refint\webapi.dll
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.pdb
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\webapi.genruntimeconfig.cache
+C:\PROJECTS\TiendaOnline\webapi\obj\Debug\net7.0\ref\webapi.dll

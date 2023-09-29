@@ -1,0 +1,72 @@
+<div class="mobile-screen">
+  <div class="header">
+    <h1>Mis ventas, SA</h1>
+  </div>
+
+  <div class="logo"></div>
+
+  <form id="registration-form">
+    <input type="email" name="email" placeholder="E-mail">
+    <input type="password" name="pass" placeholder="Password">
+    <input type="password" name="repass" placeholder="Repeat password">
+    <a href="#" class="login-btn" id="signup-btn">Sign Up</a>
+  </form>
+
+  <form id="login-form">
+    <img src="assets/logito2.png" style="height: 240px; width: auto; position: static;" alt="">
+    <input type="user" name="user" placeholder="Usuario">
+    <input type="password" name="pass" placeholder="Contraseña">
+    <a href="#" class="login-btn">Log in</a>
+  </form>
+
+  <form id="fpass-form">
+    <input type="text" name="forgotten" placeholder="E-mail or phone number">
+    <a href="#" class="login-btn" id="getpass-btn">Get Password</a>
+  </form>
+
+  <div class="other-options">
+    <div class="option" id="newUser"><p class="option-text">New User</p></div>
+    <div class="option" id="fPass"><p class="option-text"> Forgotten password</p></div>
+  </div>
+
+</div>
+
+<script>
+    $("#newUser").click(function(){
+  $("h1").text("Registration");
+  $(".logo").css({
+    "width":"120px",
+    "height":"120px",
+    "top":"10px"
+  });
+  $("#login-form").fadeOut(200);
+  $("#registration-form").delay(300).fadeIn(500);
+  $(".other-options").fadeOut(200);
+});
+
+$("#signup-btn,#getpass-btn").click(function(){
+  $("h1").text("Log in");
+  $(".logo").css({
+    "width":"150px",
+    "height":"150px",
+    "top":"30px"
+  });
+
+  $("#registration-form,#fpass-form").fadeOut(200);
+  $("#login-form").delay(300).fadeIn(500);
+  $(".other-options").fadeIn(300);
+});
+
+$("#fPass").click(function(){
+  $("h1").text("Forgotten password");
+  $(".logo").css({
+    "width":"190px",
+    "height":"190px",
+    "top":"40px"
+  });
+
+  $("#login-form").fadeOut(200);
+  $("#fpass-form").delay(300).fadeIn(500);
+  $(".other-options").fadeOut(200);
+});
+</script>
