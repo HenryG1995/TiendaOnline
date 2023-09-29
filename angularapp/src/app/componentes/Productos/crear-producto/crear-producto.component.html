@@ -1,0 +1,63 @@
+<div class="contenedor">
+    <h4 style="margin-bottom: 25px; margin-top: 25px;"><strong>CREACIÓN DE PRODUCTOS</strong></h4>
+    <mat-divider></mat-divider>
+
+    <div class="container">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre de producto</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción de producto</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div class="containerData">
+        <mat-form-field class="zona-field">
+            <mat-label>Departamento</mat-label>
+            <mat-select>
+                <mat-option value="Guatemala">Guatemala</mat-option>
+            </mat-select>
+            <mat-error>Selecciona una opción</mat-error>
+        </mat-form-field>
+        <mat-form-field class="zona-field">
+            <mat-label>Departamento</mat-label>
+            <mat-select>
+                <mat-option value="Guatemala">Guatemala</mat-option>
+            </mat-select>
+            <mat-error>Selecciona una opción</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha de vencimiento</mat-label>
+            <input matInput [matDatepicker]="dp3" [(ngModel)]="fechaVencimiento" (dateChange)="onFechaVencimientoChange($event)" disabled>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+
+    </div>
+
+    <div class="containerData">
+        <mat-form-field appearance="outline">
+            <mat-label>Unidades existentes</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="zona-field">
+            <mat-label>Ubicación fisica</mat-label>
+            <mat-select>
+                <mat-option value="bodega">Bodega</mat-option>
+                <mat-option value="tienda">Tienda</mat-option>
+            </mat-select>
+            <mat-error>Selecciona una opción</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="guardar">
+        <div></div><div></div>
+        <button mat-fab extended color="primary"><mat-icon>turned_in</mat-icon>Guardar</button>
+    </div>
+
+</div>
