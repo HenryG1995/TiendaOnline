@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "0VJpx+KRiEDI/l7h74uFKiutZ9QEwCq5IuTKqlm8+MOGXcNenfH0TTwtUdiWy7JD1lSjWax9Sbd8ND/7c6whRw==",
+=======
   "dgSpecHash": "Le3I8L/sj0p3okwZH/WUANYb8D9+FWKwOCRBL9Vs5H95OZ7sz7rgwhCtzvBlhs1UyhmNAnceS0fPBAsLOqxu0w==",
+>>>>>>> 07a286157326b25938b641c3eeee736ca1fe377f
   "success": true,
   "projectFilePath": "C:\\PROJECTS\\TiendaOnline\\Test\\Test.csproj",
   "expectedPackageFiles": [
