@@ -136,8 +136,6 @@ namespace webapi.Controllers
 
 
 
-
-
         }
         [HttpDelete("BajaCliente")]
         public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)

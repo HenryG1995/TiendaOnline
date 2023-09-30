@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "81Qc1qMOOA7PIncFFJpSi5k4i+YlCDUalI08gsUj2cB14qhg6bx26AmB+7tIKZtPU8Jf5RqHjBXlb0BmMBDMCA==",
+=======
   "dgSpecHash": "URfzV+lqChBieLv6Canbci6LkY3zTOul5MQQw07HwPcFC/6N3lVnxmUXobOIVcI3vtnPAYtPGdT4x1S035xbKQ==",
+>>>>>>> 07a286157326b25938b641c3eeee736ca1fe377f
   "success": true,
   "projectFilePath": "C:\\PROJECTS\\TiendaOnline\\webapi\\webapi.csproj",
   "expectedPackageFiles": [

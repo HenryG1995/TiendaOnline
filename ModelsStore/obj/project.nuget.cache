@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "YLaahhyRnvn4Qkg39e/yPZjM6fDFvKXOnYb5F/pGiIHmdwlxz1TTxMRkCyjwrMAzBZPi+Tu/1/fhda+7gM4bDQ==",
+=======
   "dgSpecHash": "kmE7NnNOXYk8HyQa2uTrkuyYRNQbDmF2UobuBMR1tSjutLC4rFyxl4k0wH0/snhJP5IvGQD9XnrVhsbyRCgDfg==",
+>>>>>>> 07a286157326b25938b641c3eeee736ca1fe377f
   "success": true,
   "projectFilePath": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
   "expectedPackageFiles": [
