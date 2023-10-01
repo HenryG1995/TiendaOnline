@@ -4,6 +4,7 @@ using ModelsStore.DbConn.DbConect;
 using SqlKata;
 using ClassDB.SqlKataTools;
 using Microsoft.AspNetCore.Http;
+using ModelsStore.DTO.PARAM;
 
 namespace webapi.Controllers
 {
@@ -11,8 +12,8 @@ namespace webapi.Controllers
     [ApiController]
     public class ProveedoresController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpPost("ConsultaProveedor")]
+        public IActionResult ConsultaProveedor([FromBody] CodigoProveedorConsulta request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -21,17 +22,26 @@ namespace webapi.Controllers
 
             try
             {
+                var lista = new List<PROVEEDORES>();
 
+                var query = new Query("PROVEEDORES").Where("CODIGO_PROVEEDOR", request.CodigoProveedor);
+                
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<PROVEEDORES>.MapToList(reader);
+                });
+
+                return Ok(lista.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPut("AddProveedor")]
+        public ActionResult AddProveedor([FromBody] PROVEEDORES request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -39,16 +49,20 @@ namespace webapi.Controllers
 
             try
             {
+                var list = new List<PROVEEDORES>();
 
+                var query = new Query("PROVEEDORES").AsInsert(request);
 
-                return Ok();
+                var sql = execute.ExecuterCompiler(query);  
+
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPut]
+        [HttpGet("ConsultaAll")]
         public ActionResult Put()
         {
 

@@ -55,16 +55,16 @@ namespace webapi.Controllers
                 var connection = new ConectionDecider();
                 connection.InitRead();
 
-                var query = new Query("CLIENTE").Select("*").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
+                var query = new Query("V_CLIENTE").Select("*").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
 
                 ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
                 var sql = execute.ExecuterCompiler(query);
 
-                var lista = new List<CLIENTE>();
+                var lista = new List<V_CLIENTE>();
 
                 execute.DataReader(sql, reader =>
                 {
-                    lista = DataReaderMapper<CLIENTE>.MapToList(reader);
+                    lista = DataReaderMapper<V_CLIENTE>.MapToList(reader);
                 });
 
                 return Ok(lista.ToList());
