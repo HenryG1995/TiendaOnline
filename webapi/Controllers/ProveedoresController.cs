@@ -21,17 +21,26 @@ namespace webapi.Controllers
 
             try
             {
-           
+                var query = new Query("PROVEEDORES").Select("*");
 
-                return Ok();
+                var lista = new List<PROVEEDORES>();
+
+                var sql = execute.ExecuterCompiler(query);
+
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<PROVEEDORES>.MapToList(reader);
+                });
+
+                return Ok(lista.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public IActionResult Post()
+        [HttpPost("AgregaProveedor")]
+        public IActionResult AgregaProveedor([FromBody] PROVEEDORES request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -39,17 +48,19 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("PROVEEDORES").AsInsert(request);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPut]
-        public IActionResult Put()
+        [HttpPut("ActualizaProveedor")]
+        public IActionResult ActualizaProveedor([FromBody] PROVEEDORES request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -58,17 +69,23 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("").AsUpdate(new
+                {
+                    request.NOMBRE_PROVEEDOR,
+                    request.ACTIVO
+                }).Where("CODIGO_PROVEEDOR",request.CODIGO_PROVEEDOR);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpDelete]
-        public IActionResult Delete()
+        [HttpDelete("BajaProveedor")]
+        public IActionResult BajaProveedor([FromBody] PROVEEDORES request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -76,9 +93,14 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("PROVEEDOR").AsUpdate(new
+                {
+                    ACTIVO = 0
+                }).Where("CODIGO_PROVEEDOR", request.CODIGO_PROVEEDOR);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
