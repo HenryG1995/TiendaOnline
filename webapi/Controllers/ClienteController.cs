@@ -47,15 +47,19 @@ namespace webapi.Controllers
         }
 
         [HttpGet("ConsultaFiltro")]
-        public IActionResult ConsultaFiltro([FromBody] CLIENTE request)
+        public IActionResult ConsultaFiltro([FromBody] V_CLIENTE request)
         {
             try
             {
+                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
                 var connection = new ConectionDecider();
 
                 connection.InitRead();
 
                 var query = new Query("V_CLIETE").Select("*");
+
+                if (request.CODIGO_ESTADO.Length > 0) query.Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
 
                 if ( request.NIT >0 ) query.Where("NIT",request.NIT);
 
@@ -72,8 +76,6 @@ namespace webapi.Controllers
                 if (request.PRIMER_NOMBRE.Length >0) query.WhereLike("PRIMER_NOMBRE",request.PRIMER_NOMBRE);
                 
                 if (request.SEGUNDO_NOMBRE.Length > 0) query.WhereLike("SEGUNDO_NOMBRE", request.SEGUNDO_NOMBRE);
-
-                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
                 var sql = execute.ExecuterCompiler(query);
 
