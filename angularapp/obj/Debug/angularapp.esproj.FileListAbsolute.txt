@@ -1,6 +1,5 @@
 C:\Users\Henry\source\repos\TiendaMisVentas\angularapp\obj\Debug\angularapp.esproj.SuggestedBindingRedirects.cache
 C:\Users\Henry\source\repos\TiendaMisVentas\angularapp\obj\Debug\angularapp.esproj.CoreCompileInputs.cache
-C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\angularapp\obj\Debug\angularapp.esproj.SuggestedBindingRedirects.cache
 C:\Users\Henry\source\Proyecto nuevo\TiendaOnline\angularapp\obj\Debug\angularapp.esproj.CoreCompileInputs.cache
 C:\PROJECTS\TiendaOnline\angularapp\obj\Debug\angularapp.esproj.SuggestedBindingRedirects.cache
 C:\PROJECTS\TiendaOnline\angularapp\obj\Debug\angularapp.esproj.CoreCompileInputs.cache

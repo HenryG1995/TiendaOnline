@@ -11,8 +11,8 @@ namespace webapi.Controllers
     [ApiController]
     public class ProveedoresController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -21,7 +21,7 @@ namespace webapi.Controllers
 
             try
             {
-
+           
 
                 return Ok();
             }
