@@ -39,7 +39,7 @@ namespace webapi.Controllers
             }
         }
         [HttpPost("GuardaCat")]
-        public ActionResult GuardaCat([FromBody] CATALOGO_CATEGORIAS request)
+        public IActionResult GuardaCat([FromBody] CATALOGO_CATEGORIAS request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -63,7 +63,7 @@ namespace webapi.Controllers
             }
         }
         [HttpPut("ActualizaCat")]
-        public ActionResult ActualizaCat([FromBody] CATALOGO_CATEGORIAS request)
+        public IActionResult ActualizaCat([FromBody] CATALOGO_CATEGORIAS request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -87,7 +87,7 @@ namespace webapi.Controllers
             }
         }
         [HttpDelete("BajaCategoria")]
-        public ActionResult BajaCategoria([FromBody] CATALOGO_CATEGORIAS request)
+        public IActionResult BajaCategoria([FromBody] CATALOGO_CATEGORIAS request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 

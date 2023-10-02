@@ -31,7 +31,7 @@ namespace webapi.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Post()
+        public IActionResult Post()
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -49,7 +49,7 @@ namespace webapi.Controllers
             }
         }
         [HttpPut]
-        public ActionResult Put()
+        public IActionResult Put()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -68,7 +68,7 @@ namespace webapi.Controllers
             }
         }
         [HttpDelete]
-        public ActionResult Delete()
+        public IActionResult Delete()
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 

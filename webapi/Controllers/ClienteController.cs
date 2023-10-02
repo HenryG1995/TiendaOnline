@@ -46,6 +46,53 @@ namespace webapi.Controllers
             }
         }
 
+        [HttpGet("ConsultaFiltro")]
+        public IActionResult ConsultaFiltro([FromBody] CLIENTE request)
+        {
+            try
+            {
+                var connection = new ConectionDecider();
+
+                connection.InitRead();
+
+                var query = new Query("V_CLIETE").Select("*");
+
+                if ( request.NIT >0 ) query.Where("NIT",request.NIT);
+
+                if (request.TELEFONO > 0) query.Where("TELEFONO", request.TELEFONO);
+                
+                if (request.DIRECCION_CLIENTE.Length > 0) query.WhereLike("DIRECCION_CLIENTE", request.DIRECCION_CLIENTE);
+                
+                if (request.SEGUNDO_APELLIDO.Length > 0) query.WhereLike("SEGUNDO_APELLIDO", request.SEGUNDO_APELLIDO);
+                
+                if (request.PRIMER_APELLIDO.Length >0) query.WhereLike("PRIMER_APELLIDO", request.SEGUNDO_APELLIDO);
+                
+                if (request.CODIGO_CLIENTE.Length > 0) query.Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
+                
+                if (request.PRIMER_NOMBRE.Length >0) query.WhereLike("PRIMER_NOMBRE",request.PRIMER_NOMBRE);
+                
+                if (request.SEGUNDO_NOMBRE.Length > 0) query.WhereLike("SEGUNDO_NOMBRE", request.SEGUNDO_NOMBRE);
+
+                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                var sql = execute.ExecuterCompiler(query);
+
+                var lista = new List<V_CLIENTE>();
+
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<V_CLIENTE>.MapToList(reader);
+                });
+
+                return Ok(lista.ToList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
+
+        }
+
 
         [HttpPost("InfoCliente")]
         public IActionResult InfoCliente([FromBody] CLIENTE_CONSULTA request)
@@ -85,7 +132,7 @@ namespace webapi.Controllers
             {
                 connection.InitRead();
 
-                var query = new Query("CLIENTES").AsInsert(request);
+                var query = new Query("V_CLIENTE").AsInsert(request);
 
                 var sql = execute.ExecuterCompiler(query);
 

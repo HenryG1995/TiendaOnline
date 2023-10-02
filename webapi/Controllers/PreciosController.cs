@@ -11,8 +11,8 @@ namespace webapi.Controllers
     [ApiController]
     public class PreciosController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("GetAllPrecio")]
+        public IActionResult GetAllPrecio()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -21,17 +21,26 @@ namespace webapi.Controllers
 
             try
             {
+                var lista = new List<PRECIOS>();
 
+                var query = new Query("PRECIOS").Select("*");
 
-                return Ok();
+                var sql = execute.ExecuterCompiler(query);
+
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<PRECIOS>.MapToList(reader);
+                });
+
+                return Ok(lista.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPost("AdicionaPrecios")]
+        public IActionResult AdicionaPrecios([FromBody] PRECIOS request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -39,17 +48,19 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("PRECIOS").AsInsert(request);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPut]
-        public ActionResult Put()
+        [HttpPut("ActualizaPrecios")]
+        public IActionResult ActualizaPrecios([FromBody] PRECIOS request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -57,33 +68,58 @@ namespace webapi.Controllers
 
             try
             {
+                var lista2 = new PRECIOS();
 
+                var query2 = new Query("PRECIOS").Select("*").Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO);
+                
+                var sql2 = execute.ExecuterCompiler(query2);
 
-                return Ok();
+                execute.DataReader(sql2, reader =>
+                {
+                    lista2 = DataReaderMapper<PRECIOS>.MapToObject(reader);
+                });
+
+                if (lista2.CODIGO_PRODUCTO == null) return Ok("codigo de producto no existe");
+
+                var query = new Query("PRECIOS");
+
+                query.AsUpdate(new
+                {
+                   PRECIO = request.PRECIO >0 ? request.PRECIO :  lista2.PRECIO,
+
+                   ACTIVO = request.ACTIVO >= 0 ? request.ACTIVO : lista2.ACTIVO,
+                   
+                   DESCUENTO = request.DESCUENTO = request.DESCUENTO >=0 ? request.DESCUENTO : lista2.DESCUENTO,
+                   
+                });
+
+                var sql = execute.ExecuterCompiler(query);
+
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpDelete]
-        public ActionResult Delete()
-        {
-            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+        //[HttpDelete]
+        //public IActionResult Delete()
+        //{
+        //    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-            var connection = new ConectionDecider();
+        //    var connection = new ConectionDecider();
 
-            try
-            {
+        //    try
+        //    {
 
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-            }
-        }
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+        //    }
+        //}
 
 
     }

@@ -65,7 +65,7 @@ namespace ModelsStore.DbConn.DbConect
                     default:
                         Console.WriteLine("error : " + DbmsProvider);
                         return sqlQuery.ToString();
-                        break;
+
 
                 }
 
@@ -250,7 +250,7 @@ namespace ModelsStore.DbConn.DbConect
                                     string log = "success " + cmdQuery.ToString();
                                     ora.OracleContext.Close();
                                     Console.WriteLine("success " + cmdQuery.ToString());
-                                    
+
                                 }
                                 else
                                 {
