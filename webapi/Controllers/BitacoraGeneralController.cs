@@ -12,25 +12,25 @@ namespace webapi.Controllers
     public class BitacoraGeneralController : ControllerBase
     {
         [HttpGet]
-        public ActionResult Get()
+        public IActionResult Get()
         {
 
             return Ok();
         }
         [HttpPost]
-        public ActionResult Post()
+        public IActionResult Post()
         {
 
             return Ok();
         }
         [HttpPut]
-        public ActionResult Put()
+        public IActionResult Put()
         {
 
             return Ok();
         }
         [HttpDelete]
-        public ActionResult Delete()
+        public IActionResult Delete()
         { 
 
             return Ok();

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PROJECTS\\TiendaOnline\\Test\\Test.csproj": {}
+    "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\Test\\Test.csproj": {}
   },
   "projects": {
-    "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj": {
+    "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\ModelsStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
+        "projectUniqueName": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
         "projectName": "ModelsStore",
-        "projectPath": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
-        "packagesPath": "C:\\Users\\Ron\\.nuget\\packages\\",
-        "outputPath": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\obj\\",
+        "projectPath": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\ModelsStore.csproj",
+        "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Ron\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -77,25 +82,25 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
->>>>>>> 07a286157326b25938b641c3eeee736ca1fe377f
         }
       }
     },
-    "C:\\PROJECTS\\TiendaOnline\\Test\\Test.csproj": {
+    "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PROJECTS\\TiendaOnline\\Test\\Test.csproj",
+        "projectUniqueName": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\Test\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "C:\\PROJECTS\\TiendaOnline\\Test\\Test.csproj",
-        "packagesPath": "C:\\Users\\Ron\\.nuget\\packages\\",
-        "outputPath": "C:\\PROJECTS\\TiendaOnline\\Test\\obj\\",
+        "projectPath": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\Test\\Test.csproj",
+        "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\Test\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Ron\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -103,14 +108,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj": {
-                "projectPath": "C:\\PROJECTS\\TiendaOnline\\ModelsStore\\ModelsStore.csproj"
+              "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\ModelsStore.csproj": {
+                "projectPath": "C:\\Users\\Henry\\source\\Proyecto nuevo\\TiendaOnline\\ModelsStore\\ModelsStore.csproj"
               }
             }
           }
@@ -140,11 +146,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
->>>>>>> 07a286157326b25938b641c3eeee736ca1fe377f
         }
       }
     }
