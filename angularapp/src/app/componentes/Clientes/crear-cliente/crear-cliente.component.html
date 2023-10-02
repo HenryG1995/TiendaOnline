@@ -11,14 +11,14 @@
     <h4><strong>CREACIÓN DE CLIENTES</strong></h4>
     <mat-divider></mat-divider>
     <!-- [linear]="isLinear" -->
-    <mat-stepper class="example-stepper"  #stepper [orientation]="(stepperOrientation | async)!">
+    <mat-stepper class="example-stepper" #stepper [orientation]="(stepperOrientation | async)!">
 
         <mat-step [stepControl]="datosFormGroup">
             <form [formGroup]="datosFormGroup">
 
                 <ng-template matStepLabel>Datos personales del cliente</ng-template>
 
-                <h5 >Código de cliente</h5>
+                <h5>Código de cliente</h5>
                 <div class="containercod">
                     <mat-form-field appearance="outline">
                         <mat-label>Ingrese código de cliente</mat-label>
@@ -73,19 +73,19 @@
 
 
                 </div>
-                
+
                 <div class="container">
                     <mat-form-field>
                         <mat-label>Estado</mat-label>
                         <mat-select [formControl]="estadoControl" [errorStateMatcher]="matcher">
                             <mat-option *ngFor="let estado of estadosInfo" [value]="estado.codigO_ESTADO">
                                 {{estado.estado}}
-                            </mat-option> 
+                            </mat-option>
                         </mat-select>
-                    
+
                         <mat-error *ngIf="estadoControl.hasError('required')">Selecciona una opción</mat-error>
                     </mat-form-field>
-                    
+
                     <mat-form-field>
                         <mat-label>Categoria</mat-label>
                         <mat-select [formControl]="categoriaControl" [errorStateMatcher]="matcher">
@@ -93,7 +93,7 @@
                                 {{categoria.nombrE_CATEGORIA}}
                             </mat-option>
                         </mat-select>
-                    
+
                         <mat-error *ngIf="categoriaControl.hasError('required')">Selecciona una opción</mat-error>
                     </mat-form-field>
                 </div>
@@ -111,66 +111,70 @@
         <mat-step [stepControl]="direccionFormGroup" label="Dirección/Direcciones">
             <form [formGroup]="direccionFormGroup">
                 <h5>Dirección</h5>
-                <div class="containerdireccion">
-                    <mat-form-field class="wide-field">
-                        <mat-label>Ingrese dirección</mat-label>
-                        <input matInput formControlName="direccion" placeholder="Calle, Avenida y/o numeral" [required] = "isAddButtonClickedSelect">
+
+                <div class="containercod">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripción de dirección</mat-label>
+                        <input matInput placeholder="Calle, Avenida y/o numeral" formControlName="direccion"
+                            [required]="isAddButtonClickedSelect">
                     </mat-form-field>
-
-                    <mat-form-field class="wide-field">
-                        <mat-label>Tipo de dirección</mat-label>
-                        <mat-select [formControl]="tipodireccionControl" [errorStateMatcher]="matcher" [required] = "isAddButtonClickedSelect">
-                            <mat-option value="casa">Casa</mat-option>
-                            <mat-option value="oficinaF">Oficina</mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="tipodireccionControl.hasError('required')">Selecciona una opción</mat-error>
-                    </mat-form-field>
-
-
                 </div>
 
                 <div class="containerdireccion">
-
                     <mat-form-field class="zona-field">
-                        <mat-label>Zona</mat-label>
-                        <mat-select [formControl]="zonaControl" [errorStateMatcher]="matcher" [required] = "isAddButtonClickedSelect">
-                            <mat-option value="1">zona 1</mat-option>
-                            <mat-option value="2">zona 2</mat-option>
-                            <mat-option value="2">zona 3</mat-option>
-                            <mat-option value="2">zona 4</mat-option>
-                            <mat-option value="2">zona 5</mat-option>
-                            <mat-option value="2">zona 6</mat-option>
-                            <mat-option value="2">zona 7</mat-option>
-                            <mat-option value="2">zona 8</mat-option>
-                            <mat-option value="2">zona 9</mat-option>
-                            <mat-option value="2">zona 10</mat-option>
+                        <mat-label>Pais</mat-label>
+                        <mat-select [formControl]="paisControl" [errorStateMatcher]="matcher"
+                            [required]="isAddButtonClickedSelect">
+                            <mat-option *ngFor="let pais of paisInfo" [value]="pais.codigO_PAIS">
+                                {{pais.pais}}
+                            </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="zonaControl.hasError('required')">Selecciona una opción</mat-error>
+                        <mat-error *ngIf="paisControl.hasError('required')">Selecciona una opción</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="zona-field">
                         <mat-label>Departamento</mat-label>
-                        <mat-select [formControl]="departamentoControl" [errorStateMatcher]="matcher" [required] = "isAddButtonClickedSelect">
-                            <mat-option value="Guatemala">Guatemala</mat-option>
+                        <mat-select [formControl]="departamentoControl" [errorStateMatcher]="matcher"
+                            [required]="isAddButtonClickedSelect">
+                            <mat-option *ngFor="let depto of departamentoInfo" [value]="depto.codigO_DEPARTAMENTO">
+                                {{depto.departamento}}
+                            </mat-option>
                         </mat-select>
                         <mat-error *ngIf="departamentoControl.hasError('required')">Selecciona una opción</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="zona-field">
                         <mat-label>Municipio</mat-label>
-                        <mat-select [formControl]="municipioControl" [errorStateMatcher]="matcher" [required] = "isAddButtonClickedSelect">
-                            <mat-option value="guatemala">Guatemala</mat-option>
-                            <mat-option value="mixco">Mixco</mat-option>
-                            <mat-option value="villanueva">Villa nueva</mat-option>
-                            <mat-option value="snjosePinula">San José pinula</mat-option>
+                        <mat-select [formControl]="municipioControl" [errorStateMatcher]="matcher"
+                            [required]="isAddButtonClickedSelect">
+                            <mat-option *ngFor="let muni of municipioInfo" [value]="muni.codigO_MUNICIPIO">
+                                {{muni.municipio}}
+                            </mat-option>
                         </mat-select>
                         <mat-error *ngIf="municipioControl.hasError('required')">Selecciona una opción</mat-error>
                     </mat-form-field>
 
-                    <button (click)="addData()" mat-fab extended color="warn"
-                        ><mat-icon>plus_one</mat-icon>
-                        Agregar</button>
+                    <mat-form-field class="zona-field">
+                        <mat-label>Zona</mat-label>
+                        <mat-select [formControl]="zonaControl" [errorStateMatcher]="matcher"
+                            [required]="isAddButtonClickedSelect">
+                            <mat-option *ngFor="let zonas of zonasInfo" [value]="zonas.codigO_ZONA">
+                                {{zonas.zona}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="zonaControl.hasError('required')">Selecciona una opción</mat-error>
+                    </mat-form-field>
                 </div>
+
+                <div class="containercod">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Notas adicionales</mat-label>
+                        <input matInput placeholder="" formControlName="notaAdicionalControl">
+                    </mat-form-field>
+                </div>
+
+                <button (click)="addData()" mat-fab extended color="warn"><mat-icon>plus_one</mat-icon>
+                    Agregar</button>
 
 
 
@@ -182,7 +186,8 @@
                     </button>
                 </div> -->
 
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" style="margin-top: 25px;">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table"
+                    style="margin-top: 25px;">
                     <!-- Position Column ['numeral', 'type', 'zona', 'departamento', 'municipio']; -->
                     <ng-container matColumnDef="numeral">
                         <th mat-header-cell *matHeaderCellDef>Avenida y numeral</th>
@@ -224,7 +229,7 @@
                     <button mat-fab extended color="accent" matStepperPrevious><mat-icon>keyboard_arrow_left</mat-icon>
                         Regresar</button>
                     <button mat-fab extended color="primary" [disabled]="isTableEmpty"
-                     matStepperNext><mat-icon>keyboard_arrow_right</mat-icon> Siguiente</button>
+                        matStepperNext><mat-icon>keyboard_arrow_right</mat-icon> Siguiente</button>
                 </div>
 
 

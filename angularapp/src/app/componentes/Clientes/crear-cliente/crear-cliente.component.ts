@@ -11,6 +11,14 @@ import { estadosmodel } from 'src/app/modelos/estados.model';
 import { EstadosService } from 'src/app/servicios/estados.service';
 import { categoriasModel } from 'src/app/modelos/categorias.model';
 import { CategoriasService } from 'src/app/servicios/categorias.service';
+import { PaisService } from 'src/app/servicios/pais.service';
+import { DepartamentoService } from 'src/app/servicios/departamento.service';
+import { MunicipioService } from 'src/app/servicios/municipio.service';
+import { ZonaService } from 'src/app/servicios/zona.service';
+import { paisModel } from 'src/app/modelos/pais.model';
+import { departamentoModel } from 'src/app/modelos/departamento.model';
+import { municipioModel } from 'src/app/modelos/municipio.model';
+import { zonaModel } from 'src/app/modelos/zona.model';
 /** Error cuando un control ha sido modificado, en este caso para validar la selección de tipo cliente */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -54,11 +62,18 @@ export class CrearClienteComponent implements OnInit {
 
   estadosInfo: estadosmodel[] = [];
   categoriasInfo: categoriasModel[] = [];
+  paisInfo: paisModel[] = [];
+  departamentoInfo: departamentoModel[] = [];
+  municipioInfo: municipioModel[] = [];
+  zonasInfo: zonaModel[] = [];
 
   ngOnInit(): void {
     this.obtenerCategorias();
     this.obtenerEstados();
-
+    this.obtenerPais();
+    this.obtenerDepartamento();
+    this.obtenerMunicipio();
+    this.obtenerZona();
   }
 
   //validación de campos requeridos como obligatorios en formulario de datos personales
@@ -79,7 +94,8 @@ export class CrearClienteComponent implements OnInit {
   //------------validación de campos requeridos como obligatorios en formulario de direcciones------------
 
   direccionFormGroup = this._formBuilder.group({
-    direccion: ['', Validators.required]
+    direccion: ['', Validators.required],
+    notaAdicionalControl: ['']
   });
 
 
@@ -88,12 +104,15 @@ export class CrearClienteComponent implements OnInit {
   zonaControl = new FormControl('', [Validators.required]);
   departamentoControl = new FormControl('', [Validators.required]);
   municipioControl = new FormControl('', [Validators.required]);
+  paisControl = new FormControl('', [Validators.required]);
+  notaAdicionalControl = new FormControl('');
 
   formDirectionsGroup = new FormGroup({
     tdireccion: this.tipodireccionControl,
     zona: this.zonaControl,
     departamento: this.departamentoControl,
-    municipio: this.municipioControl
+    municipio: this.municipioControl,
+    pais: this.paisControl,
   })
 
 
@@ -108,7 +127,11 @@ export class CrearClienteComponent implements OnInit {
     breakpointObserver: BreakpointObserver,
     private clienteservice: ClientesService,
     private estadosservice: EstadosService,
-    private categoriasservice: CategoriasService) {
+    private categoriasservice: CategoriasService,
+    private paisservice: PaisService,
+    private departamentoservice: DepartamentoService,
+    private municipioservice: MunicipioService,
+    private zonasservice: ZonaService) {
 
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -116,8 +139,53 @@ export class CrearClienteComponent implements OnInit {
 
   }
 
-  logs(){
-    console.log('categoria: ', this.categoriaControl.value, ' estado: ', this.estadoControl.value );
+  logs() {
+    console.log('categoria: ', this.categoriaControl.value, ' estado: ', this.estadoControl.value);
+    console.log('pais: ', this.paisControl.value , ' depto: ', this.departamentoControl.value, ' muni: ', this.municipioControl.value, ' zona: ', this.zonaControl.value);
+  }
+
+  obtenerZona(){
+    this.zonasservice.obtenerZonasAPI().subscribe(
+      (response: any) => {
+        this.zonasInfo = response;
+      },
+      (error) => {
+        console.error('Error en la solicitud de obtener zonas: ', error);
+      }
+    )
+  }
+
+  obtenerMunicipio() {
+    this.municipioservice.obtenerMunicipioAPI().subscribe(
+      (response: any) => {
+        this.municipioInfo = response;
+      },
+      (error) => {
+        console.error('Error en la solicitud de obtener municipios ', error);
+      }
+    )
+  }
+
+  obtenerDepartamento() {
+    this.departamentoservice.obtenerDepartamentoAPI().subscribe(
+      (response: any) => {
+        this.departamentoInfo = response;
+      },
+      (error) => {
+        console.error('Error en la solicitud de obtener departamento ', error);
+      }
+    )
+  }
+
+  obtenerPais() {
+    this.paisservice.obtenerListadoPaisAPI().subscribe(
+      (response: any) => {
+        this.paisInfo = response;
+      },
+      (error) => {
+        console.error('Error en la solicitud de obtener paises ', error);
+      }
+    )
   }
 
   obtenerCategorias() {
@@ -125,7 +193,6 @@ export class CrearClienteComponent implements OnInit {
       this.categoriasservice.obtenerCategoriasAPI().subscribe(
         (response: any) => {
           this.categoriasInfo = response;
-          console.log('categorias: ', response);
         },
         (error) => {
           console.error('Error en la solicitud de obtener estados ', error);
@@ -141,7 +208,6 @@ export class CrearClienteComponent implements OnInit {
       this.estadosservice.obtenerEstadosAPI().subscribe(
         (response: any) => {
           this.estadosInfo = response;
-          console.log('estados: ', response);
         },
         (error) => {
           console.error('Error en la solicitud de obtener estado ', error);
@@ -154,7 +220,7 @@ export class CrearClienteComponent implements OnInit {
 
 
   addData() {
-
+    this.logs();
     if (this.direccionFormGroup.valid && (this.formDirectionsGroup.valid)) {
       console.log('si pasa la primera validacion')
       const nuevadireccion: interfaceDireccion = {
