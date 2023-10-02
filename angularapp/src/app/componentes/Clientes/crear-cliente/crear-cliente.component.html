@@ -10,15 +10,25 @@
 <div class="contenedor">
     <h4><strong>CREACIÓN DE CLIENTES</strong></h4>
     <mat-divider></mat-divider>
+    <!-- [linear]="isLinear" -->
+    <mat-stepper class="example-stepper"  #stepper [orientation]="(stepperOrientation | async)!">
 
-    <mat-stepper class="example-stepper" [linear]="isLinear" #stepper [orientation]="(stepperOrientation | async)!">
-
-        <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
+        <mat-step [stepControl]="datosFormGroup">
+            <form [formGroup]="datosFormGroup">
 
                 <ng-template matStepLabel>Datos personales del cliente</ng-template>
 
-                <h5>Nombres</h5>
+                <h5 >Código de cliente</h5>
+                <div class="containercod">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ingrese código de cliente</mat-label>
+                        <input matInput placeholder="Primer nombre" formControlName="codcliente" required>
+                    </mat-form-field>
+                </div>
+
+                <mat-divider></mat-divider><br>
+
+                <h5>Información personal</h5>
                 <div class="container">
                     <mat-form-field appearance="outline">
                         <mat-label>Primer nombre</mat-label>
@@ -30,8 +40,6 @@
                         <input matInput placeholder="Segundo nombre" formControlName="segundoNombre" required>
                     </mat-form-field>
                 </div>
-                <mat-divider></mat-divider><br>
-                <h5>Apellidos</h5>
                 <div class="container">
                     <mat-form-field appearance="outline">
                         <mat-label>Primer apellido</mat-label>
@@ -45,36 +53,53 @@
                 <mat-divider></mat-divider><br>
 
                 <h5>Información extra</h5>
-                <div class="infcontainer">
+                <div class="container">
 
                     <mat-form-field appearance="outline">
                         <mat-label>Ingrese No. NIT</mat-label>
                         <input matInput placeholder="No. NIT" formControlName="nit" required>
                     </mat-form-field>
 
+                    <mat-form-field appearance="outline">
+                        <mat-label>número de teléfono</mat-label>
+                        <input matInput placeholder="Número de teléfono" formControlName="numtelefono" required>
+                    </mat-form-field>
 
-
-                    <mat-form-field>
+                    <!-- <mat-form-field>
                         <mat-label>Ingrese correo</mat-label>
                         <input matInput placeholder="adc@guatex.com" [formControl]="email" required>
                         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                    </mat-form-field>
+                    </mat-form-field> -->
 
 
+                </div>
+                
+                <div class="container">
                     <mat-form-field>
-                        <mat-label>Tipo de cliente</mat-label>
-                        <mat-select [formControl]="selected" [errorStateMatcher]="matcher">
-                            <mat-option value="client">Cliente</mat-option>
-                            <mat-option value="admin" *ngIf="usuario !== 0">Administrador</mat-option>
+                        <mat-label>Estado</mat-label>
+                        <mat-select [formControl]="estadoControl" [errorStateMatcher]="matcher">
+                            <mat-option *ngFor="let estado of estadosInfo" [value]="estado.codigO_ESTADO">
+                                {{estado.estado}}
+                            </mat-option> 
                         </mat-select>
-
-                        <mat-error *ngIf="selected.hasError('required')">Selecciona una opción</mat-error>
-
+                    
+                        <mat-error *ngIf="estadoControl.hasError('required')">Selecciona una opción</mat-error>
+                    </mat-form-field>
+                    
+                    <mat-form-field>
+                        <mat-label>Categoria</mat-label>
+                        <mat-select [formControl]="categoriaControl" [errorStateMatcher]="matcher">
+                            <mat-option *ngFor="let categoria of categoriasInfo" [value]="categoria.codigO_CATEGORIA">
+                                {{categoria.nombrE_CATEGORIA}}
+                            </mat-option>
+                        </mat-select>
+                    
+                        <mat-error *ngIf="categoriaControl.hasError('required')">Selecciona una opción</mat-error>
                     </mat-form-field>
                 </div>
 
 
-                <button mat-fab extended color="primary" style="margin-top: 20px;"
+                <button (click)="logs()" mat-fab extended color="primary" style="margin-top: 20px;"
                     matStepperNext><mat-icon>keyboard_arrow_right</mat-icon>Siguiente</button>
 
 
@@ -83,8 +108,8 @@
 
 
 
-        <mat-step [stepControl]="secondFormGroup" label="Dirección/Direcciones">
-            <form [formGroup]="secondFormGroup">
+        <mat-step [stepControl]="direccionFormGroup" label="Dirección/Direcciones">
+            <form [formGroup]="direccionFormGroup">
                 <h5>Dirección</h5>
                 <div class="containerdireccion">
                     <mat-form-field class="wide-field">

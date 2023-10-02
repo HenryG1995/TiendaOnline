@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Azure.Core;
 using ModelsStore.DTO.PARAM;
+using System.Diagnostics;
 
 namespace webapi.Controllers
 {
@@ -85,7 +86,7 @@ namespace webapi.Controllers
             {
                 connection.InitRead();
 
-                var query = new Query("CLIENTES").AsInsert(request);
+                var query = new Query("CLIENTE").AsInsert(request);
 
                 var sql = execute.ExecuterCompiler(query);
 
