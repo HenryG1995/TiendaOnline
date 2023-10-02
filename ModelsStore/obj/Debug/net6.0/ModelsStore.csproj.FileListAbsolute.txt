@@ -22,3 +22,15 @@ C:\PROJECTS\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.dll
 C:\PROJECTS\TiendaOnline\ModelsStore\obj\Debug\net6.0\refint\ModelsStore.dll
 C:\PROJECTS\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.pdb
 C:\PROJECTS\TiendaOnline\ModelsStore\obj\Debug\net6.0\ref\ModelsStore.dll
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\bin\Debug\net6.0\ModelsStore.deps.json
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\bin\Debug\net6.0\ModelsStore.dll
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\bin\Debug\net6.0\ModelsStore.pdb
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.csproj.AssemblyReference.cache
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.AssemblyInfoInputs.cache
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.AssemblyInfo.cs
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.csproj.CoreCompileInputs.cache
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.dll
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\refint\ModelsStore.dll
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ModelsStore.pdb
+C:\Users\Henry\source\repos\TiendaOnline\ModelsStore\obj\Debug\net6.0\ref\ModelsStore.dll

@@ -41,7 +41,7 @@ namespace webapi.Controllers
             }
         }
         [HttpPut("AddProveedor")]
-        public ActionResult AddProveedor([FromBody] PROVEEDORES request)
+        public IActionResult AddProveedor([FromBody] PROVEEDORES request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -63,7 +63,7 @@ namespace webapi.Controllers
             }
         }
         [HttpGet("ConsultaAll")]
-        public ActionResult Put()
+        public IActionResult ConsultaAll()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -72,17 +72,26 @@ namespace webapi.Controllers
 
             try
             {
+                var Lista = new List<PROVEEDORES>();
 
+                var query = new Query("PROVEEDORES").Select("*");
 
-                return Ok();
+                var sql = execute.ExecuterCompiler(query);
+
+                execute.DataReader(sql, reader =>
+                {
+                    Lista = DataReaderMapper<PROVEEDORES>.MapToList(reader);
+                });
+
+                return Ok(Lista.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("DarDeBaja")]
+        public IActionResult DarDeBaja([FromBody] CodigoProveedorConsulta request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -91,8 +100,15 @@ namespace webapi.Controllers
             try
             {
 
+                var query = new Query("PROVEEDORES")
+                    .Where("CODIGO_PROVEEDOR", request.CodigoProveedor)
+                    .AsUpdate( new
+                    {
+                    ACTIVO = 1
+                    });
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {

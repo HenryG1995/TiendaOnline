@@ -11,8 +11,8 @@ namespace webapi.Controllers
     [ApiController]
     public class EntregaProductosController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("GetAllEntregaProd")]
+        public IActionResult GetAllEntregaProd()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -22,16 +22,27 @@ namespace webapi.Controllers
             try
             {
 
+                var query = new Query("ENTREGA_PRODUCTO").Select("*");
 
-                return Ok();
+                var list = new List<ENTREGA_PRODUCTO>();
+
+                var sql = execute.ExecuterCompiler(query);
+
+                execute.DataReader(sql, reader =>
+                {
+                    list = DataReaderMapper<ENTREGA_PRODUCTO>.MapToList(reader);
+                });
+
+
+                return Ok(list.ToArray());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPut("IngresaEntrega")]
+        public IActionResult IngresaEntrega([FromBody] ENTREGA_PRODUCTO request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -40,9 +51,11 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("IngresaEntrega").AsInsert(request);
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
@@ -50,7 +63,7 @@ namespace webapi.Controllers
             }
         }
         [HttpPut]
-        public ActionResult Put()
+        public IActionResult Put()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -69,7 +82,7 @@ namespace webapi.Controllers
             }
         }
         [HttpDelete]
-        public ActionResult Delete()
+        public IActionResult Delete()
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
