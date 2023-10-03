@@ -40,3 +40,5 @@
 # System files
 .DS_Store
 Thumbs.db
+*.dll
+.vs/TiendaMisVentas/v17/.suo
