@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 
-export interface direccionInterface {
+export interface direccionInterface1 {
   numeral: string;
   tdireccion: string;
   zona: string;
@@ -9,7 +9,7 @@ export interface direccionInterface {
   municipio: string
 }
 
-const ELEMENT_DATA: direccionInterface[] = [
+const ELEMENT_DATA: direccionInterface1[] = [
   { numeral: '6ta avenida', tdireccion: 'casa', zona: '10', departamento: 'Guatemala', municipio: 'Guatemala' },
   { numeral: '6ta avenida', tdireccion: 'casa', zona: '10', departamento: 'Guatemala', municipio: 'Guatemala' },
 ];

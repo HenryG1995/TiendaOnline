@@ -94,7 +94,6 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     NgSwitch,
     NgSwitchCase,
-    MatStepperModule,
     FormsModule,
     AsyncPipe,
     MatPaginatorModule,
