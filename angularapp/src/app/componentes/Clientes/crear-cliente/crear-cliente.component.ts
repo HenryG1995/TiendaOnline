@@ -318,11 +318,11 @@ export class CrearClienteComponent implements OnInit {
     this.stepper.next();
 
     this.clienteInfo.direccion = this.direccionInfo['DESCRIPCION DIRECCION']
-        + ' zona: ' + this.direccionInfo.ZONA
-        + ' municipio: ' + this.direccionInfo.MUNICIPIO
-        + ' departamento: ' + this.direccionInfo.DEPARTAMENTO
-        + ' pais: ' + this.direccionInfo.PAIS + ', '
-        +   this.direccionInfo.NOTAS_ADICIONALES
+      + ' zona: ' + this.direccionInfo.ZONA
+      + ' municipio: ' + this.direccionInfo.MUNICIPIO
+      + ' departamento: ' + this.direccionInfo.DEPARTAMENTO
+      + ' pais: ' + this.direccionInfo.PAIS + ', '
+      +   this.direccionInfo.NOTAS_ADICIONALES
   }
 
   // removeData() {
@@ -340,7 +340,7 @@ export class CrearClienteComponent implements OnInit {
 
 
 
-      
+
       Swal.fire({
         position: 'top-end',
         icon: 'success',
