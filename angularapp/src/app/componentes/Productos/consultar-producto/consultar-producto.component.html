@@ -1,1 +1,54 @@
-<p>consultar-producto works!</p>
+<div class="contenedor">
+
+  <h4><strong>PRODUCTOS</strong></h4>
+  <mat-divider></mat-divider>
+  <div class="container">
+    <mat-form-field appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput placeholder="Consulta por código" [(ngModel)]="productosInfo.codigoProducto">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <input matInput placeholder="Consulta por descripción" [(ngModel)]="productosInfo.descripcion">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha de vencimiento</mat-label>
+      <input matInput [matDatepicker]="dp3" [(ngModel)]="fechaVencimiento"
+        (dateChange)="onFechaVencimientoChange($event)" disabled>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button s-mr-1 color="">Consultar</button>
+    <button mat-raised-button color="">Borrar filtros</button>
+  </div>
+
+
+  <div class="contenedorcards">
+
+    <mat-card class="card" *ngFor="let item of dataSource">
+      <mat-card-header>
+        <mat-card-title>{{item.cardTitle}}</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <img (click)="alertaCompra(item)" mat-card-image src="{{item.imagecard}}" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <h5 style="margin-top: 5px; text-align: center; ">
+          {{'Q.'+item.price}}
+        </h5>
+      </mat-card-content>
+      <br>
+      <div  class="center-button">
+        <div>añadir al carrito</div>
+        <button (click)="alertaCompra(item)" mat-button color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
+      </div>
+    </mat-card>
+  </div>
+
+
+
+
+</div>
