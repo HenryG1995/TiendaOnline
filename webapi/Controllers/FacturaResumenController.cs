@@ -4,6 +4,7 @@ using ModelsStore.DbConn.DbConect;
 using SqlKata;
 using ClassDB.SqlKataTools;
 using Microsoft.AspNetCore.Http;
+using ModelsStore.DTO.VIEWS;
 
 namespace webapi.Controllers
 {
@@ -11,8 +12,8 @@ namespace webapi.Controllers
     [ApiController]
     public class FacturaResumenController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("AllFacturas")]
+        public IActionResult AllFacturas()
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -21,17 +22,26 @@ namespace webapi.Controllers
 
             try
             {
+                var query = new Query("V_FACTURA").Select("*");
 
+                var sql = execute.ExecuterCompiler(query);
 
-                return Ok();
+                var list = new List<V_FACTURA>();
+
+                execute.DataReader(sql, reader =>
+                {
+                    list = DataReaderMapper<V_FACTURA>.MapToList(reader);
+                });
+
+                return Ok(list.ToList());
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost]
-        public IActionResult Post()
+        [HttpPost("GuardaFact")]
+        public IActionResult GuardaFact([FromBody] FACTURA_RESUMEN request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -40,52 +50,21 @@ namespace webapi.Controllers
 
             try
             {
+                request.CODIGO_VENTA = Guid.NewGuid().ToString();
 
+                var query = new Query("FACTURA_RESUMEN").AsInsert(request);
 
-                return Ok();
+                var sql = execute.ExecuterCompiler(query);
+
+                return Ok(execute.ExecuteDecider(sql));
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPut]
-        public IActionResult Put()
-        {
-
-            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-            var connection = new ConectionDecider();
-
-            try
-            {
-
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-            }
-        }
-        [HttpDelete]
-        public IActionResult Delete()
-        {
-            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-            var connection = new ConectionDecider();
-
-            try
-            {
-
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-            }
-        }
+     
+     
 
 
     }

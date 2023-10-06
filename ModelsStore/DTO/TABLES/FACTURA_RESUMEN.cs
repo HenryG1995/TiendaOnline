@@ -15,7 +15,7 @@ namespace ModelsStore.DTO.TABLES
         public string CODIGO_PRECIO { get; set; }
         public Int64 CANTIDAD { get; set; }
         public Int64 TOTAL { get; set; }
-        public double FECHA_EMISION { get; set; }
+        public DateTime FECHA_EMISION { get; set; }
 
     }
 }

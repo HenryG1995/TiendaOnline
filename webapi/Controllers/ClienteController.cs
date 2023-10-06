@@ -61,7 +61,7 @@ namespace webapi.Controllers
 
                 if (request.CODIGO_ESTADO.Length > 0) query.Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
 
-                if ( request.NIT.Length > 0 ) query.Where("NIT",request.NIT);
+                if ( request.NIT.Length >0 ) query.Where("NIT",request.NIT);
 
                 if (request.TELEFONO > 0) query.Where("TELEFONO", request.TELEFONO);
                 
