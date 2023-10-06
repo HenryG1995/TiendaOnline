@@ -98,7 +98,7 @@ namespace webapi.Controllers
 
                 var query = new Query("V_FACTURA").Select("*").Limit(10);
 
-                query.OrderBy("FECHA_EMISION").OrderByDesc();
+                query.OrderByDesc("FECHA_EMISION");
                 var sql = execute.ExecuterCompiler(query);
 
                 execute.DataReader(sql, reader =>
