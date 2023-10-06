@@ -28,11 +28,7 @@ namespace webapi.Controllers
 
             try
             {
-
-
                 var list = new List<TotalesDashboard>();
-
-
 
                 var queryTotal = new Query("DUAL");
 
@@ -40,12 +36,9 @@ namespace webapi.Controllers
 
                 var sql = execute.ExecuterCompiler(queryTotalCLIENTE);
 
-
-
                 var queryTotalInventario = new Query("INVENTARIO").SelectRaw("count(*) AS TotalProductos").Where("ACTIVO", 1);
 
                 var sql2 = execute.ExecuterCompiler(queryTotalInventario);
-
 
                 var queryTotalVentas = new Query("V_FACTURA").SelectRaw("count(*)");
 
@@ -55,18 +48,20 @@ namespace webapi.Controllers
 
                 var sql3 = execute.ExecuterCompiler(queryTotalVentas);
 
-
                 var queryTotalPaquetes = new Query("ENTREGA_PRODUCTO").SelectRaw("count(*)").WhereRaw("ESTADO = (SELECT CODIGO_ESTADO FROM ESTADOS WHERE ESTADO = 'INGRESO')");
 
                 var sql4 = execute.ExecuterCompiler(queryTotalPaquetes);
 
-
                 var str = "";
 
                 str = str + "select * from (SELECT (" + sql + "   )AS TOTALCLIENTES, ";
+                
                 str = str + " (" + sql3 + "   )AS TOTALVENTAS, ";
+                
                 str = str + " (" + sql4 + " ) AS TOTALINGRESO, ";
+                
                 str = str + " (" + sql2 + " ) AS TOTALPRODUCTOS";
+
                 str = str + " FROM DUAL) TotalesDashboard";
 
                 var data = execute.ExecuteDecider(str);
@@ -75,7 +70,6 @@ namespace webapi.Controllers
                 {
                     list = DataReaderMapper<TotalesDashboard>.MapToList(reader);
                 });
-
 
                 return Ok(list.ToList());
             }
@@ -99,6 +93,7 @@ namespace webapi.Controllers
                 var query = new Query("V_FACTURA").Select("*").Limit(10);
 
                 query.OrderByDesc("FECHA_EMISION");
+
                 var sql = execute.ExecuterCompiler(query);
 
                 execute.DataReader(sql, reader =>
@@ -114,7 +109,6 @@ namespace webapi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-
 
     }
 
