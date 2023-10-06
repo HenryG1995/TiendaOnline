@@ -43,6 +43,7 @@ export class CrearClienteComponent implements OnInit {
   //validación de horientación y tamaño de pantalla
   stepperOrientation!: Observable<StepperOrientation>;
 
+  isLoading = false;
   isLinear = true;
   isTableEmpty = true;
   disableValidations = true;
@@ -70,6 +71,10 @@ export class CrearClienteComponent implements OnInit {
   @ViewChild('stepper') stepper!: MatStepper;
 
   ngOnInit(): void {
+    window.addEventListener('beforeunload', () => {
+      this.isLoading = true;
+    });
+
     this.obtenerCategorias();
     this.obtenerEstados();
     this.obtenerPais();
@@ -216,12 +221,12 @@ export class CrearClienteComponent implements OnInit {
     var nombreCategoria = this.datosFormGroup.get('categoriaControl')?.value
 
     this.estadosInfo.forEach(e => {
-        e.codigO_ESTADO === nombreEstado ? this.nombreEstadoi = e.estado : '';
+      e.codigO_ESTADO === nombreEstado ? this.nombreEstadoi = e.estado : '';
     });
 
     this.categoriasInfo.forEach(e => {
       e.codigO_CATEGORIA === nombreCategoria ? this.nombreCategoriai = e.nombrE_CATEGORIA : '';
-  });
+    });
 
     // console.log('BUENOOOOOOOOOO EL CODIGO ESTADO ES: ', nombreEstado)
 
@@ -303,8 +308,6 @@ export class CrearClienteComponent implements OnInit {
       this.table.renderRows();
       this.direccionFormGroup.reset();
 
-      console.log('peso de la tabla despues: ', this.dataSource.length)
-
 
     } else {
       Swal.fire({
@@ -331,16 +334,17 @@ export class CrearClienteComponent implements OnInit {
       + this.direccionInfo.NOTAS_ADICIONALES
   }
 
-  // removeData() {
-  //   this.dataSource.pop();
-  //   this.table.renderRows();
+  removeData() {
+    this.dataSource.pop();
+    this.table.renderRows();
+    this.direccionFormGroup.reset();
+    this.datosFormGroup.reset();
 
-  //   this.isTableEmpty = this.dataSource.length === 0;
-  // }
+    this.isTableEmpty = this.dataSource.length === 0;
+  }
 
 
   crearCliente() {
-    console.log('ajjjjjaaaaaaaaa que esta pasarando??')
 
     if (this.datosFormGroup.valid && !this.isTableEmpty) {
 
@@ -348,13 +352,21 @@ export class CrearClienteComponent implements OnInit {
       this.clienteservice.createClient(this.clienteInfo).subscribe(
         (response: ConsultaCliente[]) => {
           if (response) {
+            
             // La inserción en la base de datos se realizó correctamente.
             Swal.fire({
               position: 'top-end',
               icon: 'success',
               text: 'Cliente creado exitosamente.',
               showConfirmButton: false,
-              timer: 2500
+              timer: 3000,
+              allowOutsideClick: false
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                
+                this.removeData();
+                location.reload();
+              }
             });
           } else {
             // Hubo un error en la inserción en la base de datos.
@@ -363,7 +375,14 @@ export class CrearClienteComponent implements OnInit {
               icon: 'error',
               text: 'Error al crear el cliente.',
               showConfirmButton: false,
-              timer: 2500
+              timer: 3000,
+              allowOutsideClick: false
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                
+                this.removeData();
+                location.reload();
+              }
             });
           }
         },
@@ -389,16 +408,7 @@ export class CrearClienteComponent implements OnInit {
         timer: 2500
       })
     }
-
-
-
-
-
-
-
-
-
-
   }
+
 
 }
