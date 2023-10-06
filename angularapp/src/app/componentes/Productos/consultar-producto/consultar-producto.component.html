@@ -2,6 +2,7 @@
 
   <h4><strong>PRODUCTOS</strong></h4>
   <mat-divider></mat-divider>
+
   <div class="container">
     <mat-form-field appearance="outline">
       <mat-label>Código</mat-label>
@@ -21,9 +22,11 @@
       <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
       <mat-datepicker #dp3 disabled="false"></mat-datepicker>
     </mat-form-field>
+    <div class="btncontainer">
+      <button mat-raised-button s-mr-1 color="primary">Consultar</button>
+      <button mat-raised-button color="accent">Borrar filtros</button>
+    </div>
 
-    <button mat-raised-button s-mr-1 color="">Consultar</button>
-    <button mat-raised-button color="">Borrar filtros</button>
   </div>
 
 
@@ -41,7 +44,7 @@
         </h5>
       </mat-card-content>
       <br>
-      <div  class="center-button">
+      <div class="center-button">
         <div>añadir al carrito</div>
         <button (click)="alertaCompra(item)" mat-button color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
       </div>

@@ -8,7 +8,18 @@
   
   .container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 100px;
+    gap: 25px;
+    height: 60%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btncontainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 100px;
     gap: 25px;
     height: 60%;

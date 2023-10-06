@@ -13,10 +13,10 @@ namespace ModelsStore.DTO.TABLES
         public string SEGUNDO_NOMBRE { get; set; }
         public string PRIMER_APELLIDO { get; set; }
         public string SEGUNDO_APELLIDO { get; set; }
-        public Double NIT { get; set; }
+        public string NIT { get; set; }
         public string DIRECCION_CLIENTE { get; set; }
         public string CODIGO_ESTADO { get; set; }
         public string CODIGO_CATEGORIA { get; set; }
-        public Int64 TELEFONO { get; set; }
+        public Decimal TELEFONO { get; set; }
     }
 }

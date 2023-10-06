@@ -12,16 +12,20 @@ export class ClientesService {
 
   constructor(private http: HttpClient) { }
 
-  public GetClient(consulta: ConsultaCliente): Observable<datosCliente[]> {
-    const requestBody = { codigO_CLIENTE : consulta.codigoCliente }
+  public GetClient(consulta: ConsultaCliente): Observable<ConsultaCliente[]> {
+    const requestBody = { codigO_CLIENTE : consulta.CODIGO_CLIENTE }
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<datosCliente[]>(this.urlAPI + "InfoCliente", requestBody, { headers: headers });
+    return this.http.post<ConsultaCliente[]>(this.urlAPI + "InfoCliente", requestBody, { headers: headers });
   }
 
-  public createClient(clienteData: datosCliente): Observable<datosCliente[]>{
+  public createClient(clienteData: ConsultaCliente): Observable<ConsultaCliente[]>{
+    
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    console.log('DATOS: ['+clienteData+']');
-    return this.http.post<datosCliente[]>(this.urlAPI + "CreaClientes", clienteData, {headers: headers});
+    console.log('DATOS: [ CODIGO: '+clienteData.CODIGO_CLIENTE
+      +' NOMBRE: '+ clienteData.PRIMER_NOMBRE + ' ' + clienteData.SEGUNDO_NOMBRE + ' ' + clienteData.PRIMER_APELLIDO + ' ' + clienteData.SEGUNDO_APELLIDO
+      + ' nit: ' + clienteData.NIT + ' DIRECCION ' + clienteData.DIRECCION_CLIENTE
+      + ' ESTADO: ' + clienteData.CODIGO_ESTADO + ' CATEGORIA: ' + clienteData.CODIGO_CATEGORIA + ' TEL ' + clienteData.TELEFONO+' ]');
+    return this.http.post<ConsultaCliente[]>(this.urlAPI + "CreaCliente", clienteData, {headers: headers});
   }
 }
 
@@ -31,7 +35,7 @@ export interface datosCliente {
   segundO_NOMBRE: string;
   primeR_APELLIDO: string;
   segundO_APELLIDO: string;
-  nit: number;
+  nit: string;
   direccioN_CLIENTE: interfaceDireccion;
   ESTADO: string;
   CATEGORIA: string;

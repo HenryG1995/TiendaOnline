@@ -47,6 +47,8 @@ export class CrearClienteComponent implements OnInit {
   isTableEmpty = true;
   disableValidations = true;
   showTable = false;
+  nombreEstadoi = "";
+  nombreCategoriai = "";
 
   clienteInfo = new ConsultaCliente();
   direccionInfo = new direccionClienteModel();
@@ -83,7 +85,7 @@ export class CrearClienteComponent implements OnInit {
     segundoNombreControl: [''],
     primerApellidoControl: ['', Validators.required],
     segundoApellidoControl: [''],
-    nit: [0, Validators.required],
+    nit: ['', Validators.required],
     numtelefono: [0, Validators.required],
     categoriaControl: ['', Validators.required],
     estadoControl: ['', Validators.required]
@@ -208,36 +210,40 @@ export class CrearClienteComponent implements OnInit {
     const nit = this.datosFormGroup.get('nit')?.value || 0;
     const telefono = this.datosFormGroup.get('numtelefono')?.value || 0;
 
-    var nombreEstado = ''
-    var nombreCategoria = ''
+    // // var nombrePais = this.direccionFormGroup.get('paisControl')?.value
 
-    this.estadosInfo.forEach(element => {
-      if (element.codigO_ESTADO === this.datosFormGroup.get('estadoControl')?.value) {
-        nombreEstado = element.estado;
-      }
+    var nombreEstado = this.datosFormGroup.get('estadoControl')?.value
+    var nombreCategoria = this.datosFormGroup.get('categoriaControl')?.value
+
+    this.estadosInfo.forEach(e => {
+        e.codigO_ESTADO === nombreEstado ? this.nombreEstadoi = e.estado : '';
     });
 
-    this.categoriasInfo.forEach(element => {
-      element.codigO_CATEGORIA === this.datosFormGroup.get('categoriaControl')?.value ? nombreCategoria = element.nombrE_CATEGORIA : nombreCategoria;
-    });
+    this.categoriasInfo.forEach(e => {
+      e.codigO_CATEGORIA === nombreCategoria ? this.nombreCategoriai = e.nombrE_CATEGORIA : '';
+  });
+
+    // console.log('BUENOOOOOOOOOO EL CODIGO ESTADO ES: ', nombreEstado)
+
 
     if (this.datosFormGroup.valid) {
       if (nit != 0 && telefono != 0) {
-        this.clienteInfo.codigoCliente = this.datosFormGroup.get('codclienteControl')?.value || "";
-        this.clienteInfo.primerNombre = this.datosFormGroup.get('primerNombreControl')?.value || "";
-        this.clienteInfo.segundoNombre = this.datosFormGroup.get('segundoNombreControl')?.value || "";
-        this.clienteInfo.primerApellido = this.datosFormGroup.get('primerApellidoControl')?.value || "";
-        this.clienteInfo.segundoApellido = this.datosFormGroup.get('segundoApellidoControl')?.value || "";
-        this.clienteInfo.nit = this.datosFormGroup.get('nit')?.value || 0;
-        this.clienteInfo.telefono = this.datosFormGroup.get('numtelefono')?.value || 0;
-        this.clienteInfo.estado = nombreEstado;
-        this.clienteInfo.categoria = nombreCategoria;
+        // var estado = 
 
+        this.clienteInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value || "";
+        this.clienteInfo.PRIMER_NOMBRE = this.datosFormGroup.get('primerNombreControl')?.value || "";
+        this.clienteInfo.SEGUNDO_NOMBRE = this.datosFormGroup.get('segundoNombreControl')?.value || "";
+        this.clienteInfo.PRIMER_APELLIDO = this.datosFormGroup.get('primerApellidoControl')?.value || "";
+        this.clienteInfo.SEGUNDO_APELLIDO = this.datosFormGroup.get('segundoApellidoControl')?.value || "";
+        this.clienteInfo.NIT = this.datosFormGroup.get('nit')?.value || '';
+        this.clienteInfo.TELEFONO = this.datosFormGroup.get('numtelefono')?.value || 0;
+        this.clienteInfo.CODIGO_ESTADO = this.datosFormGroup.get('estadoControl')?.value || '';
+        this.clienteInfo.CODIGO_CATEGORIA = this.datosFormGroup.get('categoriaControl')?.value || '';
 
         this.stepper.next();
-        console.log('codigo: ', this.clienteInfo.codigoCliente)
-        console.log('estado: ', this.clienteInfo.estado)
-        console.log('categoria: ', this.clienteInfo.categoria)
+        console.log('codigo: ', this.clienteInfo.CODIGO_CLIENTE)
+        console.log('estado: ', this.clienteInfo.CODIGO_ESTADO)
+        console.log('categoria: ', this.clienteInfo.CODIGO_CATEGORIA)
       } else {
         Swal.fire({
           position: 'top-end',
@@ -317,12 +323,12 @@ export class CrearClienteComponent implements OnInit {
   direccionNextStep() {
     this.stepper.next();
 
-    this.clienteInfo.direccion = this.direccionInfo['DESCRIPCION DIRECCION']
+    this.clienteInfo.DIRECCION_CLIENTE = this.direccionInfo['DESCRIPCION DIRECCION']
       + ' zona: ' + this.direccionInfo.ZONA
       + ' municipio: ' + this.direccionInfo.MUNICIPIO
       + ' departamento: ' + this.direccionInfo.DEPARTAMENTO
       + ' pais: ' + this.direccionInfo.PAIS + ', '
-      +   this.direccionInfo.NOTAS_ADICIONALES
+      + this.direccionInfo.NOTAS_ADICIONALES
   }
 
   // removeData() {
@@ -339,16 +345,49 @@ export class CrearClienteComponent implements OnInit {
     if (this.datosFormGroup.valid && !this.isTableEmpty) {
 
 
+      this.clienteservice.createClient(this.clienteInfo).subscribe(
+        (response: ConsultaCliente[]) => {
+          if (response) {
+            // La inserción en la base de datos se realizó correctamente.
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              text: 'Cliente creado exitosamente.',
+              showConfirmButton: false,
+              timer: 2500
+            });
+          } else {
+            // Hubo un error en la inserción en la base de datos.
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              text: 'Error al crear el cliente.',
+              showConfirmButton: false,
+              timer: 2500
+            });
+          }
+        },
+        (error) => {
+          // Error de comunicación con el servidor.
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            text: 'Error en la comunicación con el servidor.',
+            showConfirmButton: false,
+            timer: 2500
+          });
+        }
+      );
 
 
+    } else {
       Swal.fire({
         position: 'top-end',
-        icon: 'success',
-        text: 'Cliente creado exitosamente.',
+        icon: 'error',
+        text: 'Alguno de los campos ingresados no es válido.',
         showConfirmButton: false,
         timer: 2500
       })
-
     }
 
 
@@ -359,7 +398,7 @@ export class CrearClienteComponent implements OnInit {
 
 
 
-    
+
   }
 
 }

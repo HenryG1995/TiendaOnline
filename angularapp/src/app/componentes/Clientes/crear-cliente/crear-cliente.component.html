@@ -20,14 +20,14 @@
                 <div class="containercod">
                     <mat-form-field appearance="outline">
                         <mat-label>Ingrese código de cliente</mat-label>
-                        <input matInput placeholder="Código de nombre" formControlName="codclienteControl" required>
+                        <input matInput placeholder="Código de cliente" formControlName="codclienteControl" required>
                     </mat-form-field>
                 </div>
 
                 <mat-divider></mat-divider><br>
 
                 <h5>Información personal</h5>
-                <div class="container">
+                <div class="infcontainer">
                     <mat-form-field appearance="outline">
                         <mat-label>Primer nombre</mat-label>
                         <input matInput placeholder="Primer nombre" formControlName="primerNombreControl" required>
@@ -37,8 +37,8 @@
                         <mat-label>Segundo nombre</mat-label>
                         <input matInput placeholder="Segundo nombre" formControlName="segundoNombreControl">
                     </mat-form-field>
-                </div>
-                <div class="container">
+                <!-- </div>
+                <div class="container"> -->
                     <mat-form-field appearance="outline">
                         <mat-label>Primer apellido</mat-label>
                         <input matInput placeholder="Primer apellido" formControlName="primerApellidoControl" required>
@@ -251,7 +251,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Código cliente</mat-label>
                         <input matInput formControlName="codigoClienteVerificacionControl"
-                            [value]="clienteInfo.codigoCliente">
+                            [value]="clienteInfo.CODIGO_CLIENTE">
                     </mat-form-field>
 
                     <!-- <mat-form-field appearance="outline">
@@ -263,27 +263,27 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Nombre de cliente</mat-label>
                         <input matInput formControlName="nombreCompletoVerificacionControl"
-                            [value]="clienteInfo.primerNombre + ' ' + clienteInfo.segundoNombre + ' ' + clienteInfo.primerApellido + ' ' + clienteInfo.segundoApellido">
+                            [value]="clienteInfo.PRIMER_NOMBRE + ' ' + clienteInfo.SEGUNDO_NOMBRE + ' ' + clienteInfo.PRIMER_APELLIDO + ' ' + clienteInfo.SEGUNDO_APELLIDO">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Teléfono</mat-label>
-                        <input matInput formControlName="telefonoVerificacionControl" [value]="clienteInfo.telefono">
+                        <input matInput formControlName="telefonoVerificacionControl" [value]="clienteInfo.TELEFONO">
                     </mat-form-field>
 
                 </div>
                 <div class="containerVerificacion">
                     <mat-form-field appearance="outline">
                         <mat-label>NIT</mat-label>
-                        <input matInput formControlName="nitVerificacionControl" [value]="clienteInfo.nit">
+                        <input matInput formControlName="nitVerificacionControl" [value]="clienteInfo.NIT">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Estado</mat-label>
-                        <input matInput formControlName="estadoVerificacionControl" [value]="clienteInfo.estado">
+                        <input matInput formControlName="estadoVerificacionControl" [value]="nombreEstadoi">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Categoria</mat-label>
-                        <input matInput formControlName="categoriaVerificacionControl" [value]="clienteInfo.categoria">
+                        <input matInput formControlName="categoriaVerificacionControl" [value]="nombreCategoriai">
                     </mat-form-field>
                 </div>
 

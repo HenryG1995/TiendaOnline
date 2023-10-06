@@ -1,12 +1,12 @@
 export class ConsultaCliente {
-    codigoCliente: string = "";
-    primerNombre: string = "";
-    segundoNombre: string = "";
-    primerApellido: string = "";
-    segundoApellido: string = "";
-    nit: number = 0;
-    direccion: string = "";
-    telefono: number = 0;
-    estado: string = "";
-    categoria: string="";
+    CODIGO_CLIENTE: string = "";
+    PRIMER_NOMBRE: string = "";
+    SEGUNDO_NOMBRE: string = "";
+    PRIMER_APELLIDO: string = "";
+    SEGUNDO_APELLIDO: string = "";
+    NIT: string = "";
+    DIRECCION_CLIENTE: string = "";
+    TELEFONO: number = 0;
+    CODIGO_ESTADO: string = "";
+    CODIGO_CATEGORIA: string="";
 }
