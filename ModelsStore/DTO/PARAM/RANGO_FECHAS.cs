@@ -8,10 +8,10 @@ namespace ModelsStore.DTO.PARAM
 {
     public class RANGO_FECHAS
     {
-        public DateTime fecha_inicio {  get; set; }
+        public DateOnly fecha_inicio {  get; set; }
 
-        public DateTime fecha_fin { get; set; }
+        public DateOnly fecha_fin { get; set; }
 
-        public DateTime fecha_especifica { get;}
+        public DateOnly fecha_especifica { get;}
     }
 }

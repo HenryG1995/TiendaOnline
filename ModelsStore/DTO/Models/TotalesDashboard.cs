@@ -8,9 +8,10 @@ namespace ModelsStore.DTO.Models
 {
     public class TotalesDashboard
     {
-        public Int64 TotalClientes {  get; set; }
-        public Int64 TotalVentas {  get; set; }
-        public Int64 TotalProductos {  get; set; }
-        public Int64 TotalIngresoPaquete {  get; set; }
+        public decimal TOTALCLIENTES { get; set; }
+        public decimal TOTALVENTAS { get; set; }
+        public decimal TOTALINGRESO { get; set; }
+        public decimal TOTALPRODUCTOS { get; set; }
+
     }
 }
