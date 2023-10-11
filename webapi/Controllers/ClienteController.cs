@@ -46,7 +46,7 @@ namespace webapi.Controllers
             }
         }
 
-        [HttpGet("ConsultaFiltro")]
+        [HttpPost("ConsultaFiltro")]
         public IActionResult ConsultaFiltro([FromBody] V_CLIENTE request)
         {
             try
@@ -57,7 +57,7 @@ namespace webapi.Controllers
 
                 connection.InitRead();
 
-                var query = new Query("V_CLIETE").Select("*");
+                var query = new Query("V_CLIENTE").Select("*");
 
                 if (request.CODIGO_ESTADO.Length > 0) query.Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
 

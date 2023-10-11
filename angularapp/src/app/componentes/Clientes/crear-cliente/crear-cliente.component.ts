@@ -377,12 +377,6 @@ export class CrearClienteComponent implements OnInit {
               showConfirmButton: false,
               timer: 3000,
               allowOutsideClick: false
-            }).then((result) => {
-              if (result.dismiss === Swal.DismissReason.timer) {
-                
-                this.removeData();
-                location.reload();
-              }
             });
           }
         },

@@ -24,7 +24,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Ingrese código de cliente</mat-label>
                             <input matInput placeholder="Código de cliente" formControlName="codclienteControl"
-                                required>
+                                required [appMaxlength]="36" uppercase appNumbersAndLetters>
                         </mat-form-field>
                     </div>
 
@@ -34,23 +34,26 @@
                     <div class="infcontainer">
                         <mat-form-field appearance="outline">
                             <mat-label>Primer nombre</mat-label>
-                            <input matInput placeholder="Primer nombre" formControlName="primerNombreControl" required>
+                            <input matInput placeholder="Primer nombre" formControlName="primerNombreControl" 
+                            required [appMaxlength]="15" uppercase appLettersOnly>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline">
                             <mat-label>Segundo nombre</mat-label>
-                            <input matInput placeholder="Segundo nombre" formControlName="segundoNombreControl">
+                            <input matInput placeholder="Segundo nombre" formControlName="segundoNombreControl" 
+                            [appMaxlength]="15" uppercase>
                         </mat-form-field>
                         <!-- </div>
                 <div class="container"> -->
                         <mat-form-field appearance="outline">
                             <mat-label>Primer apellido</mat-label>
                             <input matInput placeholder="Primer apellido" formControlName="primerApellidoControl"
-                                required>
+                                required [appMaxlength]="15" uppercase appLettersOnly>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                             <mat-label>Segundo apellido</mat-label>
-                            <input matInput placeholder="Segundo apellido" formControlName="segundoApellidoControl">
+                            <input matInput placeholder="Segundo apellido" formControlName="segundoApellidoControl" 
+                            [appMaxlength]="15" uppercase appLettersOnly>
                         </mat-form-field>
                     </div>
                     <mat-divider></mat-divider><br>
@@ -60,12 +63,14 @@
 
                         <mat-form-field appearance="outline">
                             <mat-label>Ingrese No. NIT</mat-label>
-                            <input matInput placeholder="No. NIT" formControlName="nit" required>
+                            <input matInput placeholder="No. NIT" formControlName="nit" 
+                            required [appMaxlength]="10" uppercase appNumbersAndLetters>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline">
                             <mat-label>número de teléfono</mat-label>
-                            <input matInput placeholder="Número de teléfono" formControlName="numtelefono" required>
+                            <input matInput placeholder="Número de teléfono" formControlName="numtelefono"
+                            [appMaxlength]="8" required appNumbersOnly>
                         </mat-form-field>
 
                         <!-- </div>
@@ -116,7 +121,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Descripción de dirección</mat-label>
                             <input matInput placeholder="Calle, Avenida y/o numeral" formControlName="direccionControl"
-                                [required]="isTableEmpty">
+                                [required]="isTableEmpty" [appMaxlength]="60" uppercase appNumbersAndLetters>
                         </mat-form-field>
                     </div>
 
@@ -178,7 +183,8 @@
                     <div class="containercod">
                         <mat-form-field appearance="outline">
                             <mat-label>Notas adicionales</mat-label>
-                            <input matInput placeholder="" formControlName="notaAdicionalControl">
+                            <input matInput placeholder="" formControlName="notaAdicionalControl" [appMaxlength]="100" 
+                            uppercase appLettersOnly>
                         </mat-form-field>
                     </div>
 
