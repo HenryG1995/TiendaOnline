@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 
 
 namespace ModelsStore.DbConn.DbConect
@@ -46,8 +47,16 @@ namespace ModelsStore.DbConn.DbConect
 
                         try
                         {
+                            var UserID = "db_tienda";
+                            var Pass = "password2";
+                            var Host = "192.168.225.135";
+                            var Port = "1521";
+                            var ServiceName = "DBORCL";
                             var STR = Environment.GetEnvironmentVariable("STR");
 
+                            var constr = string.Format("USER ID={0};PASSWORD={1};DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = {2})(PORT = {3}))(CONNECT_DATA = (SERVICE_NAME ={4}))) ;", UserID, Pass, Host, Port, ServiceName);
+
+                            STR = STR.IsNullOrEmpty() == true ? STR : constr;
 
                             Console.WriteLine(STR);
 
@@ -55,16 +64,16 @@ namespace ModelsStore.DbConn.DbConect
                             ora.ConnectToDatabase(STR);
 
 
+                            break;
                         }
                         catch
                         (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
 
+                            break;
                         }
 
-
-                        break;
                     }
                 case "postgresql":
                     {
