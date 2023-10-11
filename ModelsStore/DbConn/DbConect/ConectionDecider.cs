@@ -6,19 +6,23 @@ namespace ModelsStore.DbConn.DbConect
 {
     public class ConectionDecider
     {
-        public string DbmsProvider { get; set; }
+         public string ? DbmsProvider { get; set; }
         public void InitRead()
         {
             //string? value;
             // Check whether the environment variable exists.
+  // Posible asignación de referencia nula
             DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
+  // Posible asignación de referencia nula
             // If necessary, create it.
             if (DbmsProvider == null)
             {
                 Environment.SetEnvironmentVariable("DbmsProvider", "oracle");
 
                 // Now retrieve it.
+  // Posible asignación de referencia nula
                 DbmsProvider = Environment.GetEnvironmentVariable("DbmsProvider");
+  // Posible asignación de referencia nula
             }
             // Display the value.
             Console.WriteLine($"DbmsProvider : {DbmsProvider}\n");
@@ -108,17 +112,6 @@ namespace ModelsStore.DbConn.DbConect
 
             }
 
-          
-
-
-            // If we've created it, now delete it.
-            //if (toDelete)
-            //{
-            //    Environment.SetEnvironmentVariable("DbmsProvider", null);
-            //    // Confirm the deletion.
-            //    if (Environment.GetEnvironmentVariable("DbmsProvider") == null)
-            //        Console.WriteLine("DbmsProvider has been deleted.");
-            //}
         }
 
     }

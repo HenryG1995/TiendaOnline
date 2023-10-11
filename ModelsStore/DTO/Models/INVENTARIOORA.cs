@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ModelsStore.DTO.TABLES
 {
-    public class INVENTARIO
+    public class INVENTARIOORA
     {
+       
         public string? CODIGO_PRODUCTO { get; set; }
         public string? NOMBRE_PRODUCTO { get; set; }
         public string? DESCRIPCION_PRODUCTO { get; set; }
@@ -17,8 +18,7 @@ namespace ModelsStore.DTO.TABLES
         public string? UUID_ESTADO { get; set; }
         public Int32 ACTIVO { get; set; }
         public string? CODIGO_PROVEEDOR { get; set; }
-        public DateTime? CADUCIDAD { get; set; } 
-        public string? IMAGEN { get; set; }
+        public DateTime CADUCIDAD { get; set; }
+        public Byte[]? IMAGEN { get; set; }
     }
 }
-

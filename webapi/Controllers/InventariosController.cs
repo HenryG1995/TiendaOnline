@@ -6,6 +6,9 @@ using ClassDB.SqlKataTools;
 using Microsoft.AspNetCore.Http;
 using System;
 using Azure.Core;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
 
 namespace webapi.Controllers
 {
@@ -25,16 +28,72 @@ namespace webapi.Controllers
             {
                 var query = new Query("INVENTARIO").Select("*").Where("ACTIVO", 1);
 
-                var list = new List<INVENTARIO>();
+                var list = new List<INVENTARIOORA>();
 
                 var sql = execute.ExecuterCompiler(query);
 
                 execute.DataReader(sql, reader =>
                 {
-                    list = DataReaderMapper<INVENTARIO>.MapToList(reader);
+                    list = DataReaderMapper<INVENTARIOORA>.MapToList(reader);
                 });
 
-                return Ok(list.ToList());
+                var lista1 = new List<INVENTARIO>();
+                foreach (var itemOra in list)
+                {
+                    var imagen = "";
+
+                    if (itemOra.IMAGEN == null || new byte[0] == null)
+                    {
+                        itemOra.IMAGEN = new byte[0];
+                    }
+                    else
+                    {
+                       imagen  = Encoding.UTF8.GetString(itemOra.IMAGEN);
+                    }
+
+                    if (imagen.Length > 0)
+                    {
+                        INVENTARIO nuevoInventario = new INVENTARIO()
+                        {
+                            ACTIVO = itemOra.ACTIVO,
+                            IMAGEN = imagen,
+                            CADUCIDAD = itemOra.CADUCIDAD,
+                            FECHA_CARGA = itemOra.FECHA_CARGA,
+                            CODIGO_PRODUCTO = itemOra.CODIGO_PRODUCTO,
+                            DESCRIPCION_PRODUCTO = itemOra.DESCRIPCION_PRODUCTO,
+                            NOMBRE_PRODUCTO = itemOra.NOMBRE_PRODUCTO,
+                            UNIDADES_EXISTENTES = itemOra.UNIDADES_EXISTENTES,
+                            UUID_ESTADO = itemOra.UUID_ESTADO,
+                            CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
+                            FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                        };
+
+                        lista1.Add(nuevoInventario);
+                    }else
+                    {
+                        INVENTARIO nuevoInventario = new INVENTARIO()
+                        {
+                            ACTIVO = itemOra.ACTIVO,
+                            IMAGEN = null,
+                            CADUCIDAD = itemOra.CADUCIDAD,
+                            FECHA_CARGA = itemOra.FECHA_CARGA,
+                            CODIGO_PRODUCTO = itemOra.CODIGO_PRODUCTO,
+                            DESCRIPCION_PRODUCTO = itemOra.DESCRIPCION_PRODUCTO,
+                            NOMBRE_PRODUCTO = itemOra.NOMBRE_PRODUCTO,
+                            UNIDADES_EXISTENTES = itemOra.UNIDADES_EXISTENTES,
+                            UUID_ESTADO = itemOra.UUID_ESTADO,
+                            CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
+                            FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                        };
+
+                        lista1.Add(nuevoInventario);
+                    }
+
+                   
+                }
+
+
+                return Ok(lista1.ToList());
             }
             catch (Exception ex)
             {
@@ -42,8 +101,8 @@ namespace webapi.Controllers
             }
         }
 
-        [HttpPost("ConsultaProducto")]
-        public IActionResult ConsultaProducto([FromBody] INVENTARIO request)
+        [HttpGet("ConsultaProducto")]
+        public IActionResult ConsultaProducto([FromQuery] INVENTARIO request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -51,10 +110,10 @@ namespace webapi.Controllers
 
             try
             {
-                
-                
-                
-                var query = new Query("INVENTARIO").Select("*").Where("ACTIVO",1);
+
+
+
+                var query = new Query("INVENTARIO").Select("*").Where("ACTIVO", 1);
 
                 if (request.CODIGO_PRODUCTO != null) query.Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO);
                 if (request.DESCRIPCION_PRODUCTO != null) query.WhereLike("DESCRIPCION_PRODUCTO", request.DESCRIPCION_PRODUCTO);
@@ -66,14 +125,70 @@ namespace webapi.Controllers
 
                 var sql = execute.ExecuterCompiler(query);
 
-                var lista = new List<INVENTARIO>();
+                var lista = new List<INVENTARIOORA>();
 
                 execute.DataReader(sql, reader =>
                 {
-                    lista = DataReaderMapper<INVENTARIO>.MapToList(reader);
+                    lista = DataReaderMapper<INVENTARIOORA>.MapToList(reader);
                 });
+               
+                var lista1 = new List<INVENTARIO>();
+                foreach (var itemOra in lista)
+                {
+                    var imagen = "";
 
-                return Ok(lista.ToList());
+                    if (itemOra.IMAGEN == null || new byte[0] == null)
+                    {
+                        itemOra.IMAGEN = new byte[0];
+                    }
+                    else
+                    {
+                        imagen = Encoding.UTF8.GetString(itemOra.IMAGEN);
+                    }
+
+                    if (imagen.Length > 0)
+                    {
+                        INVENTARIO nuevoInventario = new INVENTARIO()
+                        {
+                            ACTIVO = itemOra.ACTIVO,
+                            IMAGEN = imagen,
+                            CADUCIDAD = itemOra.CADUCIDAD,
+                            FECHA_CARGA = itemOra.FECHA_CARGA,
+                            CODIGO_PRODUCTO = itemOra.CODIGO_PRODUCTO,
+                            DESCRIPCION_PRODUCTO = itemOra.DESCRIPCION_PRODUCTO,
+                            NOMBRE_PRODUCTO = itemOra.NOMBRE_PRODUCTO,
+                            UNIDADES_EXISTENTES = itemOra.UNIDADES_EXISTENTES,
+                            UUID_ESTADO = itemOra.UUID_ESTADO,
+                            CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
+                            FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                        };
+
+                        lista1.Add(nuevoInventario);
+                    }
+                    else
+                    {
+                        INVENTARIO nuevoInventario = new INVENTARIO()
+                        {
+                            ACTIVO = itemOra.ACTIVO,
+                            IMAGEN = null,
+                            CADUCIDAD = itemOra.CADUCIDAD,
+                            FECHA_CARGA = itemOra.FECHA_CARGA,
+                            CODIGO_PRODUCTO = itemOra.CODIGO_PRODUCTO,
+                            DESCRIPCION_PRODUCTO = itemOra.DESCRIPCION_PRODUCTO,
+                            NOMBRE_PRODUCTO = itemOra.NOMBRE_PRODUCTO,
+                            UNIDADES_EXISTENTES = itemOra.UNIDADES_EXISTENTES,
+                            UUID_ESTADO = itemOra.UUID_ESTADO,
+                            CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
+                            FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                        };
+
+                        lista1.Add(nuevoInventario);
+                    }
+
+
+                }
+
+                return Ok(lista1.ToList());
             }
             catch (Exception ex)
             {
@@ -93,11 +208,15 @@ namespace webapi.Controllers
             {
                 request.CODIGO_PRODUCTO = Guid.NewGuid().ToString();
 
+                var blob = request.IMAGEN.ToString();
+
+                request.IMAGEN = "data:img";
+
                 var query = new Query("INVENTARIO").AsInsert(request);
 
                 var sql = execute.ExecuterCompiler(query);
 
-                return Ok(execute.ExecuteDecider(sql));
+                return Ok(execute.ExecuteDecider(sql,blob));
             }
             catch (Exception ex)
             {
@@ -114,6 +233,10 @@ namespace webapi.Controllers
 
             try
             {
+                var blob = request.IMAGEN.ToString();
+
+
+
                 var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO).AsUpdate(new
                 {
                        
@@ -124,13 +247,14 @@ namespace webapi.Controllers
                         FECHA_INGRESO = request.FECHA_INGRESO,
                         UUID_ESTADO = request.UUID_ESTADO,
                         ACTIVO = request.ACTIVO,
-                        CADUCIDAD = request.CADUCIDAD
+                        CADUCIDAD = request.CADUCIDAD,
+                        IMAGEN = "data:img"
 
-                });
+            });
 
                 var sql = execute.ExecuterCompiler(query);
 
-                return Ok(execute.ExecuteDecider(sql));
+                return Ok(execute.ExecuteDecider(sql,blob));
             }
             catch (Exception ex)
             {

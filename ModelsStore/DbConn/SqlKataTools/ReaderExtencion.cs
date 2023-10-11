@@ -27,7 +27,9 @@ namespace ClassDB.SqlKataTools
         }
         public static T MapToObject(IDataReader reader)
         {
+#pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
             T obj = default(T);
+#pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
             if (reader.Read())
             {
                 obj = Activator.CreateInstance<T>();
@@ -41,7 +43,9 @@ namespace ClassDB.SqlKataTools
                     }
                 }
             }
+#pragma warning disable CS8603 // Posible tipo de valor devuelto de referencia nulo
             return obj;
+#pragma warning restore CS8603 // Posible tipo de valor devuelto de referencia nulo
         }
     }
 }
