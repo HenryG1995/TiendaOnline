@@ -17,6 +17,7 @@ using static ModelsStore.DbConn.DbConect.OraConnect;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Runtime.InteropServices;
 using ModelsStore.DbConn.Utilities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ModelsStore.DbConn.DbConect
 {
@@ -86,7 +87,7 @@ namespace ModelsStore.DbConn.DbConect
             try
             {
                 var STR = Environment.GetEnvironmentVariable("STR");
-                if (blob.Length > 0)
+                if (!string.IsNullOrEmpty(blob))
                 {
                     var STR2 = Environment.GetEnvironmentVariable("STR");
                     if (STR2  != null)
@@ -142,7 +143,7 @@ namespace ModelsStore.DbConn.DbConect
                 {
                     case "oracle":
                         {
-                            if (blob.Length > 0)
+                            if (!string.IsNullOrEmpty(blob))
                             {                                
                                 var r = ExecuterOracle(Query,blob);
                                 return r;
