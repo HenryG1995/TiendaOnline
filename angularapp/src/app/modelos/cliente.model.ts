@@ -11,3 +11,8 @@ export class ConsultaCliente {
     CODIGO_CATEGORIA: string="";
     FECHA_EMISION: Date = new Date();
 }
+
+
+export class ConsultacodCliente{
+    codigO_CLIENTE: string = ""
+}
