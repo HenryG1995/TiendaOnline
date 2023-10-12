@@ -13,7 +13,9 @@ namespace ModelsStore.DbConn.DbConect
     public class OraConnect
     {
         public OracleConnection OracleContext = new OracleConnection();
-        public string ConnectionStringOracle { get; set; }
+ // Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.
+         public string ? ConnectionStringOracle { get; set; }
+   // Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.
         public bool ConnectToDatabase(string connection)
         {
             try

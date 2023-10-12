@@ -15,6 +15,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static ModelsStore.DbConn.DbConect.OraConnect;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Runtime.InteropServices;
+using ModelsStore.DbConn.Utilities;
 
 namespace ModelsStore.DbConn.DbConect
 {
@@ -23,7 +25,7 @@ namespace ModelsStore.DbConn.DbConect
 
         public OraConnect ora = new OraConnect();
 
-        public string ExecuterCompiler(Query sqlQuery)
+         public string ? ExecuterCompiler(Query sqlQuery)
         {
             try
             {
@@ -79,11 +81,27 @@ namespace ModelsStore.DbConn.DbConect
 
         }
 
-        public bool ExecuterOracle(string sqlQuery)
+        public bool ExecuterOracle(string sqlQuery, [Optional] string blob)
         {
             try
             {
                 var STR = Environment.GetEnvironmentVariable("STR");
+                if (blob.Length > 0)
+                {
+                    var STR2 = Environment.GetEnvironmentVariable("STR");
+                    if (STR2  != null)
+                    {
+                        var exe = new InsertarBlobs();
+                        return exe.insertBlobs(sqlQuery, blob, STR2);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                  
+                }
+
+                
 
 
                 Console.WriteLine(STR);
@@ -108,7 +126,7 @@ namespace ModelsStore.DbConn.DbConect
 
         }
 
-        public bool ExecuteDecider(string Query)
+        public bool ExecuteDecider(string Query, [Optional] string blob)
         {
 
             try
@@ -124,8 +142,18 @@ namespace ModelsStore.DbConn.DbConect
                 {
                     case "oracle":
                         {
-                            var r = ExecuterOracle(Query);
-                            return r;
+                            if (blob.Length > 0)
+                            {                                
+                                var r = ExecuterOracle(Query,blob);
+                                return r;
+                            }
+                            else
+                            {
+                                var r = ExecuterOracle(Query);
+                                return r;
+                            }
+
+                           
                         }
                     case "sqlserver":
                         {
@@ -370,6 +398,7 @@ namespace ModelsStore.DbConn.DbConect
 
                         Console.WriteLine(STR);
 
+#pragma warning disable CS0168 // La variable está declarada pero nunca se usa
                         try
                         {
                             using (var connection = new SqlConnection(STR))
@@ -404,6 +433,7 @@ namespace ModelsStore.DbConn.DbConect
 
                             break;
                         }
+#pragma warning restore CS0168 // La variable está declarada pero nunca se usa
                     }
             }
         }

@@ -18,7 +18,9 @@ namespace ModelsStore.DbConn.DbConect
             Console.WriteLine(STR);
 
 
+#pragma warning disable CS0219 // La variable está asignada pero nunca se usa su valor
             string connectionString = "Data Source=nombre_servidor;Initial Catalog=nombre_base_datos;User ID=nombre_usuario;Password=contraseña;";
+#pragma warning restore CS0219 // La variable está asignada pero nunca se usa su valor
 
             try
             {

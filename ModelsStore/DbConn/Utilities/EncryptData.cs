@@ -14,7 +14,7 @@ namespace ModelsStore.DbConn.Utilities
     public class EncryptData
     {
 
-        public string Encrypt(string Clave)
+         public string ? Encrypt(string Clave)
         {
             if (string.IsNullOrEmpty(Clave) == false)
             {

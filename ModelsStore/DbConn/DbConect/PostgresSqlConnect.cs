@@ -13,8 +13,10 @@ namespace ModelsStore.DbConn.DbConect
 {
     internal class PostgresSqlConnect
     {
-        public string pgstringconnection { get; set; }
-        public bool psgConnect(string strconnection )
+        // Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.
+        public string? pgstringconnection { get; set; }
+        // Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.
+        public bool psgConnect(string strconnection)
         {
             using (var connection = new NpgsqlConnection(strconnection))
             {
@@ -46,14 +48,14 @@ namespace ModelsStore.DbConn.DbConect
             NpgsqlDataReader dataReader = command.ExecuteReader();
             connection.Close();
 
-            DataTable dt =new DataTable();
+            DataTable dt = new DataTable();
 
             dt.Rows.Add(dataReader);
 
             return dt;
         }
 
-      
+
 
 
 
