@@ -2,56 +2,59 @@
   <h4><strong>CONSULTA DE CLIENTE</strong></h4>
   <mat-divider></mat-divider>
 
+  <form [formGroup]="datosConsultaFormGroup">
+    <div class="container">
 
-  <div class="container">
-    <mat-form-field appearance="outline">
-      <mat-label>Consultar por código</mat-label>
-      <input matInput placeholder="Consulta por código" [(ngModel)]="consulta.CODIGO_CLIENTE">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Consultar por código</mat-label>
+        <input matInput placeholder="Consulta por código" formControlName="consultaCodigoControl">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Consultar por nombre</mat-label>
-      <input matInput placeholder="Consulta por nombre" [(ngModel)]="consulta.PRIMER_NOMBRE">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Consultar por primer nombre</mat-label>
+        <input matInput placeholder="Consulta por nombre" formControlName="primerNombreControl" [appMaxlength]="15"
+          uppercase appLettersOnly>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Consultar por apellido</mat-label>
-      <input matInput placeholder="Consulta por apellido" [(ngModel)]="consulta.PRIMER_APELLIDO">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Consultar por primer apellido</mat-label>
+        <input matInput placeholder="Consulta por apellido" formControlName="primerApellidoControl" [appMaxlength]="15" uppercase appLettersOnly>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Consulta por NIT</mat-label>
-      <input matInput placeholder="Consulta por NIT" [(ngModel)]="consulta.NIT">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Consulta por NIT</mat-label>
+        <input matInput placeholder="Consulta por NIT" formControlName="nitControl" [appMaxlength]="10" uppercase>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Estado</mat-label>
-      <mat-select>
-        <mat-option>-- None --</mat-option>
-        <mat-option value="activo">Activo</mat-option>
-        <mat-option value="inactivo">Inactivo</mat-option>
-      </mat-select>
-      <mat-label><mat-icon></mat-icon> </mat-label>
-    </mat-form-field>
-
-
-    <button mat-raised-button color="primary" (click)="buscarCliente()" >Consultar</button>
-  </div>
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="estadoControl">
+          <mat-option *ngFor="let estado of estadosInfo" [value]="estado.codigO_ESTADO">
+            {{estado.estado}}
+          </mat-option>
+        </mat-select>
+        <mat-label><mat-icon></mat-icon> </mat-label>
+      </mat-form-field>
 
 
+      <button mat-raised-button color="primary" (click)="obtenerDatosConsulta()">Consultar</button>
+    </div>
+  </form>
 
-  <div class="example-container mat-elevation-z8">
+
+
+  <div class="example-container mat-elevation-z8" *ngIf="!isTableEmpty">
     <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      <!-- <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
         web's API rate limit has been reached. It will be reset in one minute.
-      </div>
+      </div> -->
     </div>
 
     <div class="example-table-container">
 
       <table mat-table [dataSource]="clientesInfo" class="example-table" matSort matSortActive="codigo"
-        matSortDisableClear matSortDirection="desc">
+        matSortDisableClear matSortDirection="desc" *ngIf="!isTableEmpty">
 
         <ng-container matColumnDef="codigo">
           <th mat-header-cell *matHeaderCellDef>Codigo cliente</th>
@@ -59,12 +62,13 @@
         </ng-container>
 
 
-        <ng-container matColumnDef="nombre">
+        <ng-container matColumnDef="nombre" style="width: 200px; background-color: red;">
           <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
-          <td mat-cell *matCellDef="let row">{{row.primeR_NOMBRE + " " + row.segundO_NOMBRE + " " + row.primeR_APELLIDO + " " + row.segundO_APELLIDO}}</td>
+          <td mat-cell *matCellDef="let row">{{row.primeR_NOMBRE + " " + row.segundO_NOMBRE + " " + row.primeR_APELLIDO
+            + " " + row.segundO_APELLIDO}}</td>
         </ng-container>
 
-     
+
         <ng-container matColumnDef="nit">
           <th mat-header-cell *matHeaderCellDef>NIT</th>
           <td mat-cell *matCellDef="let row">{{row.nit}}</td>
@@ -74,15 +78,15 @@
           <th mat-header-cell *matHeaderCellDef>Dirección de cliente</th>
           <td mat-cell *matCellDef="let row">{{row.direccioN_CLIENTE}}</td>
         </ng-container>
-        
+
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef>Estado</th>
-          <td mat-cell *matCellDef="let row">{{row.ESTADO}}</td>
+          <td mat-cell *matCellDef="let row">{{row.codigO_ESTADO}}</td>
         </ng-container>
-        
+
         <ng-container matColumnDef="categoria">
           <th mat-header-cell *matHeaderCellDef>Categoria</th>
-          <td mat-cell *matCellDef="let row">{{row.CATEGORIA}}</td>
+          <td mat-cell *matCellDef="let row">{{row.codigO_CATEGORIA}}</td>
         </ng-container>
 
         <ng-container matColumnDef="telefono">

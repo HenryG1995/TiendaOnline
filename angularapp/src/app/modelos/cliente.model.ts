@@ -9,4 +9,5 @@ export class ConsultaCliente {
     TELEFONO: number = 0;
     CODIGO_ESTADO: string = "";
     CODIGO_CATEGORIA: string="";
+    FECHA_EMISION: Date = new Date();
 }

@@ -6,7 +6,7 @@ import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatTable } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ClientesService, datosCliente } from 'src/app/servicios/clientes.service';
+import { ClientesService } from 'src/app/servicios/clientes.service';
 import { estadosmodel } from 'src/app/modelos/estados.model';
 import { EstadosService } from 'src/app/servicios/estados.service';
 import { categoriasModel } from 'src/app/modelos/categorias.model';
