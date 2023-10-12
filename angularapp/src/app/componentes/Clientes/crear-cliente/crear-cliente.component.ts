@@ -235,15 +235,15 @@ export class CrearClienteComponent implements OnInit {
       if (nit != 0 && telefono != 0) {
         // var estado = 
 
-        this.clienteInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value || "";
-        this.clienteInfo.PRIMER_NOMBRE = this.datosFormGroup.get('primerNombreControl')?.value || "";
-        this.clienteInfo.SEGUNDO_NOMBRE = this.datosFormGroup.get('segundoNombreControl')?.value || "";
-        this.clienteInfo.PRIMER_APELLIDO = this.datosFormGroup.get('primerApellidoControl')?.value || "";
-        this.clienteInfo.SEGUNDO_APELLIDO = this.datosFormGroup.get('segundoApellidoControl')?.value || "";
-        this.clienteInfo.NIT = this.datosFormGroup.get('nit')?.value || '';
+        this.clienteInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.PRIMER_NOMBRE = this.datosFormGroup.get('primerNombreControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.SEGUNDO_NOMBRE = this.datosFormGroup.get('segundoNombreControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.PRIMER_APELLIDO = this.datosFormGroup.get('primerApellidoControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.SEGUNDO_APELLIDO = this.datosFormGroup.get('segundoApellidoControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.NIT = this.datosFormGroup.get('nit')?.value?.toUpperCase() || '';
         this.clienteInfo.TELEFONO = this.datosFormGroup.get('numtelefono')?.value || 0;
-        this.clienteInfo.CODIGO_ESTADO = this.datosFormGroup.get('estadoControl')?.value || '';
-        this.clienteInfo.CODIGO_CATEGORIA = this.datosFormGroup.get('categoriaControl')?.value || '';
+        this.clienteInfo.CODIGO_ESTADO = this.datosFormGroup.get('estadoControl')?.value?.toUpperCase() || '';
+        this.clienteInfo.CODIGO_CATEGORIA = this.datosFormGroup.get('categoriaControl')?.value?.toUpperCase() || '';
 
         this.stepper.next();
         console.log('codigo: ', this.clienteInfo.CODIGO_CLIENTE)
@@ -275,10 +275,10 @@ export class CrearClienteComponent implements OnInit {
 
       this.showTable = true;
 
-      var nombrePais = this.direccionFormGroup.get('paisControl')?.value
-      var nombreDepartamento = this.direccionFormGroup.get('departamentoControl')?.value
-      var nombreMunicipio = this.direccionFormGroup.get('municipioControl')?.value
-      var nombreZona = this.direccionFormGroup.get('zonaControl')?.value
+      var nombrePais = this.direccionFormGroup.get('paisControl')?.value?.toUpperCase()
+      var nombreDepartamento = this.direccionFormGroup.get('departamentoControl')?.value?.toUpperCase()
+      var nombreMunicipio = this.direccionFormGroup.get('municipioControl')?.value?.toUpperCase()
+      var nombreZona = this.direccionFormGroup.get('zonaControl')?.value?.toUpperCase()
 
       this.paisInfo.forEach(e => {
         e.codigO_PAIS === nombrePais ? nombrePais = e.pais : '';
@@ -296,13 +296,13 @@ export class CrearClienteComponent implements OnInit {
         e.codigO_ZONA === nombreZona ? nombreZona = e.zona.toString() : ''
       })
 
-      this.direccionInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value || "";
-      this.direccionInfo['DESCRIPCION DIRECCION'] = this.direccionFormGroup.get('direccionControl')?.value || "";
-      this.direccionInfo.PAIS = nombrePais || ''
-      this.direccionInfo.DEPARTAMENTO = nombreDepartamento || ''
-      this.direccionInfo.MUNICIPIO = nombreMunicipio || ''
-      this.direccionInfo.ZONA = nombreZona || ''
-      this.direccionInfo.NOTAS_ADICIONALES = this.direccionFormGroup.get('notaAdicionalControl')?.value || "";
+      this.direccionInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value?.toUpperCase() || "";
+      this.direccionInfo['DESCRIPCION DIRECCION'] = this.direccionFormGroup.get('direccionControl')?.value?.toUpperCase() || "";
+      this.direccionInfo.PAIS = nombrePais?.toUpperCase() || ''
+      this.direccionInfo.DEPARTAMENTO = nombreDepartamento?.toUpperCase() || ''
+      this.direccionInfo.MUNICIPIO = nombreMunicipio?.toUpperCase() || ''
+      this.direccionInfo.ZONA = nombreZona?.toUpperCase() || ''
+      this.direccionInfo.NOTAS_ADICIONALES = this.direccionFormGroup.get('notaAdicionalControl')?.value?.toUpperCase() || "";
 
       this.dataSource.push(this.direccionInfo);
       this.table.renderRows();

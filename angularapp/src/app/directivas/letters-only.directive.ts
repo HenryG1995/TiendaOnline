@@ -9,10 +9,10 @@ export class LettersOnlyDirective {
 
   @HostListener('input', ['$event']) onInput(event: InputEvent): void {
     const input = event.target as HTMLInputElement;
-    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ ]*$/; // Expresión regular para letras con acentos y espacios
+    const regex = /^[A-ZÀ-ÖØ-öø-ÿ ]*$/; // Expresión regular para letras con acentos y espacios
 
     if (!regex.test(input.value)) {
-      input.value = input.value.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ ]/g, ''); // Eliminar caracteres no alfabéticos ni espacios
+      input.value = input.value.replace(/[^A-ZÀ-ÖØ-öø-ÿ ]/g, ''); // Eliminar caracteres no alfabéticos ni espacios
       input.dispatchEvent(new Event('input'));
     }
   }

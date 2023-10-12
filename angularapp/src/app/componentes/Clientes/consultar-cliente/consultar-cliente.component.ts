@@ -48,11 +48,11 @@ export class ConsultarClienteComponent implements OnInit {
   });
 
   obtenerDatosConsulta() {
-    this.consulta.CODIGO_CLIENTE = this.datosConsultaFormGroup.get('consultaCodigoControl')?.value || "";
-    this.consulta.PRIMER_NOMBRE = this.datosConsultaFormGroup.get('primerNombreControl')?.value || "";
-    this.consulta.PRIMER_APELLIDO = this.datosConsultaFormGroup.get('primerApellidoControl')?.value || "";
-    this.consulta.NIT = this.datosConsultaFormGroup.get('nitControl')?.value || "";
-    this.consulta.CODIGO_ESTADO = this.datosConsultaFormGroup.get('estadoControl')?.value || "";
+    this.consulta.CODIGO_CLIENTE = this.datosConsultaFormGroup.get('consultaCodigoControl')?.value?.toUpperCase() || "";
+    this.consulta.PRIMER_NOMBRE = this.datosConsultaFormGroup.get('primerNombreControl')?.value?.toUpperCase() || "";
+    this.consulta.PRIMER_APELLIDO = this.datosConsultaFormGroup.get('primerApellidoControl')?.value?.toUpperCase() || "";
+    this.consulta.NIT = this.datosConsultaFormGroup.get('nitControl')?.value?.toUpperCase() || "";
+    this.consulta.CODIGO_ESTADO = this.datosConsultaFormGroup.get('estadoControl')?.value?.toUpperCase() || "";
 
     console.log('codigo: ', this.consulta.CODIGO_CLIENTE)
     console.log('nombre: ', this.consulta.PRIMER_NOMBRE)
@@ -62,7 +62,7 @@ export class ConsultarClienteComponent implements OnInit {
 
     this.clientesInfo = [];
 
-    this.buscarCliente();
+    //this.buscarCliente();
   }
 
   ngOnInit(): void {
