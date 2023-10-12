@@ -62,7 +62,7 @@ export class ConsultarClienteComponent implements OnInit {
 
     this.clientesInfo = [];
 
-    //this.buscarCliente();
+    this.buscarCliente();
   }
 
   ngOnInit(): void {
