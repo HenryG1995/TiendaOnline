@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Azure.Core;
 using ModelsStore.DTO.PARAM;
+using System.Diagnostics;
 
 namespace webapi.Controllers
 {
@@ -61,15 +62,15 @@ namespace webapi.Controllers
 
                 if (request.CODIGO_ESTADO.Length > 0) query.Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
 
-                if ( request.NIT.Length >0 ) query.Where("NIT",request.NIT);
+                if ( request.NIT.Length >0 ) query.WhereLike("NIT",request.NIT);
 
                 if (request.TELEFONO > 0) query.Where("TELEFONO", request.TELEFONO);
-                
+
                 if (request.DIRECCION_CLIENTE.Length > 0) query.WhereLike("DIRECCION_CLIENTE", request.DIRECCION_CLIENTE);
-                
+
                 if (request.SEGUNDO_APELLIDO.Length > 0) query.WhereLike("SEGUNDO_APELLIDO", request.SEGUNDO_APELLIDO);
                 
-                if (request.PRIMER_APELLIDO.Length >0) query.WhereLike("PRIMER_APELLIDO", request.SEGUNDO_APELLIDO);
+                if (request.PRIMER_APELLIDO.Length >0) query.WhereLike("PRIMER_APELLIDO", request.PRIMER_APELLIDO);
                 
                 if (request.CODIGO_CLIENTE.Length > 0) query.Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
                 
