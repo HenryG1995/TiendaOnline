@@ -17,7 +17,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DbmsProvider": "oracle",
-        "STR": "USER ID=db_tienda;PASSWORD=password2;DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))(CONNECT_DATA = (SID =XE))) ;"
+        "STR": "USER ID=db_tienda;PASSWORD=password2;DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.225.135)(PORT = 1521))(CONNECT_DATA = (SID =DBORCL))) ;"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7065;http://localhost:5010"
