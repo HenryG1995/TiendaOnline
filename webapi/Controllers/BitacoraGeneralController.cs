@@ -33,7 +33,7 @@ namespace webapi.Controllers
                 });
 
 
-                return Ok(lista.ToList()) ;
+                return Ok(lista.ToList());
 
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace webapi.Controllers
 
             try
             {
-               
+
                 var query = new Query("BITACORA_GENERAL").AsInsert(request);
 
                 var sql = execute.ExecuterCompiler(query);
@@ -67,3 +67,4 @@ namespace webapi.Controllers
         }
 
     }
+}

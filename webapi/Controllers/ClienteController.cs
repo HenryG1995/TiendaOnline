@@ -86,7 +86,7 @@ namespace webapi.Controllers
                 if (request.SEGUNDO_APELLIDO.IsNullOrEmpty() == false) query.WhereLike("SEGUNDO_APELLIDO", request.SEGUNDO_APELLIDO);
                 
                 if (request.PRIMER_APELLIDO.IsNullOrEmpty() == false) query.WhereLike("PRIMER_APELLIDO", request.SEGUNDO_APELLIDO);
->
+
                 if (request.CODIGO_CLIENTE.IsNullOrEmpty() == false) query.Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
                 
                 if (request.PRIMER_NOMBRE.IsNullOrEmpty() == false) query.WhereLike("PRIMER_NOMBRE",request.PRIMER_NOMBRE);
