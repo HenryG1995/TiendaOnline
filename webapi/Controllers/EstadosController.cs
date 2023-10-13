@@ -40,7 +40,7 @@ namespace webapi.Controllers
             }
         }
         [HttpPost("ObtenerEstado")]
-        public IActionResult ObtenerEstado([FromBody] ESTADOS request)
+        public IActionResult ObtenerEstado([FromQuery] ESTADOS request)
         {
 
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();

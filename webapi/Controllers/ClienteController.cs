@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Azure.Core;
 using ModelsStore.DTO.PARAM;
+using Microsoft.IdentityModel.Tokens;
 
 namespace webapi.Controllers
 {
@@ -47,7 +48,7 @@ namespace webapi.Controllers
         }
 
         [HttpGet("ConsultaFiltro")]
-        public IActionResult ConsultaFiltro([FromBody] V_CLIENTE request)
+        public IActionResult ConsultaFiltro([FromQuery] V_CLIENTE request)
         {
             try
             {
@@ -57,33 +58,47 @@ namespace webapi.Controllers
 
                 connection.InitRead();
 
-                var query = new Query("V_CLIETE").Select("*");
+                var query = new Query("V_CLIENTE").Select("*");
 
-                if (request.CODIGO_ESTADO.Length > 0) query.Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
+                if (request.CODIGO_ESTADO.Length > 0 && request.CODIGO_ESTADO.ToString() != "string") { 
+                    
+                    var query1 = new Query("ESTADOS").Select("ESTADO").Where("CODIGO_ESTADO",request.CODIGO_ESTADO);
 
-                if ( request.NIT.Length >0 ) query.Where("NIT",request.NIT);
+                    var sql1 = execute.ExecuterCompiler(query1);
 
-                if (request.TELEFONO > 0) query.Where("TELEFONO", request.TELEFONO);
+                    var obj = new ESTADOS();
+
+                    execute.DataReader(sql1, reader =>
+                    {
+                        obj = DataReaderMapper<ESTADOS>.MapToObject(reader);
+                    });
+                    
+                    query.Where("ESTADO", obj.ESTADO); }
+            
+
+                if ( request.NIT.IsNullOrEmpty() == false ) query.Where("NIT",request.NIT);
+
+                if (request.TELEFONO.ToString().IsNullOrEmpty() == false) query.Where("TELEFONO", request.TELEFONO);
                 
-                if (request.DIRECCION_CLIENTE.Length > 0) query.WhereLike("DIRECCION_CLIENTE", request.DIRECCION_CLIENTE);
+                if (request.DIRECCION_CLIENTE.IsNullOrEmpty() == false) query.WhereLike("DIRECCION_CLIENTE", request.DIRECCION_CLIENTE);
                 
-                if (request.SEGUNDO_APELLIDO.Length > 0) query.WhereLike("SEGUNDO_APELLIDO", request.SEGUNDO_APELLIDO);
+                if (request.SEGUNDO_APELLIDO.IsNullOrEmpty() == false) query.WhereLike("SEGUNDO_APELLIDO", request.SEGUNDO_APELLIDO);
                 
-                if (request.PRIMER_APELLIDO.Length >0) query.WhereLike("PRIMER_APELLIDO", request.SEGUNDO_APELLIDO);
+                if (request.PRIMER_APELLIDO.IsNullOrEmpty() == false) query.WhereLike("PRIMER_APELLIDO", request.SEGUNDO_APELLIDO);
                 
-                if (request.CODIGO_CLIENTE.Length > 0) query.Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
+                if (request.CODIGO_CLIENTE.IsNullOrEmpty() == false) query.Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
                 
-                if (request.PRIMER_NOMBRE.Length >0) query.WhereLike("PRIMER_NOMBRE",request.PRIMER_NOMBRE);
+                if (request.PRIMER_NOMBRE.IsNullOrEmpty() == false) query.WhereLike("PRIMER_NOMBRE",request.PRIMER_NOMBRE);
                 
-                if (request.SEGUNDO_NOMBRE.Length > 0) query.WhereLike("SEGUNDO_NOMBRE", request.SEGUNDO_NOMBRE);
+                if (request.SEGUNDO_NOMBRE.IsNullOrEmpty() == false) query.WhereLike("SEGUNDO_NOMBRE", request.SEGUNDO_NOMBRE);
 
                 var sql = execute.ExecuterCompiler(query);
 
-                var lista = new List<V_CLIENTE>();
+                var lista = new List<V_CLIENTE_R>();
 
                 execute.DataReader(sql, reader =>
                 {
-                    lista = DataReaderMapper<V_CLIENTE>.MapToList(reader);
+                    lista = DataReaderMapper<V_CLIENTE_R>.MapToList(reader);
                 });
 
                 return Ok(lista.ToList());

@@ -28,7 +28,6 @@ namespace ModelsStore.DbConn.Utilities
                 //byte[] blobData = File.ReadAllBytes(filePath);
                 byte[] blob_newdata = Encoding.Default.GetBytes(blobDataString);
 
-
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
                     connection.Open();
@@ -37,12 +36,17 @@ namespace ModelsStore.DbConn.Utilities
                     using (OracleCommand cmd = connection.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
+                       
                         cmd.CommandText = "INSERT INTO PRUEBASIMAGEN (UUID,IMAGEN) VALUES (DEFAULT,:blobParam)";
                         // Agrega el parámetro BLOB al comando
+                       
                         OracleParameter blobParam = new OracleParameter("blobParam", OracleDbType.Blob);
+                        
                         blobParam.Value = blob_newdata;
+                       
                         cmd.Parameters.Add(blobParam);
                         // Ejecuta la inserción
+                       
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -61,8 +65,6 @@ namespace ModelsStore.DbConn.Utilities
 
         public bool insertBlobs(string query, string blob,string connectionString)
         {
-
-
             try
             {
 
@@ -70,11 +72,11 @@ namespace ModelsStore.DbConn.Utilities
 
                 if (result == true)
                 {
-                     query = query.Replace("'data:img'", ":blobParam");
-
+                    query = query.Replace("'data:img'", ":blobParam");
                 }
 
                 var blobDataString = blob;
+
                 byte[] blob_newdata = Encoding.Default.GetBytes(blobDataString);
 
                 using (OracleConnection connection = new OracleConnection(connectionString))
@@ -85,14 +87,23 @@ namespace ModelsStore.DbConn.Utilities
                     using (OracleCommand cmd = connection.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
+
                         cmd.CommandText = query;
+                        
                         // Agrega el parámetro BLOB al comando
+                        
                         OracleParameter blobParam = new OracleParameter("blobParam", OracleDbType.Blob);
+                        
                         blobParam.Value = blob_newdata;
+                        
                         cmd.Parameters.Add(blobParam);
+                        
                         // Ejecuta la inserción
+                        
                         cmd.ExecuteNonQuery();
+                        
                         Console.WriteLine(cmd.CommandText);
+                        
                         connection.Close();
                     }
                 }
@@ -104,6 +115,7 @@ namespace ModelsStore.DbConn.Utilities
 
 
                 Console.WriteLine(query);
+
                 Console.WriteLine(ex.ToString());
 
                 return false;
