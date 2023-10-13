@@ -11,31 +11,59 @@ namespace webapi.Controllers
     [ApiController]
     public class BitacoraGeneralController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("GetAllBitacora")]
+        public IActionResult GetAllBitacora()
         {
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-            return Ok();
+            var connection = new ConectionDecider();
+
+            try
+            {
+
+                var query = new Query("BITACORA_GENERAL").Select("*");
+
+                var sql = execute.ExecuterCompiler(query);
+
+                var lista = new List<BITACORA_GENERAL>();
+
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<BITACORA_GENERAL>.MapToList(reader);
+                });
+
+
+                return Ok(lista.ToList()) ;
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
         }
-        [HttpPost]
-        public IActionResult Post()
+
+
+        [HttpPost("GuardaBitacora")]
+        public IActionResult GuardaBitacora([FromBody] BITACORA_GENERAL request)
         {
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-            return Ok();
+            var connection = new ConectionDecider();
+
+            try
+            {
+               
+                var query = new Query("BITACORA_GENERAL").AsInsert(request);
+
+                var sql = execute.ExecuterCompiler(query);
+
+                return Ok(execute.ExecuteDecider(sql));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
         }
-        [HttpPut]
-        public IActionResult Put()
-        {
-
-            return Ok();
-        }
-        [HttpDelete]
-        public IActionResult Delete()
-        { 
-
-            return Ok();
-        }
-
 
     }
-}
