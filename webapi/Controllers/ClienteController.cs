@@ -240,7 +240,7 @@ public IActionResult ActualizaCliente([FromBody] CLIENTE request)
             NIT = request.NIT,
             DIRECCION_CLIENTE = request.DIRECCION_CLIENTE,
             TELEFONO = request.TELEFONO,
-        });
+        }).Where("CODIGO_CLIENTE",request.CODIGO_CLIENTE);
 
         var sql = execute.ExecuterCompiler(query);
 
