@@ -3,8 +3,8 @@
         <h4><strong>ACTUALIZACIÓN DE CLIENTE</strong></h4>
         <mat-divider></mat-divider><br>
         
-        <button mat-fab extended color="primary" (click)="pruebaactualizar()"
-        style="margin-top: 20px;"><mat-icon>search</mat-icon>PRUEBA</button>
+        <!-- <button mat-fab extended color="primary" (click)="pruebaactualizar()"
+        style="margin-top: 20px;"><mat-icon>search</mat-icon>PRUEBA</button> -->
         <form [formGroup]="codigoForm">
 
             <div class="containercod">
@@ -58,18 +58,17 @@
                 </div>
                 <mat-divider></mat-divider><br>
 
-                <h5>Información extra</h5>
                 <div class="infcontainer">
 
                     <mat-form-field appearance="outline">
                         <mat-label>Ingrese No. NIT</mat-label>
-                        <input matInput placeholder="No. NIT" formControlName="nit" required [appMaxlength]="10"
+                        <input matInput placeholder="No. NIT" formControlName="nitControl" required [appMaxlength]="10"
                             uppercase>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>número de teléfono</mat-label>
-                        <input matInput placeholder="Número de teléfono" formControlName="numtelefono"
+                        <input matInput placeholder="Número de teléfono" formControlName="numtelefonoControl"
                             [appMaxlength]="8" required appNumbersOnly>
                     </mat-form-field>
 
