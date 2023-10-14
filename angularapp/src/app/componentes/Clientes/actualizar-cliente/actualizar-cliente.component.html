@@ -2,7 +2,9 @@
     <div class="contenedor">
         <h4><strong>ACTUALIZACIÓN DE CLIENTE</strong></h4>
         <mat-divider></mat-divider><br>
-
+        
+        <button mat-fab extended color="primary" (click)="pruebaactualizar()"
+        style="margin-top: 20px;"><mat-icon>search</mat-icon>PRUEBA</button>
         <form [formGroup]="codigoForm">
 
             <div class="containercod">
@@ -110,7 +112,7 @@
                     </mat-form-field>
                 </div>
 
-                <button (click)="clienteNextStep()" mat-fab extended color="primary"
+                <button (click)="Actualizar()" mat-fab extended color="primary"
                     style="margin-top: 20px;"><mat-icon>update</mat-icon>Actualizar</button>
 
             </div>

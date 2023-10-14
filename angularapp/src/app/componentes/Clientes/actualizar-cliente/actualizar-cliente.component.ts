@@ -33,6 +33,7 @@ export class ActualizarClienteComponent implements OnInit {
   disableValidations = true;
   nombreEstadoi = "";
   nombreCategoriai = "";
+  codigoCliente = "";
 
   clienteInfo = new ConsultaCliente();
   direccionInfo = new direccionClienteModel();
@@ -40,15 +41,12 @@ export class ActualizarClienteComponent implements OnInit {
 
   estadosInfo: estadosmodel[] = [];
   categoriasInfo: categoriasModel[] = [];
-  
+
 
   ngOnInit(): void {
     window.addEventListener('beforeunload', () => {
       this.isLoading = true;
     });
-
-    this.obtenerCategorias();
-    this.obtenerEstados();
   }
 
   codigoForm = this._formBuilder.group({
@@ -57,7 +55,6 @@ export class ActualizarClienteComponent implements OnInit {
 
   //validación de campos requeridos como obligatorios en formulario de datos personales
   datosFormGroup = this._formBuilder.group({
-    codclienteControl: ['', Validators.required],
     primerNombreControl: ['', Validators.required],
     segundoNombreControl: [''],
     primerApellidoControl: ['', Validators.required],
@@ -112,16 +109,55 @@ export class ActualizarClienteComponent implements OnInit {
   buscarCliente() {
     if (this.codigoForm.valid) {
       this.idFind = false
-      this.datosFormGroup.reset
-      
+      this.datosFormGroup.reset()
+
       this.codCliente.codigO_CLIENTE = this.codigoForm.get('codclienteControl')?.value?.toUpperCase() || ''
       try {
         console.log('el valor del codigo es: ' + this.codCliente.codigO_CLIENTE)
 
         this.clienteservice.InfoCliente(this.codCliente).subscribe(
           (response: any) => {
-            this.categoriasInfo = response;
-            this.idFind = true;
+
+            if (response.length > 0) {
+              this.clienteInfo = response.map((item: any) => {
+                Object.keys(item).forEach(key => {
+                  if (item[key] === null) item[key] = '';
+                });
+                return item;
+              });
+
+              this.codigoCliente = this.codCliente.codigO_CLIENTE;
+
+              this.datosFormGroup.patchValue({
+                primerNombreControl: response[0].primeR_NOMBRE,
+                segundoNombreControl: response[0].segundO_NOMBRE,
+                primerApellidoControl: response[0].primeR_APELLIDO,
+                segundoApellidoControl: response[0].segundO_APELLIDO,
+                nit: response[0].nit,
+                numtelefono: response[0].telefono,
+                direccionControl: response[0].direccioN_CLIENTE,
+                estadoControl: response[0].codigO_ESTADO,
+                categoriaControl: response[0].codigO_CATEGORIA
+              });
+
+
+              // this.categoriasInfo = response;
+              this.idFind = true;
+              this.codigoForm.reset();
+              this.obtenerCategorias();
+              this.obtenerEstados();
+
+
+            } else {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'info',
+                text: 'No existen datos de cliente.',
+                showConfirmButton: false,
+                timer: 3000,
+                allowOutsideClick: false
+              });
+            }
           },
           (error) => {
             Swal.fire({
@@ -147,44 +183,72 @@ export class ActualizarClienteComponent implements OnInit {
     }
   }
 
-  clienteNextStep() {
+  Actualizar() {
     const nit = this.datosFormGroup.get('nit')?.value || 0;
     const telefono = this.datosFormGroup.get('numtelefono')?.value || 0;
 
-    // // var nombrePais = this.direccionFormGroup.get('paisControl')?.value
+    // var nombreEstado = this.datosFormGroup.get('estadoControl')?.value
+    // var nombreCategoria = this.datosFormGroup.get('categoriaControl')?.value
 
-    var nombreEstado = this.datosFormGroup.get('estadoControl')?.value
-    var nombreCategoria = this.datosFormGroup.get('categoriaControl')?.value
+    // this.estadosInfo.forEach(e => {
+    //   e.codigO_ESTADO === nombreEstado ? this.nombreEstadoi = e.estado : '';
+    // });
 
-    this.estadosInfo.forEach(e => {
-      e.codigO_ESTADO === nombreEstado ? this.nombreEstadoi = e.estado : '';
-    });
+    // this.categoriasInfo.forEach(e => {
+    //   e.codigO_CATEGORIA === nombreCategoria ? this.nombreCategoriai = e.nombrE_CATEGORIA : '';
+    // });
 
-    this.categoriasInfo.forEach(e => {
-      e.codigO_CATEGORIA === nombreCategoria ? this.nombreCategoriai = e.nombrE_CATEGORIA : '';
-    });
-
-    // console.log('BUENOOOOOOOOOO EL CODIGO ESTADO ES: ', nombreEstado)
-
+    // console.log('estadocontrol: ' + this.datosFormGroup.get('estadoControl')?.value?.toUpperCase())
+    // console.log('categoriacontrol: ' + this.datosFormGroup.get('categoriaControl')?.value)
 
     if (this.datosFormGroup.valid) {
       if (nit != 0 && telefono != 0) {
-        // var estado = 
-
-        this.clienteInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.CODIGO_CLIENTE = this.codigoCliente;
         this.clienteInfo.PRIMER_NOMBRE = this.datosFormGroup.get('primerNombreControl')?.value?.toUpperCase() || "";
         this.clienteInfo.SEGUNDO_NOMBRE = this.datosFormGroup.get('segundoNombreControl')?.value?.toUpperCase() || "";
         this.clienteInfo.PRIMER_APELLIDO = this.datosFormGroup.get('primerApellidoControl')?.value?.toUpperCase() || "";
         this.clienteInfo.SEGUNDO_APELLIDO = this.datosFormGroup.get('segundoApellidoControl')?.value?.toUpperCase() || "";
-        this.clienteInfo.NIT = this.datosFormGroup.get('nit')?.value?.toUpperCase() || '';
-        this.clienteInfo.TELEFONO = this.datosFormGroup.get('numtelefono')?.value || 0;
-        this.clienteInfo.CODIGO_ESTADO = this.datosFormGroup.get('estadoControl')?.value?.toUpperCase() || '';
-        this.clienteInfo.CODIGO_CATEGORIA = this.datosFormGroup.get('categoriaControl')?.value?.toUpperCase() || '';
+        this.clienteInfo.NIT = nit
+        this.clienteInfo.DIRECCION_CLIENTE = this.datosFormGroup.get('direccionControl')?.value?.toUpperCase() || '';
+        this.clienteInfo.CODIGO_ESTADO = this.datosFormGroup.get('estadoControl')?.value || '';
+        this.clienteInfo.CODIGO_CATEGORIA = this.datosFormGroup.get('categoriaControl')?.value || '';
+        this.clienteInfo.TELEFONO = telefono
 
-        console.log('codigo: ', this.clienteInfo.CODIGO_CLIENTE)
-        console.log('estado: ', this.clienteInfo.CODIGO_ESTADO)
-        console.log('categoria: ', this.clienteInfo.CODIGO_CATEGORIA)
-      } else {
+    //     this.clienteInfo.CODIGO_CLIENTE = "74FDF8F558624C3A8575E9BA23B0C332"
+    // this.clienteInfo.PRIMER_NOMBRE = "HECTOR"
+    // this.clienteInfo.SEGUNDO_NOMBRE = "JAVIER"
+    // this.clienteInfo.PRIMER_APELLIDO = "GUTIERREZ"
+    // this.clienteInfo.SEGUNDO_APELLIDO = "HERNANDEZ"
+    // this.clienteInfo.NIT = "cf"
+    // this.clienteInfo.DIRECCION_CLIENTE = "9NA AVENIDA zona: 1 municipio: GUATEMALA departamento: GUATEMALA pais: GUATEMALA"
+    // this.clienteInfo.CODIGO_ESTADO = "D6A9E45954714523BD4CEF16B1BB16C6"
+    // this.clienteInfo.CODIGO_CATEGORIA = "91D3EFF699F040F481ED77F5981BC319"
+    // this.clienteInfo.TELEFONO = 22222222
+
+        this.clienteservice.actualizarCliente(this.clienteInfo).subscribe(
+          (response: any) => {
+            console.log('a ver: [' + response + ']')
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              text: 'todo cool',
+              showConfirmButton: false,
+              timer: 2500
+            });
+          },
+          (error) => {
+            console.log('a ver el error pue: ' + error)
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              text: 'Error en la comunicación con el servidor.',
+              showConfirmButton: false,
+              timer: 2500
+            });
+          }
+        );
+      }
+      else {
         Swal.fire({
           position: 'top-end',
           icon: 'warning',
@@ -193,25 +257,16 @@ export class ActualizarClienteComponent implements OnInit {
           timer: 2500
         })
       }
-    } else {
+    }
+    else {
       Swal.fire({
         position: 'top-end',
-        icon: 'warning',
-        text: 'Llenar campos obligatorios.',
+        icon: 'error',
+        text: 'Alguno de los campos ingresados no es válido.',
         showConfirmButton: false,
         timer: 2500
       })
     }
-  }
-
-  direccionNextStep() {
-
-    this.clienteInfo.DIRECCION_CLIENTE = this.direccionInfo['DESCRIPCION DIRECCION']
-      + ' zona: ' + this.direccionInfo.ZONA
-      + ' municipio: ' + this.direccionInfo.MUNICIPIO
-      + ' departamento: ' + this.direccionInfo.DEPARTAMENTO
-      + ' pais: ' + this.direccionInfo.PAIS + ', '
-      + this.direccionInfo.NOTAS_ADICIONALES
   }
 
   removeData() {
@@ -219,44 +274,22 @@ export class ActualizarClienteComponent implements OnInit {
   }
 
 
-  crearCliente() {
+  actualizarCliente(dato: ConsultaCliente) {
 
     if (this.datosFormGroup.valid) {
-
-
-      this.clienteservice.createClient(this.clienteInfo).subscribe(
-        (response: ConsultaCliente[]) => {
-          if (response) {
-
-            // La inserción en la base de datos se realizó correctamente.
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              text: 'Cliente creado exitosamente.',
-              showConfirmButton: false,
-              timer: 3000,
-              allowOutsideClick: false
-            }).then((result) => {
-              if (result.dismiss === Swal.DismissReason.timer) {
-
-                this.removeData();
-                location.reload();
-              }
-            });
-          } else {
-            // Hubo un error en la inserción en la base de datos.
-            Swal.fire({
-              position: 'top-end',
-              icon: 'error',
-              text: 'Error al crear el cliente.',
-              showConfirmButton: false,
-              timer: 3000,
-              allowOutsideClick: false
-            });
-          }
+      this.clienteservice.actualizarCliente(dato).subscribe(
+        (response: any) => {
+          console.log('a ver: [' + response + ']')
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            text: 'todo cool',
+            showConfirmButton: false,
+            timer: 2500
+          });
         },
         (error) => {
-          // Error de comunicación con el servidor.
+          console.log('a ver el error pue: ' + error)
           Swal.fire({
             position: 'top-end',
             icon: 'error',
@@ -266,8 +299,6 @@ export class ActualizarClienteComponent implements OnInit {
           });
         }
       );
-
-
     } else {
       Swal.fire({
         position: 'top-end',
@@ -279,4 +310,40 @@ export class ActualizarClienteComponent implements OnInit {
     }
   }
 
+  pruebaactualizar() {
+    this.clienteInfo.CODIGO_CLIENTE = "74FDF8F558624C3A8575E9BA23B0C332"
+    this.clienteInfo.PRIMER_NOMBRE = "HECTOR"
+    this.clienteInfo.SEGUNDO_NOMBRE = "JAVIER"
+    this.clienteInfo.PRIMER_APELLIDO = "GUTIERREZ"
+    this.clienteInfo.SEGUNDO_APELLIDO = "HERNANDEZ"
+    this.clienteInfo.NIT = "cf"
+    this.clienteInfo.DIRECCION_CLIENTE = "9NA AVENIDA zona: 1 municipio: GUATEMALA departamento: GUATEMALA pais: GUATEMALA"
+    this.clienteInfo.CODIGO_ESTADO = "D6A9E45954714523BD4CEF16B1BB16C6"
+    this.clienteInfo.CODIGO_CATEGORIA = "91D3EFF699F040F481ED77F5981BC319"
+    this.clienteInfo.TELEFONO = 22222222
+
+    this.clienteservice.actualizarCliente(this.clienteInfo).subscribe(
+      (response: any) => {
+        console.log('a ver: [' + response + ']')
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          text: 'todo cool',
+          showConfirmButton: false,
+          timer: 2500
+        });
+      },
+      (error) => {
+        console.log('a ver el error pue: ' + error)
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          text: 'Error en la comunicación con el servidor.',
+          showConfirmButton: false,
+          timer: 2500
+        });
+      }
+    );
+
+  }
 }

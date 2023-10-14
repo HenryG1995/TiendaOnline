@@ -9,6 +9,8 @@ import { EstadosService } from 'src/app/servicios/estados.service';
 import { MyErrorStateMatcher } from '../crear-cliente/crear-cliente.component';
 import { FormBuilder } from '@angular/forms';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-consultar-cliente',
   templateUrl: './consultar-cliente.component.html',
@@ -60,7 +62,9 @@ export class ConsultarClienteComponent implements OnInit {
     console.log('nit: ', this.consulta.NIT)
     console.log('estado: ', this.consulta.CODIGO_ESTADO)
 
+    this.isTableEmpty = true;
     this.clientesInfo = [];
+    
 
     this.buscarCliente();
   }
@@ -85,24 +89,50 @@ export class ConsultarClienteComponent implements OnInit {
       this.clientservice.GetClient(this.consulta).subscribe(
         (response: any) => {
 
-          this.clientesInfo = response.map((item: any) => {
-            Object.keys(item).forEach(key => {
-              if (item[key] === null) item[key] = '';
+          if (response.length > 0) {
+            this.clientesInfo = response.map((item: any) => {
+              Object.keys(item).forEach(key => {
+                if (item[key] === null) item[key] = '';
+              });
+              return item;
             });
-            return item;
-          });
 
-          this.resultsLength = this.clientesInfo.length;
-          this.isTableEmpty = false;
-          this.isLoadingResults = false;
-          console.log('Esta es la información: ', this.clientesInfo);
+            this.resultsLength = this.clientesInfo.length;
+            this.isTableEmpty = false;
+            this.isLoadingResults = false;
+            this.datosConsultaFormGroup.reset()
+          } else {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'info',
+              text: 'No existen datos de cliente.',
+              showConfirmButton: false,
+              timer: 3000,
+              allowOutsideClick: false
+            });
+          }
+
         },
         (error) => {
-          console.error('Error en la solicitud:', error);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            text: 'Error con el servidor.',
+            showConfirmButton: false,
+            timer: 3000,
+            allowOutsideClick: false
+          });
         }
       );
     } catch (error) {
-      console.error('Este es el error: ', error);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        text: 'Error con el servidor.',
+        showConfirmButton: false,
+        timer: 3000,
+        allowOutsideClick: false
+      });
     }
   }
 

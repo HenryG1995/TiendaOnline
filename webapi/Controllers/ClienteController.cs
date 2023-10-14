@@ -10,6 +10,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Azure.Core;
 using ModelsStore.DTO.PARAM;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 
 namespace webapi.Controllers
 {
@@ -47,8 +48,8 @@ namespace webapi.Controllers
             }
         }
 
-        [HttpGet("ConsultaFiltro")]
-        public IActionResult ConsultaFiltro([FromQuery] V_CLIENTE request)
+        [HttpPost("ConsultaFiltro")]
+        public IActionResult ConsultaFiltro([FromBody] V_CLIENTE request)
         {
             try
             {
@@ -64,7 +65,7 @@ namespace webapi.Controllers
                 {
 
                     var query1 = new Query("ESTADOS").Select("ESTADO").Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
-
+                    
                     var sql1 = execute.ExecuterCompiler(query1);
 
                     var obj = new ESTADOS();
@@ -195,7 +196,7 @@ public IActionResult InfoCliente([FromBody] CLIENTE_CONSULTA request)
     }
 
 }
-[HttpPut("CreaCliente")]
+[HttpPost("CreaCliente")]
 public IActionResult CreaCliente([FromBody] CLIENTE request)
 {
     ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
