@@ -2,8 +2,8 @@
     <h4><strong>ELIMINAR CLIENTE</strong></h4>
     <div class="busqueda" style="display: block; align-items: center; text-align: center;">
 
-        <form [formGroup]="codigoFormGroup">
-            <mat-form-field appearance="outline" style="margin-top: 20px; margin-right: 25px;">
+        <form [formGroup]="codigoForm">
+            <mat-form-field appearance="outline" style="margin-top: 20px; margin-right: 25px; width: 400px;">
                 <mat-label>Ingresar código</mat-label>
                 <input matInput placeholder="Consulta por código" formControlName="codclienteControl" required>
             </mat-form-field>
@@ -13,7 +13,7 @@
 
     </div>
     <mat-divider></mat-divider>
-    <form [formGroup]="datosFormGroup" *ngIf="isFill">
+    <form [formGroup]="datosFormGroup">
         <div class="containerNombre" style="text-align: center;">
 
             <mat-form-field appearance="outline" style="text-align: center;">
@@ -34,18 +34,18 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Correo electrónico</mat-label>
+                <mat-label>Teléfono</mat-label>
                 <input matInput placeholder="no. teléfono" formControlName="telefonoControl" [value]="clienteInfo.TELEFONO">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Estado</mat-label>
-                <input matInput formControlName="estadoControl" [value]="clienteInfo.CODIGO_ESTADO">
+                <input matInput formControlName="estadoControl" [value]="clienteInfo.ESTADO">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Categoria</mat-label>
-                <input matInput formControlName="categoriaControl" [value]="clienteInfo.CODIGO_CATEGORIA">
+                <input matInput formControlName="categoriaControl" [value]="clienteInfo.CATEGORIA">
             </mat-form-field>
 
         </div>

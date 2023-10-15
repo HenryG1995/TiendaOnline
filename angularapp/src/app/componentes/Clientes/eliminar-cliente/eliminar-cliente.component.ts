@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import Swal from 'sweetalert2';
-import { ConsultaCliente } from 'src/app/modelos/cliente.model';
+import { ConsultaCliente, ConsultacodCliente, DatosCliente } from 'src/app/modelos/cliente.model';
+import { ClientesService } from 'src/app/servicios/clientes.service';
+import { direccionClienteModel } from 'src/app/modelos/direccionCliente.model';
+import { estadosmodel } from 'src/app/modelos/estados.model';
+import { categoriasModel } from 'src/app/modelos/categorias.model';
 
 @Component({
   selector: 'app-eliminar-cliente',
@@ -12,14 +15,25 @@ import { ConsultaCliente } from 'src/app/modelos/cliente.model';
 })
 export class EliminarClienteComponent implements OnInit {
 
-  isFill = false;
+  idFind = false;
+  isLoading = false;
+  codigoClientei = "";
 
-  clienteInfo = new ConsultaCliente();
+  clienteInfo = new DatosCliente();
+  direccionInfo = new direccionClienteModel();
+  consulta = new ConsultaCliente();
+  eliminaCliente = new ConsultacodCliente();
 
-  constructor(private _formBuilder: FormBuilder) { }
+  estadosInfo: estadosmodel[] = [];
+  categoriasInfo: categoriasModel[] = [];
 
-  codigoFormGroup = this._formBuilder.group({
-    codclienteControl: ['', Validators.required]
+  constructor(
+    private _formBuilder: FormBuilder,
+    private clienteservice: ClientesService,
+  ) { }
+
+  codigoForm = this._formBuilder.group({
+    codclienteControl: ['', [Validators.required, Validators.minLength(25)]]
   })
 
 
@@ -33,62 +47,133 @@ export class EliminarClienteComponent implements OnInit {
   });
 
   ngOnInit(): void {
-
+    window.addEventListener('beforeunload', () => {
+      this.isLoading = true;
+    });
   }
+
 
   buscarCliente() {
-    //d this.datosFormGroup.reset();
-    // this.clienteInfo = new ConsultaCliente();
-    if (this.codigoFormGroup.valid) {
-      
-      this.clienteInfo.PRIMER_NOMBRE = this.clienteInfo.PRIMER_NOMBRE + ' Ronichi' + this.clienteInfo.SEGUNDO_NOMBRE + ' ' + this.clienteInfo.PRIMER_APELLIDO + ' ' + this.clienteInfo.SEGUNDO_APELLIDO || ''
-      this.clienteInfo.DIRECCION_CLIENTE = 'En la bendición de yisus' || ''
-      this.clienteInfo.NIT = '88007995' || ''
-      this.clienteInfo.TELEFONO = 911 || 0
-      this.clienteInfo.CODIGO_ESTADO = 'en depre' || ''
-      this.clienteInfo.CODIGO_CATEGORIA = 'saquenme de aki' || ''
 
-      console.log('this.clienteInfo.PRIMER_NOMBRE: [', this.clienteInfo.PRIMER_NOMBRE + ']')
-      console.log('this.clienteInfo.PRIMER_NOMBRE: [', this.clienteInfo.DIRECCION_CLIENTE + ']')
-      console.log('this.clienteInfo.PRIMER_NOMBRE: [', this.clienteInfo.NIT + ']')
-      console.log('this.clienteInfo.PRIMER_NOMBRE: [', this.clienteInfo.TELEFONO + ']')
-      console.log('this.clienteInfo.PRIMER_NOMBRE: [', this.clienteInfo.CODIGO_ESTADO + ']')
-      console.log('this.clienteInfo.PRIMER_NOMBRE: [', this.clienteInfo.CODIGO_CATEGORIA + ']')
+    this.eliminaCliente.codigO_CLIENTE = this.codigoForm.get('codclienteControl')?.value?.toUpperCase() ?? ''
 
-      this.isFill = true
-    }else {
+    try {
+
+      this.clienteservice.InfoCliente(this.eliminaCliente).subscribe(
+        (response: any) => {
+
+          if (response.length > 0) {
+
+            response.map((item: any) => {
+              Object.keys(item).forEach(key => {
+                if (item[key] === null) item[key] = '';
+              });
+              return item;
+            });
+
+            console.log('nombre: ', response[0].primeR_NOMBRE)
+            console.log('estado: ', response[0].estado)
+            console.log('categoria: ', response[0].categoria)
+
+            this.datosFormGroup.patchValue({
+              nombreControl:
+                response[0].primeR_NOMBRE + " " +
+                response[0].segundO_NOMBRE + " " +
+                response[0].primeR_APELLIDO + " " +
+                response[0].segundO_APELLIDO,
+              nitControl: response[0].nit,
+              telefonoControl: response[0].telefono,
+              direccionControl: response[0].direccioN_CLIENTE,
+              estadoControl: response[0].estado,
+              categoriaControl: response[0].categoria
+            });
+
+            this.idFind = true;
+            this.codigoForm.reset();
+
+          } else {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'info',
+              text: 'No existen datos de cliente.',
+              showConfirmButton: false,
+              timer: 3000,
+              allowOutsideClick: false
+            });
+          }
+        },
+        (error) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            text: 'Ocurrio un error al obtener los datos.',
+            showConfirmButton: false,
+            timer: 2500
+          });
+        }
+      )
+    } catch (error) {
       Swal.fire({
         position: 'top-end',
-        icon: 'info',
-        text: 'Debe de ingresar el código del cliente.',
+        icon: 'warning',
+        text: 'Ocurrio un error con el servidor',
         showConfirmButton: false,
         timer: 2500
-      }).then(e =>{
-        this.isFill = false
       });
     }
-
   }
 
+
   eliminarCliente() {
-    console.log('Elimina al cliente', this.codigoFormGroup.get('codclienteControl')?.value)
+    console.log('Elimina al cliente', this.eliminaCliente.codigO_CLIENTE )
 
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      text: 'Cliente eliminado exitosamente.',
-      showConfirmButton: false,
-      timer: 2500
-    });
-
-    this.limpiaPantalla();
-
+    
+    this.clienteservice.eliminarCliente(this.eliminaCliente).subscribe(
+      (response: any) => {
+        if (response) {
+          // La inserción en la base de datos se realizó correctamente.
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Cliente dado de baja exitosamente.',
+            showConfirmButton: false,
+            timer: 3000,
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+              this.limpiaPantalla();
+              location.reload();
+            }
+          });
+        } else {
+          // Hubo un error en la inserción en la base de datos.
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            text: 'Error al cambiar estado del cliente.',
+            showConfirmButton: false,
+            timer: 3000,
+            allowOutsideClick: false
+          });
+        }
+      },
+      (error) => {
+        // Error de comunicación con el servidor.
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          text: 'Error en la comunicación con el servidor.',
+          showConfirmButton: false,
+          timer: 2500
+        });
+      }
+    );
   }
 
   limpiaPantalla() {
-    this.isFill = false;
+    this.idFind = false
 
-    this.codigoFormGroup.reset();
+    this.codigoForm.reset();
     this.datosFormGroup.reset();
 
   }
