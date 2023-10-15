@@ -55,11 +55,11 @@ export class EliminarClienteComponent implements OnInit {
 
   buscarCliente() {
 
-    this.eliminaCliente.codigO_CLIENTE = this.codigoForm.get('codclienteControl')?.value?.toUpperCase() ?? ''
+    this.consulta.CODIGO_CLIENTE = this.codigoForm.get('codclienteControl')?.value?.toUpperCase() ?? ''
 
     try {
 
-      this.clienteservice.InfoCliente(this.eliminaCliente).subscribe(
+      this.clienteservice.GetClient(this.consulta).subscribe(
         (response: any) => {
 
           if (response.length > 0) {
