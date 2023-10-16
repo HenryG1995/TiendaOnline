@@ -113,13 +113,13 @@ namespace webapi.Controllers
 
 
 
-                var query = new Query("INVENTARIO").Select("*").Where("ACTIVO", 1);
+                var query = new Query("INVENTARIO").Select("*");
 
                 if (request.CODIGO_PRODUCTO != null) query.Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO);
                 if (request.DESCRIPCION_PRODUCTO != null) query.WhereLike("DESCRIPCION_PRODUCTO", request.DESCRIPCION_PRODUCTO);
-                if (request.UUID_ESTADO != null) query.Where("UUID_ESTADO", request.UUID_ESTADO);
-                if (request.CODIGO_PROVEEDOR != null) query.Where("CODIGO_PROVEEDOR", request.CODIGO_PROVEEDOR);
-                if (request.NOMBRE_PRODUCTO != null) query.WhereLike("NOMBRE_PRODUCTO", request.NOMBRE_PRODUCTO);
+                //if (request.UUID_ESTADO != null) query.Where("UUID_ESTADO", request.UUID_ESTADO);
+                //if (request.CODIGO_PROVEEDOR != null) query.Where("CODIGO_PROVEEDOR", request.CODIGO_PROVEEDOR);
+                //if (request.NOMBRE_PRODUCTO != null) query.WhereLike("NOMBRE_PRODUCTO", request.NOMBRE_PRODUCTO);
 
                 query.Limit(1);
 
