@@ -162,15 +162,14 @@ export class CrearProductoComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            text: 'Cliente creado exitosamente.',
-            showConfirmButton: false,
-            timer: 3000,
+            text: 'Cliente creado exitosamente,',
+            // timer: 3000,
             allowOutsideClick: false
           }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer) {
+            // if (result.dismiss === Swal.DismissReason.timer) {
               this.productoFormGroup.reset();
               location.reload();
-            }
+            // }
           });
 
         },

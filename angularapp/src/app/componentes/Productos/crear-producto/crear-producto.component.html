@@ -58,7 +58,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="containerVerificacion">
+            <div class="containerdireccionselect">
                 <mat-form-field>
                     <mat-label>Fecha de carga</mat-label>
                     <input matInput [matDatepicker]="dp1" formControlName="fechaCarga"
@@ -87,17 +87,18 @@
                     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                 </mat-form-field>
 
-                <div>
-                    <br>
-                    <label for="imagen" style="text-size-adjust: 300px;"><strong>Seleccione la imagen del
-                            producto</strong></label>
-                            <br><br>
-                    <input type="file" id="imagen" name="imagen" (change)="onFileSelected($event)" accept="image/*"
-                        formControlName="imagenProductoControl" required>
+                
+            </div>
+            <div>
+                <br>
+                <label for="imagen" style="text-size-adjust: 300px;"><strong>Seleccione la imagen del
+                        producto</strong></label>
+                        <br><br>
+                <input type="file" id="imagen" name="imagen" (change)="onFileSelected($event)" accept="image/*"
+                    formControlName="imagenProductoControl" required>
 
-                    <div class="imagen-container" *ngIf="imageData">
-                        <img [src]="imageData" *ngIf="imageData" alt="Imagen seleccionada">
-                    </div>
+                <div class="imagen-container" *ngIf="imageData">
+                    <img [src]="imageData" *ngIf="imageData" alt="Imagen seleccionada">
                 </div>
             </div>
 
