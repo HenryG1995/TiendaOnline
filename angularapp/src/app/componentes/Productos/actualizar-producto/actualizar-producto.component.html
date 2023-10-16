@@ -1,1 +1,138 @@
-<p>actualizar-producto works!</p>
+<div class="contenedor">
+    <h4><strong>ACTUALIZACIÓN DE PRODUCTOS</strong></h4>
+    <mat-divider></mat-divider>
+
+
+    <div class="">
+        <form [formGroup]="productoFormGroupConsulta">
+            <div class="containercod" >
+                <mat-form-field appearance="outline">
+                    <mat-label>Código de producto</mat-label>
+                    <input matInput placeholder="Código de producto" formControlName="codigoProductoControl" required
+                        [appMaxlength]="40">
+                </mat-form-field>
+            </div>
+            <div class="botones"
+                    style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                    <button (click)="buscarProducto()" mat-fab extended color="primary"
+                        style="text-align: center; align-items: center;">
+                        <mat-icon>search</mat-icon>
+                        BUSCAR PRODUCTO
+                    </button>
+                </div>
+            
+        </form>
+        
+        <div style="margin-top: 10px;">
+            <form [formGroup]="productoFormGroup">
+                <div class="" style="display: grid; grid-template-columns: 1fr 2fr; gap: 25px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre de producto</mat-label>
+                        <input matInput placeholder="Nombre de producto" formControlName="nombreProductoControl" required
+                            [appMaxlength]="100" appNumbersAndLetters>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripción de producto</mat-label>
+                        <input matInput placeholder="Descripción de producto" formControlName="descripcionProductoControl"
+                            required [appMaxlength]="250" appNumbersAndLetters>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerVerificacion">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Unidades existentes</mat-label>
+                        <input matInput placeholder="Unidades existentes" formControlName="unidadesControl"
+                            [appMaxlength]="8" required appNumbersOnly>
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="estadoProductoControl" [errorStateMatcher]="matcher">
+                            <mat-option *ngFor="let estado of estadosInfo" [value]="estado.codigO_ESTADO">
+                                {{estado.estado}}
+                            </mat-option>
+                        </mat-select>
+    
+                        <mat-error *ngIf="productoFormGroup.get('estadoControl')?.hasError('required')">Selecciona una
+                            opción</mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <mat-label>Proveedor</mat-label>
+                        <mat-select formControlName="proveedorProductoControl" [errorStateMatcher]="matcher">
+                            <mat-option *ngFor="let proveedor of proveedoresInfo" [value]="proveedor.codigO_PROVEEDOR">
+                                {{proveedor.nombrE_PROVEEDOR}}
+                            </mat-option>
+                        </mat-select>
+    
+                        <mat-error *ngIf="productoFormGroup.get('estadoControl')?.hasError('required')">Selecciona una
+                            opción</mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="activoProductoControl" [errorStateMatcher]="matcher">
+                            <mat-option value="1">Activo</mat-option>
+                            <mat-option value="0">Inactivo</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerdireccionselect">
+                    <mat-form-field>
+                        <mat-label>Fecha de carga</mat-label>
+                        <input matInput [matDatepicker]="dp1" formControlName="fechaCarga">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+                        <mat-datepicker #dp1></mat-datepicker>
+                    </mat-form-field>
+    
+    
+                    <mat-form-field>
+                        <mat-label>Fecha de ingreso</mat-label>
+                        <input matInput [matDatepicker]="dp2" formControlName="fechaIngreso">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+                        <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <mat-label>Fecha de vencimiento</mat-label>
+                        <input matInput [matDatepicker]="dp3" formControlName="fechaVencimiento">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+    
+                    
+                </div>
+                <div>
+                    <br>
+                    <label for="imagen" style="text-size-adjust: 300px;"><strong>Seleccione la imagen del
+                            producto</strong></label>
+                            <br><br>
+                    <input type="file" id="imagen" name="imagen" (change)="onFileSelected($event)" accept="image/*"
+                        formControlName="imagenProductoControl" required>
+
+                    <div class="imagen-container" *ngIf="imageData">
+                        <img [src]="imageData" *ngIf="imageData" alt="Imagen seleccionada">
+                    </div>
+                </div>
+    
+                <div class="botones"
+                    style="display: flex; justify-content: center; align-items: center; text-align: center; height: 120px;">
+                    <button (click)="actualizarProducto()" mat-fab extended color="primary"
+                        style="text-align: center; align-items: center;">
+                        <mat-icon>library_add</mat-icon>
+                        CREAR CLIENTE
+                    </button>
+                </div>
+    
+            </form>
+        </div>
+
+
+
+    </div>
+</div>

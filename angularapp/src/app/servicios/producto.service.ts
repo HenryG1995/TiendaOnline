@@ -18,14 +18,18 @@ export class ProductoService {
 
   private url = 'https://localhost:7065/Inventarios/ConsultaProducto?'
 
-  public obtenerProducto(id?: string, descripcion?: string, fechaVencimiento?: Date) {
+  public obtenerProducto(id?: string, descripcion?: string, fechaVencimiento?: Date): Observable<ProductoModel[]> {
 
     if (id?.length) {
-      this.url = `${this.url}+${'CODIGO_PRODUCTO='}+${id}`;
-      console.log('url: [' + this.url + ']')
+      this.url = `${'https://localhost:7065/Inventarios/ConsultaProducto?CODIGO_PRODUCTO='}${id}`;
     }
 
+    console.log('url: [' + this.url + ']')
+
+    return this.http.get<ProductoModel[]>(this.url)
   }
+
+  
 
 
 }
