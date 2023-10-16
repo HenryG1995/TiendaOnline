@@ -1,5 +1,5 @@
 .contenedor {
-  width: 80%;
+  width: 100%;
   max-width: 100%;
   margin: 0em auto;
   font: 0.9em/1.2 Arial, Helvetica, sans-serif;
@@ -8,14 +8,29 @@
 
 .container {
   display: grid;
-  margin-top: 25px;
   grid-template-columns: 1fr 2fr;
-  gap: 25px;
+  grid-auto-rows: 100px;
+  gap: 25px;  
+  height: 60%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.containerData {
+.containerVerificacion {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: -20px;
+  /* grid-auto-rows: 100px; */
+  gap: 25px;
+  width: 100%;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+}
+
+.containercod {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   grid-auto-rows: 100px;
   gap: 25px;
   height: 60%;
@@ -24,8 +39,109 @@
   align-items: center;
 }
 
-.guardar {
+.containerdireccion {
+  display: flex; /* Cambiamos de grid a flex para alinear los elementos en la misma línea */
+  align-items: center; /* Alineamos verticalmente al centro */
+  gap: 25px; /* Espacio entre los elementos */
+
+  /* Puedes ajustar estos valores para controlar el ancho de los elementos */
+}
+
+.wide-field {
+  width: 50%; /* Ajusta el ancho según tus necesidades */
+}
+
+.zona-field {
+  width: 350%; /* Ajusta el ancho según tus necesidades */
+}
+
+.containerdireccionselect {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 80px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 100px;
+  gap: 25px;
+  height: 60%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infcontainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 100px;
+  gap: 25px;
+  height: 60%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.botones {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.example-stepper {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.mat-table {
+  max-width: 80%;
+  overflow-x: auto;
+}
+
+.mat-column-name {
+  height: 100px;
+}
+
+/* :host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  } */
+
+
+
+  /* Estilos para el contenedor de la imagen */
+.imagen-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(120%, 60%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  max-width: 20%; /* Tamaño máximo del contenedor */
+  max-height: 40vh; /* Altura máxima del contenedor (80% de la altura visible) */
+  text-align: center;
+}
+
+/* Estilos para la imagen dentro del contenedor */
+.imagen-container img {
+  max-width: 100%; /* Asegura que la imagen se ajuste al contenedor */
+  max-height: 100%; /* Asegura que la imagen se ajuste al contenedor */
+}
+
+/* Estilo para ocultar el contenedor si no hay imagen */
+/* .imagen-container.ng-star-inserted {
+  display: none;
+} */
+.image-preview {
+  text-align: center;
+  margin-top: 10px; /* Ajusta el espacio entre el botón y la imagen según tus preferencias */
 }

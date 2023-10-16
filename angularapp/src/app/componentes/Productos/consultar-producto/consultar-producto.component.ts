@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { productoModel } from 'src/app/modelos/producto.model';
+import { ProductoModel } from 'src/app/modelos/producto.model';
 import { ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { ConsultaCliente } from 'src/app/modelos/cliente.model';
 import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
@@ -53,7 +53,7 @@ export class ConsultarProductoComponent implements OnInit {
 
   dataSource = ELEMENT_DATA;
 
-  productosInfo: productoModel = new productoModel();
+  productosInfo: ProductoModel = new ProductoModel();
 
   fechaVencimiento : Date | null = null;
 

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { NgSwitch, NgSwitchCase, AsyncPipe } from '@angular/common';
+import { NgSwitch, NgSwitchCase, AsyncPipe, NgIf, DatePipe, CommonModule } from '@angular/common';
 import { Moment } from 'moment';
 
 //importacion de angular material
@@ -23,7 +23,6 @@ import { map } from 'rxjs/operators';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, SortDirection, matSortAnimations } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NgIf, DatePipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -89,6 +88,7 @@ import { NitdirectiveDirective } from './directivas/nitdirective.directive';
   ],
   imports: [
     BrowserAnimationsModule,
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     NgbModule,
@@ -118,6 +118,7 @@ import { NitdirectiveDirective } from './directivas/nitdirective.directive';
 
   ],
   providers: [
+    DatePipe,
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     { provide: DateAdapter, useClass: MomentDateAdapter },
 
