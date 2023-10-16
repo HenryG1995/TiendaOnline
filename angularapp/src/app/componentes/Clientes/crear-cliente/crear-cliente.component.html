@@ -1,9 +1,4 @@
 <div class="app-container">
-    <!-- <div class="center">
-        <div class="overlay" *ngIf="isLoading">
-            <mat-spinner></mat-spinner>
-        </div>
-    </div> -->
     <ng-container [ngSwitch]="stepperOrientation | async">
         <div *ngSwitchCase="'horizontal'"></div>
         <div *ngSwitchCase="'vertical'"></div>
@@ -11,7 +6,7 @@
     <div class="contenedor">
         <h4><strong>CREACIÓN DE CLIENTES</strong></h4>
         <mat-divider></mat-divider>
-        <!-- [linear]="isLinear" -->
+
         <mat-stepper [linear]="isLinear" class="example-stepper" #stepper [orientation]="(stepperOrientation | async)!">
 
             <mat-step [stepControl]="datosFormGroup">
@@ -43,8 +38,7 @@
                             <input matInput placeholder="Segundo nombre" formControlName="segundoNombreControl" 
                             [appMaxlength]="15" uppercase>
                         </mat-form-field>
-                        <!-- </div>
-                <div class="container"> -->
+
                         <mat-form-field appearance="outline">
                             <mat-label>Primer apellido</mat-label>
                             <input matInput placeholder="Primer apellido" formControlName="primerApellidoControl"
@@ -73,9 +67,6 @@
                             [appMaxlength]="8" required appNumbersOnly>
                         </mat-form-field>
 
-                        <!-- </div>
-
-                <div class="container"> -->
                         <mat-form-field>
                             <mat-label>Estado</mat-label>
                             <mat-select formControlName="estadoControl" [errorStateMatcher]="matcher">
@@ -193,16 +184,6 @@
                             [disabled]="!isTableEmpty" color="primary">Agregar</button>
                     </div>
 
-
-
-                    <!-- <div class="demo-button-container">
-
-                    <button mat-raised-button [disabled]="!dataSource.length" (click)="removeData()"
-                        class="demo-button">
-                        Remove data
-                    </button>
-                </div> -->
-
                     <div *ngIf="showTable" class="contenedor" style="overflow-x: auto; max-width: 100%;">
                         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"
                             style="margin-top: 25px; min-width: 100%;">
@@ -263,12 +244,6 @@
                             <input matInput formControlName="codigoClienteVerificacionControl"
                                 [value]="clienteInfo.CODIGO_CLIENTE">
                         </mat-form-field>
-
-                        <!-- <mat-form-field appearance="outline">
-                        <mat-label>Nombre de cliente</mat-label>
-                        <input matInput formControlName="nombreCompletoVerificacionControl"
-                            [value]="validacionFormGroup.get('nombreCompletoVerificacionControl')?.value">
-                    </mat-form-field> -->
 
                         <mat-form-field appearance="outline">
                             <mat-label>Nombre de cliente</mat-label>
