@@ -1,98 +1,151 @@
 .contenedor {
-    width: 100%;
-    max-width: 100%;
-    margin: 0em auto;
-    font: 0.9em/1.2 Arial, Helvetica, sans-serif;
-    background-color: rgba(246, 247, 251, 255);
-  }
-  
-  .container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 100px;
-    gap: 25px;
-    height: 60%;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
+  width: 100%;
+  max-width: 100%;
+  margin: 0em auto;
+  font: 0.9em/1.2 Arial, Helvetica, sans-serif;
+  background-color: rgba(246, 247, 251, 255);
+}
 
-  .btncontainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 100px;
-    gap: 25px;
-    height: 60%;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+  gap: 25px;
+  height: 60%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .card {
-    max-width: 250px;
-    background-color: #ffff;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.02);
-    /* border: 1px solid #afaeae; */
+.btncontainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 100px;
+  gap: 25px;
+  height: 60%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  max-width: 250px;
+  background-color: #ffff;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.02);
+  position: relative;
+  min-height: 300px; 
 }
 
 .card:hover {
-    background-color: rgb(224, 240, 247);
-    /* color: #ffffff; */
+  background-color: rgb(224, 240, 247);
+}
+
+.card img {
+  max-width: 100%;
+  max-height: 150px; /* Tamaño máximo de la imagen */
+  object-fit: contain; /* Ajusta la imagen al contenedor */
+  margin: 0 auto; /* Centra horizontalmente */
+  display: block;
+}
+
+.card .mat-card-content,
+.center-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card button {
+  /* background-color: #007bff; */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  
+}
+
+.quantity-input {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0 10px;
 }
 
 .imagen {
-    max-width: 10px;
+  max-width: 10px;
 }
 
 .contenedor {
-    width: 100%;
+  width: 100%;
 }
 
 .center-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightblue;
 }
 
-.contenedorcards {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-    text-align: center;
+
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
+
+/* .contenedorcards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  text-align: center;
+} */
 
 .input-with-buttons {
-    display: flex;
-    align-items: center;
-  }
-  
-  .quantity-input {
-    width: 40px; /* Ancho del campo de entrada numérica */
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 0 10px; /* Espacio entre el campo de entrada y los botones */
-  }
-  
-  .decrement-button,
-  .increment-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 5px 10px;
-  }
-  
-  .decrement-button {
-    margin-right: 5px; /* Espacio entre el botón de menos y el campo de entrada */
-  }
-  
-  .increment-button {
-    margin-left: 5px; /* Espacio entre el botón de más y el campo de entrada */
-  }
+  display: flex;
+  align-items: center;
+}
+
+.quantity-input {
+  width: 40px; /* Ancho del campo de entrada numérica */
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0 10px; /* Espacio entre el campo de entrada y los botones */
+}
+
+.decrement-button,
+.increment-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.decrement-button {
+  margin-right: 5px;
+}
+
+.increment-button {
+  margin-left: 5px;
+}
+
+/* Estilo para el contenedor de tarjetas */
+.contenedorcards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  text-align: center;
+  width: 100%;
+}

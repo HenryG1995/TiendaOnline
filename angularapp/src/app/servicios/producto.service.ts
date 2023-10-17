@@ -29,7 +29,9 @@ export class ProductoService {
     return this.http.get<ProductoModel[]>(this.url)
   }
 
-  
+  public obtenerListadoProductos(): Observable<ProductoModel[]> {
+    return this.http.get<ProductoModel[]>('https://localhost:7065/Inventarios/GetAllInventario')
+  }
 
 
 }

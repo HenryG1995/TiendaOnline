@@ -2,56 +2,93 @@
 
   <h4><strong>PRODUCTOS</strong></h4>
   <mat-divider></mat-divider>
+  <form [formGroup]="productoFormGroupConsulta">
+    <div class="container">
+      <mat-form-field appearance="outline">
+        <mat-label>Código de producto</mat-label>
+        <input matInput placeholder="Código de producto" formControlName="codigoProductoControl" [appMaxlength]="40">
+      </mat-form-field>
 
-  <div class="container">
-    <mat-form-field appearance="outline">
-      <mat-label>Código</mat-label>
-      <input matInput placeholder="Consulta por código" [(ngModel)]="productosInfo.codigO_PRODUCTO">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción de producto</mat-label>
+        <input matInput placeholder="Descripción de producto" formControlName="descripcionProductoControl"
+          [appMaxlength]="40">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Descripción</mat-label>
-      <input matInput placeholder="Consulta por descripción" [(ngModel)]="productosInfo.descripcioN_PRODUCTO">
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Fecha de vencimiento</mat-label>
-      <input matInput [matDatepicker]="dp3" [(ngModel)]="fechaVencimiento"
-        (dateChange)="onFechaVencimientoChange($event)" disabled>
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
-      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-    </mat-form-field>
-    <div class="btncontainer">
-      <button mat-raised-button s-mr-1 color="primary">Consultar</button>
-      <button mat-raised-button color="accent">Borrar filtros</button>
+      <mat-form-field>
+        <mat-label>Fecha de vencimiento</mat-label>
+        <input matInput [matDatepicker]="dp3" formControlName="fechaVencimientoControl">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+      </mat-form-field>
     </div>
 
-  </div>
+    <div class="btncontainer">
+      <p></p>
+      <button (click)="buscarProducto()" mat-fab extended color="primary"
+        style="text-align: center; align-items: center;">
+        <mat-icon>search</mat-icon>
+        BUSCAR PRODUCTO
+      </button>
 
+      <button (click)="buscarProducto()" mat-fab extended color="accent"
+        style="text-align: center; align-items: center;">
+        <mat-icon>shopping_cart</mat-icon>
+        IR A CARRITO DE COMPRAS
+      </button>
+
+      <button (click)="buscarProducto()" mat-fab extended color="inf" style="text-align: center; align-items: center;">
+        <mat-icon>clear</mat-icon>
+        LIMPIAR FILTROS
+      </button>
+      <p></p>
+    </div>
+  </form>
 
   <div class="contenedorcards">
-
-    <mat-card class="card" *ngFor="let item of dataSource">
+    <mat-card class="card" *ngFor="let item of productos">
       <mat-card-header>
-        <mat-card-title>{{item.cardTitle}}</mat-card-title>
-        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        <mat-card-subtitle>{{item.nombrE_PRODUCTO}}</mat-card-subtitle>
       </mat-card-header>
-      <img (click)="alertaCompra(item)" mat-card-image src="{{item.imagecard}}" alt="Photo of a Shiba Inu">
+      <div class="image-container">
+        <img mat-card-image src="{{item.imagen}}" alt="No available photo">
+        <div class="center-button">
+          <button mat-button color="primary" >
+            <mat-icon>add_shopping_cart</mat-icon> Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <mat-card-content>
+        <h5 style="margin-top: 5px; text-align: center;">
+          <!-- {{'Q.'+item.price}} -->
+        </h5>
+      </mat-card-content>
+      <br>
+    </mat-card>
+  </div>
+</div>
+
+
+
+<!-- <div class="contenedorcards">
+
+    <mat-card class="card" *ngFor="let item of productos">
+      <mat-card-header>
+        <mat-card-subtitle>{{item.nombrE_PRODUCTO}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{item.imagen}}" alt="No avaible photo">
       <mat-card-content>
         <h5 style="margin-top: 5px; text-align: center; ">
-          {{'Q.'+item.price}}
+          
         </h5>
       </mat-card-content>
       <br>
       <div class="center-button">
         <div>añadir al carrito</div>
-        <button (click)="alertaCompra(item)" mat-button color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
+        <button mat-button color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
       </div>
     </mat-card>
-  </div>
-
-
-
-
-</div>
+  </div> -->
+  <!--boton (click)="alertaCompra(item)"-->
+  <!--img (click)="alertaCompra(item)" -->
