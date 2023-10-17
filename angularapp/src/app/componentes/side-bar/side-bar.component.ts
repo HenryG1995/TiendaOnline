@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 declare var $: any;
 
@@ -15,8 +15,9 @@ interface opciones {
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent implements OnInit{
+export class SideBarComponent implements OnInit, AfterViewInit{
   submenuAbierto: string | null = null;
+  carga= true;
 
   submenusState: opciones = {
     clienteSubmenu: false,
@@ -38,6 +39,11 @@ export class SideBarComponent implements OnInit{
 
   ngOnInit(): void {
     this.initSidebarToggle();
+    this.carga = false;
+  }
+
+  ngAfterViewInit(): void {
+    
   }
 
   initSidebarToggle() {

@@ -1,106 +1,111 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<div *ngIf="carga" class="overlay">
+    <div class="center">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
 
 <div class="contenedor">
     <div class="wrapper d-flex align-items-stretch">
 
         <nav id="sidebar">
             <div class="p-4 pt-5">
-                <a  class="img logo rounded-circle mb-5" href="/home"
+                <a class="img logo rounded-circle mb-5" href="/principalside"
                     style="background-image: url(assets/logitohome.png);"></a>
 
                 <ul class="list-unstyled components mb-5">
                     <li class="">
-                        <a (click)="toggleSubmenu('clienteSubmenu')" data-toggle="collapse"
-                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Clientes</a>
+                        <a (click)="toggleSubmenu('clienteSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-user"></i> Clientes</a>
                         <ul *ngIf="submenusState.clienteSubmenu && submenuAbierto === 'clienteSubmenu'"
                             class=" list-unstyled">
                             <li>
-                                <a href="clientes/crearCliente"><i class="fa fa-user-plus"></i>
+                                <a href="/principalside/clientes/crearCliente"><i class="fa fa-user-plus"></i>
                                     Crear cliente</a>
                             </li>
                             <li>
-                                <a href="clientes/consultarCliente"><i class="fa fa-search"></i>
+                                <a href="/principalside/clientes/consultarCliente"><i class="fa fa-search"></i>
                                     Consulta cliente</a>
                             </li>
                             <li>
-                                <a href="clientes/actualizarCliente"><i class="fa fa-edit"></i>
+                                <a href="/principalside/clientes/actualizarCliente"><i class="fa fa-edit"></i>
                                     Actualizar cliente</a>
                             </li>
                             <li>
-                                <a href="clientes/eliminarCliente"><i class="fa fa-trash"></i>
+                                <a href="/principalside/clientes/eliminarCliente"><i class="fa fa-trash"></i>
                                     Eliminar cliente</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a (click)="toggleSubmenu('productoSubmenu')"  data-toggle="collapse"
-                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-tags"></i> Productos</a>
+                        <a (click)="toggleSubmenu('productoSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-tags"></i> Productos</a>
                         <ul *ngIf="submenusState.productoSubmenu && submenuAbierto === 'productoSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/crearProducto">Crear producto</a>
+                                <a href="/principalside/crearProducto">Crear producto</a>
                             </li>
                             <li>
-                                <a href="/consultarProducto">Consultar producto</a>
+                                <a href="/principalside/consultarProducto">Consultar producto</a>
                             </li>
                             <li>
-                                <a href="/actualizarProducto">Actualizar producto</a>
+                                <a href="/principalside/actualizarProducto">Actualizar producto</a>
                             </li>
                             <li>
-                                <a href="/eliminarProducto">Eliminar producto</a>
+                                <a href="/principalside/eliminarProducto">Eliminar producto</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a (click)="toggleSubmenu('ventaSubmenu')"  data-toggle="collapse" aria-expanded="false"
+                        <a (click)="toggleSubmenu('ventaSubmenu')" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle"><i class="fa fa-shopping-cart"></i> Ventas</a>
                         <ul *ngIf="submenusState.ventaSubmenu && submenuAbierto === 'ventaSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/ventaMayor">Venta por mayor</a>
+                                <a href="/principalside/ventaMayor">Venta</a>
                             </li>
-                            <li>
-                                <a href="/ventaMenor">Venta por menor</a>
-                            </li>
+                            <!-- <li>
+                                <a href="/principalside/ventaMenor">Venta por menor</a>
+                            </li> -->
                         </ul>
                     </li>
                     <li>
-                        <a (click)="toggleSubmenu('notaCreditoSubmenu')"  data-toggle="collapse"
-                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-history"></i>
+                        <a (click)="toggleSubmenu('notaCreditoSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-history"></i>
                             Nota de crédito</a>
                         <ul *ngIf="submenusState.notaCreditoSubmenu && submenuAbierto === 'notaCreditoSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/anularVenta">Anular venta</a>
+                                <a href="/principalside/anularVenta">Anular venta</a>
                             </li>
                             <li>
-                                <a href="/devolucionProducto">Devolución de producto</a>
+                                <a href="/principalside/devolucionProducto">Devolución de producto</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a (click)="toggleSubmenu('entregaPaqueteSubmenu')"  data-toggle="collapse"
-                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-truck"></i>
+                        <a (click)="toggleSubmenu('entregaPaqueteSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-truck"></i>
                             Entrega de paquetes</a>
                         <ul *ngIf="submenusState.entregaPaqueteSubmenu && submenuAbierto === 'entregaPaqueteSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/ingresoEntrega">Ingreso de entrega</a>
+                                <a href="/principalside/ingresoEntrega">Ingreso de entrega</a>
                             </li>
                             <li>
-                                <a href="/seguimientoEntrega">Seguimiento de entrega</a>
+                                <a href="/principalside/seguimientoEntrega">Seguimiento de entrega</a>
                             </li>
                             <li>
-                                <a href="/bitacoraEntrega">Consulta de bitácora de entrega</a>
+                                <a href="/principalside/bitacoraEntrega">Consulta de bitácora de entrega</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="nosotros"><i class="fa fa-info-circle"></i>
                             Nosotros</a>
-                    </li>
+                    </li> -->
                 </ul>
 
             </div>
@@ -126,18 +131,20 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" >Mi perfil</a>
+                                <a class="nav-link">Mi perfil</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" >Log out</a>
+                                <a class="nav-link">Log out</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
 
+
             <router-outlet></router-outlet>
-            
+
+
         </div>
     </div>
 </div>

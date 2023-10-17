@@ -1,12 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
+  carga = true;
+
+  ngOnInit(): void {
+    this.carga = false
+  }
+
+  ngAfterViewInit(): void {
+    
+  }
+
   // public forecasts?: WeatherForecast[];
 
   // constructor(http: HttpClient) {

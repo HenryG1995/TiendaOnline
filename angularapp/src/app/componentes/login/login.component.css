@@ -1,5 +1,158 @@
 
 
+.contenedor {
+  width: 500px;
+  height: 500px;
+  border: 5px rgb(0, 139, 253) solid;
+  border-radius: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  background-color: rgba(255, 255, 255);
+  animation: slideUp 0.8s ease forwards;
+}
+.recortada{
+    padding-top: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  
+  }
+.padre{
+    border: 5px outset black;
+    text-align: center;
+    animation: slideUp .8s ease forwards;
+    height: fit-content;
+    margin: auto;
+    width: 25%;
+    border: 3px solid rgb(85, 153, 255);
+    padding: 10px;
+  
+    
+  
+    border-radius: 25px;
+    
+    background-color: white;
+  
+  }
+.madre {
+  padding-top: 50px;
+  margin-top: 50px;
+  text-align: center;
+}
+.pruebas {
+  border: 5px rgb(13, 231, 78) solid;
+}
+.titulos {
+  font-family: "Roboto", sans-serif;
+  font-size: 40px;
+}
+.recortada {
+  padding-top: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.txtusuario,
+txtpassword {
+  padding-bottom: 20px;
+}
+.btnlogin {
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+body,
+html {
+  height: 100%;
+  
+  
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("https://guatex.com/guatex/wp-content/themes/guatex/img/faq/guatex_faq.jpg");
+  animation: slideIn 0.8s ease forwards;
+  /* Add the blur effect */
+  filter: blur(25px);
+  -webkit-filter: blur(0px);
+
+  /* Full height */
+  
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(500px) scale(0.2);
+  }
+  100% {
+    transform: translateX(0px) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(300px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes expand {
+  0% {
+    transform: translateX(1400px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+
+.login,
+.image {
+  min-height: 100vh;
+}
+.bg-image {
+  background-image: url('https://media.istockphoto.com/id/1216048247/es/vector/car%C3%A1cter-masculino-joven-sosteniendo-una-pila-de-cajas-de-cart%C3%B3n-servicio-de-entrega.jpg?s=612x612&w=0&k=20&c=56Q0NcfZU_IRTuUe9-6kRtpFjqWvwZEe7SUNcWuk-pY=');
+  background-size: cover;
+  background-position: center center;
+}
+
+
+
+
+
+
+
+
+
+
+/* 
+
   ::selection {
     background: rgba(255,255,255,.5);
     color: #333;
@@ -37,25 +190,8 @@
     color: rgba(255,255,255,.5);
   }
 
-  /* .logo{
-    position: relative;
-    top: 30px;
-    width: 150px;
-    height: 150px;
-    margin: auto;
-    background: url(https://s10.postimg.org/z6xqdowix/imageedit_1_8168502978.gif) no-repeat center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-  } */
 
   form{
-    /* background-image: url('assets/logito2.png'); */
     position: absolute;
     bottom: 50px;
     width: 100%;
@@ -152,7 +288,6 @@
     display: none;
   }
 
-  /* Change colors container */
   .change-colors-container{
     position: absolute;
     height: 300px;
@@ -162,4 +297,4 @@
     bottom: 0;
     margin: auto;
     background: rgba(255,255,255,.5);
-  }
+  } */

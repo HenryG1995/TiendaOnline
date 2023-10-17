@@ -2,9 +2,9 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ProductoModel } from 'src/app/modelos/producto.model';
 import { DateAdapter } from '@angular/material/core';
-
+import { Moment } from 'moment';
 import Swal from 'sweetalert2'
-// import * as _moment from 'moment';
+import * as _moment from 'moment';
 import { ProductoService } from 'src/app/servicios/producto.service';
 
 @Component({
@@ -125,11 +125,11 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
       }
   }
 
-  // onFechaVencimientoChange(event: any) {
-  //   const m: Moment = event.value;
-  //   if (m) {
-  //     console.log('fecha seleccionada: ', m.toDate());
-  //   }
-  // }
+  onFechaVencimientoChange(event: any) {
+    const m: Moment = event.value;
+    if (m) {
+      console.log('fecha seleccionada: ', m.toDate());
+    }
+  }
 
 }

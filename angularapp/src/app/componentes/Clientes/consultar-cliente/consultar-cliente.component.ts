@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./consultar-cliente.component.css']
 })
 export class ConsultarClienteComponent implements OnInit {
+  carga: boolean = false;
   isTableEmpty = true;
   displayedColumns: string[] = ['codigo', 'nombre', 'nit', 'direccion', 'estado', 'categoria', 'telefono'];
 
@@ -50,6 +51,7 @@ export class ConsultarClienteComponent implements OnInit {
   });
 
   obtenerDatosConsulta() {
+    this.carga = true;
     this.consulta.CODIGO_CLIENTE = this.datosConsultaFormGroup.get('consultaCodigoControl')?.value?.toUpperCase() || "";
     this.consulta.PRIMER_NOMBRE = this.datosConsultaFormGroup.get('primerNombreControl')?.value?.toUpperCase() || "";
     this.consulta.PRIMER_APELLIDO = this.datosConsultaFormGroup.get('primerApellidoControl')?.value?.toUpperCase() || "";
@@ -96,12 +98,13 @@ export class ConsultarClienteComponent implements OnInit {
               });
               return item;
             });
-
+            this.carga = false;
             this.resultsLength = this.clientesInfo.length;
             this.isTableEmpty = false;
             this.isLoadingResults = false;
             this.datosConsultaFormGroup.reset()
           } else {
+            this.carga = false;
             Swal.fire({
               position: 'top-end',
               icon: 'info',
@@ -114,6 +117,7 @@ export class ConsultarClienteComponent implements OnInit {
 
         },
         (error) => {
+          this.carga = false;
           Swal.fire({
             position: 'top-end',
             icon: 'error',
@@ -125,6 +129,7 @@ export class ConsultarClienteComponent implements OnInit {
         }
       );
     } catch (error) {
+      this.carga = false;
       Swal.fire({
         position: 'top-end',
         icon: 'error',
