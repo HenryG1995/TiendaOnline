@@ -20,12 +20,18 @@ export class ProductoService {
 
   public obtenerProducto(id?: string, descripcion?: string, fechaVencimiento?: Date): Observable<ProductoModel[]> {
 
-    if (id?.length) {
+    console.log('id: ', id, ' desc: ', descripcion, ' fecha: ', fechaVencimiento)
+
+    if (id !== undefined && id.trim() !== '') {
       this.url = `${'https://localhost:7065/Inventarios/ConsultaProducto?CODIGO_PRODUCTO='}${id}`;
+    } else if (descripcion !== undefined && descripcion?.trim() !== '') {
+      this.url = `${'https://localhost:7065/Inventarios/ConsultaProducto?NOMBRE_PRODUCTO='}${descripcion}`;
+    } else if (fechaVencimiento !== undefined && fechaVencimiento !== null) {
+      this.url = `${'https://localhost:7065/Inventarios/ConsultaProducto?CADUCIDAD='}${fechaVencimiento}`;
+    } else {
+      this.url = '';
     }
-
-    console.log('url: [' + this.url + ']')
-
+    console.log('url: ', this.url)
     return this.http.get<ProductoModel[]>(this.url)
   }
 
@@ -35,3 +41,5 @@ export class ProductoService {
 
 
 }
+
+

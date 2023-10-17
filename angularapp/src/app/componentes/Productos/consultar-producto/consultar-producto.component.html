@@ -32,13 +32,13 @@
         BUSCAR PRODUCTO
       </button>
 
-      <button (click)="buscarProducto()" mat-fab extended color="accent"
+      <button  mat-fab extended color="accent"
         style="text-align: center; align-items: center;">
         <mat-icon>shopping_cart</mat-icon>
         IR A CARRITO DE COMPRAS
       </button>
 
-      <button (click)="buscarProducto()" mat-fab extended color="inf" style="text-align: center; align-items: center;">
+      <button (click)="obtenerListadoProductos()" mat-fab extended color="inf" style="text-align: center; align-items: center;">
         <mat-icon>clear</mat-icon>
         LIMPIAR FILTROS
       </button>
@@ -52,19 +52,18 @@
         <mat-card-subtitle>{{item.nombrE_PRODUCTO}}</mat-card-subtitle>
       </mat-card-header>
       <div class="image-container">
-        <img mat-card-image src="{{item.imagen}}" alt="No available photo">
+        <img mat-card-image src="{{item.imagen}}" (click)="alertaCompra(item)" alt="No available photo">
+        <mat-card-content>
+          <h5 style="margin-top: 5px; text-align: center;">
+            {{'Q.'+item.unidadeS_EXISTENTES}}
+          </h5>
+        </mat-card-content>
         <div class="center-button">
-          <button mat-button color="primary" >
+          <button mat-button color="primary" (click)="alertaCompra(item)">
             <mat-icon>add_shopping_cart</mat-icon> Añadir al carrito
           </button>
         </div>
       </div>
-      <mat-card-content>
-        <h5 style="margin-top: 5px; text-align: center;">
-          <!-- {{'Q.'+item.price}} -->
-        </h5>
-      </mat-card-content>
-      <br>
     </mat-card>
   </div>
 </div>
