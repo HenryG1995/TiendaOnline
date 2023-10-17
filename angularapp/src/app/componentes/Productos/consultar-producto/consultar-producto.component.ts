@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ProductoModel } from 'src/app/modelos/producto.model';
-import { ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { ConsultaCliente } from 'src/app/modelos/cliente.model';
-import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
-import { Moment } from 'moment';
+import { DateAdapter } from '@angular/material/core';
 
 import Swal from 'sweetalert2'
-import * as _moment from 'moment';
+// import * as _moment from 'moment';
 import { ProductoService } from 'src/app/servicios/producto.service';
 
 @Component({
@@ -17,14 +14,9 @@ import { ProductoService } from 'src/app/servicios/producto.service';
 })
 export class ConsultarProductoComponent implements OnInit, AfterViewInit {
 
-  // dataSource = ELEMENT_DATA;
-
   productos: ProductoModel[] = [];
-  // productosInfo: ProductoModel = new ProductoModel();
-  // datosProducto: ProductoModel[] = [];
   fechaVencimiento: Date | null = null;
 
-  // constructor(private _formBuilder: FormBuilder){}
 
   productoFormGroupConsulta = this._formBuilder.group({
     codigoProductoControl: [''],
@@ -101,9 +93,6 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
         this.productosservice.obtenerProducto(id, desc, vencimiento).subscribe(
           (response) => {
             // ca50701a-d7cf-4def-b565-3d6c37b60440
-            // this.obtenerEstados();
-            // this.obtenerProveedores();
-
             if (response.length > 0) {
               this.productos = response.map((item: any) => {
                 Object.keys(item).forEach(key => {
@@ -136,57 +125,11 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
       }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // onFechaVencimientoChange(event: any) {
   //   const m: Moment = event.value;
   //   if (m) {
   //     console.log('fecha seleccionada: ', m.toDate());
   //   }
   // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
 
 }
