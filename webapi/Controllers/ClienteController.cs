@@ -10,6 +10,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Azure.Core;
 using ModelsStore.DTO.PARAM;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 
 namespace webapi.Controllers
 {
@@ -47,8 +48,8 @@ namespace webapi.Controllers
             }
         }
 
-        [HttpGet("ConsultaFiltro")]
-        public IActionResult ConsultaFiltro([FromQuery] V_CLIENTE request)
+        [HttpPost("ConsultaFiltro")]
+        public IActionResult ConsultaFiltro([FromBody] V_CLIENTE request)
         {
             try
             {
@@ -60,9 +61,10 @@ namespace webapi.Controllers
 
                 var query = new Query("V_CLIENTE").Select("*");
 
-                if (request.CODIGO_ESTADO.Length > 0 && request.CODIGO_ESTADO.ToString() != "string") { 
-                    
-                    var query1 = new Query("ESTADOS").Select("ESTADO").Where("CODIGO_ESTADO",request.CODIGO_ESTADO);
+                if (request.CODIGO_ESTADO.IsNullOrEmpty() == false)
+                {
+
+                    var query1 = new Query("ESTADOS").Select("ESTADO").Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
 
                     var sql1 = execute.ExecuterCompiler(query1);
 
@@ -72,25 +74,80 @@ namespace webapi.Controllers
                     {
                         obj = DataReaderMapper<ESTADOS>.MapToObject(reader);
                     });
-                    
-                    query.Where("ESTADO", obj.ESTADO); }
-            
 
-                if ( request.NIT.IsNullOrEmpty() == false ) query.Where("NIT",request.NIT);
+                    query.Where("ESTADO", obj.ESTADO);
+                }
+
+
+                if (request.NIT.IsNullOrEmpty() == false) query.Where("NIT", request.NIT);
 
                 if (request.TELEFONO.ToString().IsNullOrEmpty() == false) query.Where("TELEFONO", request.TELEFONO);
-                
+
                 if (request.DIRECCION_CLIENTE.IsNullOrEmpty() == false) query.WhereLike("DIRECCION_CLIENTE", request.DIRECCION_CLIENTE);
-                
+
                 if (request.SEGUNDO_APELLIDO.IsNullOrEmpty() == false) query.WhereLike("SEGUNDO_APELLIDO", request.SEGUNDO_APELLIDO);
-                
+
                 if (request.PRIMER_APELLIDO.IsNullOrEmpty() == false) query.WhereLike("PRIMER_APELLIDO", request.SEGUNDO_APELLIDO);
-                
-                if (request.CODIGO_CLIENTE.IsNullOrEmpty() == false) query.Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
-                
-                if (request.PRIMER_NOMBRE.IsNullOrEmpty() == false) query.WhereLike("PRIMER_NOMBRE",request.PRIMER_NOMBRE);
-                
+
+
+                if (request.PRIMER_NOMBRE.IsNullOrEmpty() == false) query.WhereLike("PRIMER_NOMBRE", request.PRIMER_NOMBRE);
+
                 if (request.SEGUNDO_NOMBRE.IsNullOrEmpty() == false) query.WhereLike("SEGUNDO_NOMBRE", request.SEGUNDO_NOMBRE);
+
+                if (request.CODIGO_CLIENTE.IsNullOrEmpty() == false)
+                {
+
+                    var vlist = new V_CLIENTE_R();
+
+                    var list = new List<CLIENTE>();
+
+                    var query2 = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
+
+                    var sql2 = execute.ExecuterCompiler(query2);
+
+                    execute.DataReader(sql2, reader =>
+                    {
+                        list = DataReaderMapper<CLIENTE>.MapToList(reader);
+                    });
+
+                    var querycategoria = new Query("CATALOGO_CATEGORIAS").Select("*").Where("CODIGO_CATEGORIA", list[0].CODIGO_CATEGORIA.ToString());
+                    var categorias = new CATALOGO_CATEGORIAS();
+                    var sqlcat = execute.ExecuterCompiler(querycategoria);
+                    execute.DataReader(sqlcat, reader =>
+                    {
+                        categorias = DataReaderMapper<CATALOGO_CATEGORIAS>.MapToObject(reader);
+                    });
+
+                    var query1 = new Query("ESTADOS").Select("ESTADO").Where("CODIGO_ESTADO", list[0].CODIGO_ESTADO.ToString());
+
+                    var sql1 = execute.ExecuterCompiler(query1);
+
+                    var obj = new ESTADOS();
+
+                    execute.DataReader(sql1, reader =>
+                    {
+                        obj = DataReaderMapper<ESTADOS>.MapToObject(reader);
+                    });
+
+                    vlist.CODIGO_CLIENTE = request.CODIGO_CLIENTE;
+                    vlist.PRIMER_NOMBRE = list[0].PRIMER_NOMBRE;
+                    vlist.SEGUNDO_NOMBRE = list[0].SEGUNDO_NOMBRE;
+                    vlist.NIT = list[0].NIT ?? null;
+                    vlist.CATEGORIA = categorias.NOMBRE_CATEGORIA;
+                    vlist.PRIMER_APELLIDO = list[0].PRIMER_APELLIDO;
+                    vlist.SEGUNDO_APELLIDO = list[0].SEGUNDO_APELLIDO;
+                    vlist.ESTADO = obj.ESTADO;
+                    vlist.DIRECCION_CLIENTE = list[0].DIRECCION_CLIENTE;
+                    vlist.TELEFONO = list[0].TELEFONO;
+
+                    var nl = new List<V_CLIENTE_R>();
+
+                    nl.Add(vlist);
+
+                    return Ok(nl.ToList());
+
+                };
+
 
                 var sql = execute.ExecuterCompiler(query);
 
@@ -139,7 +196,7 @@ namespace webapi.Controllers
             }
 
         }
-        [HttpPut("CreaCliente")]
+        [HttpPost("CreaCliente")]
         public IActionResult CreaCliente([FromBody] CLIENTE request)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -184,7 +241,7 @@ namespace webapi.Controllers
                     NIT = request.NIT,
                     DIRECCION_CLIENTE = request.DIRECCION_CLIENTE,
                     TELEFONO = request.TELEFONO,
-                });
+                }).Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
 
                 var sql = execute.ExecuterCompiler(query);
 
@@ -212,9 +269,9 @@ namespace webapi.Controllers
 
             {
                 var estado = new ESTADOS();
-                
+
                 var query2 = new Query("ESTADOS").Select("CODIGO_ESTADO").Where("ACTIVO", 1).Where("ESTADO", "BAJA").Limit(1);
-                
+
                 var sql2 = execute.ExecuterCompiler(query2);
 
                 execute.DataReader(sql2, reader =>
@@ -229,7 +286,7 @@ namespace webapi.Controllers
                 });
 
                 var sql = execute.ExecuterCompiler(query);
-                
+
                 var query3 = new Query("USUARIOS").Where("CODIGO_USUARIO", request.CODIGO_CLIENTE).AsUpdate(new
                 {
                     ESTADO = estado.CODIGO_ESTADO
@@ -238,7 +295,7 @@ namespace webapi.Controllers
                 var sql3 = execute.ExecuterCompiler(query3);
 
                 var result = execute.ExecuteDecider(sql3);
-                
+
                 return Ok(execute.ExecuteDecider(sql));
 
             }

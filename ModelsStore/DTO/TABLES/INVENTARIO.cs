@@ -19,6 +19,9 @@ namespace ModelsStore.DTO.TABLES
         public string? CODIGO_PROVEEDOR { get; set; }
         public DateTime? CADUCIDAD { get; set; } 
         public string? IMAGEN { get; set; }
+        public Double PRECIO { get; set; }
+        public double? DESCUENTO { get; set; }
+        public int ACTIVA_DESCUENTO { get; set; }
     }
 }
 
