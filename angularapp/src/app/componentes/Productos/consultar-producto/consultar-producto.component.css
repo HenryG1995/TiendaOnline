@@ -1,0 +1,98 @@
+.contenedor {
+    width: 100%;
+    max-width: 100%;
+    margin: 0em auto;
+    font: 0.9em/1.2 Arial, Helvetica, sans-serif;
+    background-color: rgba(246, 247, 251, 255);
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 100px;
+    gap: 25px;
+    height: 60%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btncontainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 100px;
+    gap: 25px;
+    height: 60%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+
+  .card {
+    max-width: 250px;
+    background-color: #ffff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.02);
+    /* border: 1px solid #afaeae; */
+}
+
+.card:hover {
+    background-color: rgb(224, 240, 247);
+    /* color: #ffffff; */
+}
+
+.imagen {
+    max-width: 10px;
+}
+
+.contenedor {
+    width: 100%;
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+}
+
+.contenedorcards {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    text-align: center;
+}
+
+.input-with-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-input {
+    width: 40px; /* Ancho del campo de entrada numérica */
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 10px; /* Espacio entre el campo de entrada y los botones */
+  }
+  
+  .decrement-button,
+  .increment-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+  
+  .decrement-button {
+    margin-right: 5px; /* Espacio entre el botón de menos y el campo de entrada */
+  }
+  
+  .increment-button {
+    margin-left: 5px; /* Espacio entre el botón de más y el campo de entrada */
+  }

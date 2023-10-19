@@ -50,6 +50,12 @@ import { SeguimientoEntregaComponent } from './componentes/EntregasPaquete/segui
 import { ConsultaBitacoraEntregaComponent } from './componentes/EntregasPaquete/consulta-bitacora-entrega/consulta-bitacora-entrega.component';
 import { NosotrosComponent } from './componentes/nosotros/nosotros.component';
 import { MatSelectModule } from '@angular/material/select';
+import { UppercaseDirective } from './directivas/uppercase.directive';
+import { MaxlengthDirective } from './directivas/maxlength.directive';
+import { LettersOnlyDirective } from './directivas/letters-only.directive';
+import { NumbersOnlyDirective } from './directivas/numbers-only.directive';
+import { NumbersAndLettersDirective } from './directivas/numbers-and-letters.directive';
+import { NitdirectiveDirective } from './directivas/nitdirective.directive';
 
 
 @NgModule({
@@ -73,7 +79,13 @@ import { MatSelectModule } from '@angular/material/select';
     IngresoEntregaComponent,
     SeguimientoEntregaComponent,
     ConsultaBitacoraEntregaComponent,
-    NosotrosComponent
+    NosotrosComponent,
+    UppercaseDirective,
+    MaxlengthDirective,
+    LettersOnlyDirective,
+    NumbersOnlyDirective,
+    NumbersAndLettersDirective,
+    NitdirectiveDirective,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -94,7 +106,6 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     NgSwitch,
     NgSwitchCase,
-    MatStepperModule,
     FormsModule,
     AsyncPipe,
     MatPaginatorModule,

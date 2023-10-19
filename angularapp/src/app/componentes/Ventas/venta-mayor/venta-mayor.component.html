@@ -1,1 +1,25 @@
-<p>venta-mayor works!</p>
+<div class="contenedor">
+  <h4 style="text-align: center;"><strong>Ventas</strong></h4>
+  <mat-divider></mat-divider>
+
+  <div class="contenedorcards">
+
+    <mat-card class="card" *ngFor="let item of dataSource">
+      <mat-card-header>
+        <mat-card-title>{{item.cardTitle}}</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <img (click)="alertaCompra(item)" mat-card-image src="{{item.imagecard}}" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <h5 style="margin-top: 5px; text-align: center; ">
+          {{'Q.'+item.price}}
+        </h5>
+      </mat-card-content>
+      <br>
+      <div  class="center-button">
+        <div>añadir al carrito</div>
+        <button (click)="alertaCompra(item)" mat-button color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
+      </div>
+    </mat-card>
+  </div>
+</div>

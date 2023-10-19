@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { StepperOrientation } from '@angular/material/stepper';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatTable } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ClientesService, datosCliente } from 'src/app/servicios/clientes.service';
+import { ClientesService } from 'src/app/servicios/clientes.service';
 import { estadosmodel } from 'src/app/modelos/estados.model';
 import { EstadosService } from 'src/app/servicios/estados.service';
 import { categoriasModel } from 'src/app/modelos/categorias.model';
@@ -19,6 +19,12 @@ import { paisModel } from 'src/app/modelos/pais.model';
 import { departamentoModel } from 'src/app/modelos/departamento.model';
 import { municipioModel } from 'src/app/modelos/municipio.model';
 import { zonaModel } from 'src/app/modelos/zona.model';
+import { direccionClienteModel } from 'src/app/modelos/direccionCliente.model';
+import { ConsultaCliente } from 'src/app/modelos/cliente.model';
+import { MatStepper } from '@angular/material/stepper';
+
+import Swal from 'sweetalert2';
+
 /** Error cuando un control ha sido modificado, en este caso para validar la selección de tipo cliente */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -26,25 +32,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-
-export interface interfaceDireccion {
-  numeral: string;
-  type: string;
-  zona: string;
-  departamento: string;
-  municipio: string;
-}
-
-const ELEMENT_DATA: interfaceDireccion[] = [
-  // {numeral: '1ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'},
-  // {numeral: '2ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'},
-  // {numeral: '3ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'},
-  // {numeral: '4ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'},
-  // {numeral: '5ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'},
-  // {numeral: '6ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'},
-  // {numeral: '7ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'},
-  // {numeral: '8ta avenida 203', type: 0, zona: 1, departamento: 'Guatemala', municipio: 'Guatemala'}
-];
 
 @Component({
   selector: 'app-crear-cliente',
@@ -56,9 +43,17 @@ export class CrearClienteComponent implements OnInit {
   //validación de horientación y tamaño de pantalla
   stepperOrientation!: Observable<StepperOrientation>;
 
+  isLoading = false;
   isLinear = true;
   isTableEmpty = true;
-  isAddButtonClickedSelect = true;
+  disableValidations = true;
+  showTable = false;
+  nombreEstadoi = "";
+  nombreCategoriai = "";
+
+  clienteInfo = new ConsultaCliente();
+  direccionInfo = new direccionClienteModel();
+
 
   estadosInfo: estadosmodel[] = [];
   categoriasInfo: categoriasModel[] = [];
@@ -66,8 +61,20 @@ export class CrearClienteComponent implements OnInit {
   departamentoInfo: departamentoModel[] = [];
   municipioInfo: municipioModel[] = [];
   zonasInfo: zonaModel[] = [];
+  ELEMENT_DATA: direccionClienteModel[] = [];
+
+  //agregar datos a la tabla de dirección
+  displayedColumns: string[] = ['Descripción', 'Pais', 'Departamento', 'Municipio', 'Zona'];
+  dataSource = this.ELEMENT_DATA;
+
+  @ViewChild(MatTable) table!: MatTable<direccionClienteModel[]>;
+  @ViewChild('stepper') stepper!: MatStepper;
 
   ngOnInit(): void {
+    window.addEventListener('beforeunload', () => {
+      this.isLoading = true;
+    });
+
     this.obtenerCategorias();
     this.obtenerEstados();
     this.obtenerPais();
@@ -78,49 +85,40 @@ export class CrearClienteComponent implements OnInit {
 
   //validación de campos requeridos como obligatorios en formulario de datos personales
   datosFormGroup = this._formBuilder.group({
-    codcliente: ['', Validators.required],
-    primerNombre: ['', Validators.required],
-    segundoNombre: ['', Validators.required],
-    primerApellido: ['', Validators.required],
-    segundoApellido: ['', Validators.required],
-    nit: [0, Validators.required],
-    numtelefono: [0, Validators.required]
+    codclienteControl: ['', Validators.required],
+    primerNombreControl: ['', Validators.required],
+    segundoNombreControl: [''],
+    primerApellidoControl: ['', Validators.required],
+    segundoApellidoControl: [''],
+    nit: ['', Validators.required],
+    numtelefono: [0, Validators.required],
+    categoriaControl: ['', Validators.required],
+    estadoControl: ['', Validators.required]
   });
-
-  categoriaControl = new FormControl('', [Validators.required]);
-  estadoControl = new FormControl('', [Validators.required]);
-  matcher = new MyErrorStateMatcher();
 
   //------------validación de campos requeridos como obligatorios en formulario de direcciones------------
 
   direccionFormGroup = this._formBuilder.group({
-    direccion: ['', Validators.required],
-    notaAdicionalControl: ['']
+    direccionControl: ['', this.disableValidations ? null : Validators.required],
+    zonaControl: ['', this.disableValidations ? null : Validators.required],
+    departamentoControl: ['', this.disableValidations ? null : Validators.required],
+    municipioControl: ['', this.disableValidations ? null : Validators.required],
+    paisControl: ['', this.disableValidations ? null : Validators.required],
+    notaAdicionalControl: [''],
   });
 
-
-  //validación de selectores, que sean requeridos y no pase si alguno está vacio.
-  tipodireccionControl = new FormControl('', [Validators.required]);
-  zonaControl = new FormControl('', [Validators.required]);
-  departamentoControl = new FormControl('', [Validators.required]);
-  municipioControl = new FormControl('', [Validators.required]);
-  paisControl = new FormControl('', [Validators.required]);
-  notaAdicionalControl = new FormControl('');
-
-  formDirectionsGroup = new FormGroup({
-    tdireccion: this.tipodireccionControl,
-    zona: this.zonaControl,
-    departamento: this.departamentoControl,
-    municipio: this.municipioControl,
-    pais: this.paisControl,
+  //-----deshabilita los campos
+  validacionFormGroup = this._formBuilder.group({
+    //---------------campos de verificación de datos-----------------
+    codigoClienteVerificacionControl: [{ value: '', disabled: true }],
+    nombreCompletoVerificacionControl: [{ value: '', disabled: true }],
+    telefonoVerificacionControl: [{ value: '', disabled: true }],
+    nitVerificacionControl: [{ value: '', disabled: true }],
+    estadoVerificacionControl: [{ value: '', disabled: true }],
+    categoriaVerificacionControl: [{ value: '', disabled: true }],
   })
 
-
-  //agregar datos a la tabla de dirección
-  displayedColumns: string[] = ['numeral', 'type', 'zona', 'departamento', 'municipio'];
-  dataSource = [...ELEMENT_DATA];
-
-  @ViewChild(MatTable) table!: MatTable<interfaceDireccion>;
+  matcher = new MyErrorStateMatcher();
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -139,12 +137,7 @@ export class CrearClienteComponent implements OnInit {
 
   }
 
-  logs() {
-    console.log('categoria: ', this.categoriaControl.value, ' estado: ', this.estadoControl.value);
-    console.log('pais: ', this.paisControl.value , ' depto: ', this.departamentoControl.value, ' muni: ', this.municipioControl.value, ' zona: ', this.zonaControl.value);
-  }
-
-  obtenerZona(){
+  obtenerZona() {
     this.zonasservice.obtenerZonasAPI().subscribe(
       (response: any) => {
         this.zonasInfo = response;
@@ -218,74 +211,198 @@ export class CrearClienteComponent implements OnInit {
     }
   }
 
+  clienteNextStep() {
+    const nit = this.datosFormGroup.get('nit')?.value || 0;
+    const telefono = this.datosFormGroup.get('numtelefono')?.value || 0;
 
-  addData() {
-    this.logs();
-    if (this.direccionFormGroup.valid && (this.formDirectionsGroup.valid)) {
-      console.log('si pasa la primera validacion')
-      const nuevadireccion: interfaceDireccion = {
-        numeral: this.direccionFormGroup.get('direccion')?.value || '',
-        type: this.tipodireccionControl.value || '',
-        zona: this.zonaControl.value || '',
-        departamento: this.departamentoControl.value || '',
-        municipio: this.municipioControl.value || ''
+    // // var nombrePais = this.direccionFormGroup.get('paisControl')?.value
+
+    var nombreEstado = this.datosFormGroup.get('estadoControl')?.value
+    var nombreCategoria = this.datosFormGroup.get('categoriaControl')?.value
+
+    this.estadosInfo.forEach(e => {
+      e.codigO_ESTADO === nombreEstado ? this.nombreEstadoi = e.estado : '';
+    });
+
+    this.categoriasInfo.forEach(e => {
+      e.codigO_CATEGORIA === nombreCategoria ? this.nombreCategoriai = e.nombrE_CATEGORIA : '';
+    });
+
+    // console.log('BUENOOOOOOOOOO EL CODIGO ESTADO ES: ', nombreEstado)
+
+
+    if (this.datosFormGroup.valid) {
+      if (nit != 0 && telefono != 0) {
+        // var estado = 
+
+        this.clienteInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.PRIMER_NOMBRE = this.datosFormGroup.get('primerNombreControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.SEGUNDO_NOMBRE = this.datosFormGroup.get('segundoNombreControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.PRIMER_APELLIDO = this.datosFormGroup.get('primerApellidoControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.SEGUNDO_APELLIDO = this.datosFormGroup.get('segundoApellidoControl')?.value?.toUpperCase() || "";
+        this.clienteInfo.NIT = this.datosFormGroup.get('nit')?.value?.toUpperCase() || '';
+        this.clienteInfo.TELEFONO = this.datosFormGroup.get('numtelefono')?.value || 0;
+        this.clienteInfo.CODIGO_ESTADO = this.datosFormGroup.get('estadoControl')?.value?.toUpperCase() || '';
+        this.clienteInfo.CODIGO_CATEGORIA = this.datosFormGroup.get('categoriaControl')?.value?.toUpperCase() || '';
+
+        this.stepper.next();
+        console.log('codigo: ', this.clienteInfo.CODIGO_CLIENTE)
+        console.log('estado: ', this.clienteInfo.CODIGO_ESTADO)
+        console.log('categoria: ', this.clienteInfo.CODIGO_CATEGORIA)
+      } else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          text: 'NIT o teléfono inválido.',
+          showConfirmButton: false,
+          timer: 2500
+        })
       }
+    } else {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        text: 'Llenar campos obligatorios.',
+        showConfirmButton: false,
+        timer: 2500
+      })
+    }
+  }
 
-      this.dataSource.push(nuevadireccion);
+  agregarDatosTabla() {
+    console.log('peso de la tabla antes: ', this.dataSource.length)
+    if (this.direccionFormGroup.valid) {
+
+      this.showTable = true;
+
+      var nombrePais = this.direccionFormGroup.get('paisControl')?.value?.toUpperCase()
+      var nombreDepartamento = this.direccionFormGroup.get('departamentoControl')?.value?.toUpperCase()
+      var nombreMunicipio = this.direccionFormGroup.get('municipioControl')?.value?.toUpperCase()
+      var nombreZona = this.direccionFormGroup.get('zonaControl')?.value?.toUpperCase()
+
+      this.paisInfo.forEach(e => {
+        e.codigO_PAIS === nombrePais ? nombrePais = e.pais : '';
+      })
+
+      this.departamentoInfo.forEach(e => {
+        e.codigO_DEPARTAMENTO === nombreDepartamento ? nombreDepartamento = e.departamento : ''
+      })
+
+      this.municipioInfo.forEach(e => {
+        e.codigO_MUNICIPIO === nombreMunicipio ? nombreMunicipio = e.municipio : ''
+      })
+
+      this.zonasInfo.forEach(e => {
+        e.codigO_ZONA === nombreZona ? nombreZona = e.zona.toString() : ''
+      })
+
+      this.direccionInfo.CODIGO_CLIENTE = this.datosFormGroup.get('codclienteControl')?.value?.toUpperCase() || "";
+      this.direccionInfo['DESCRIPCION DIRECCION'] = this.direccionFormGroup.get('direccionControl')?.value?.toUpperCase() || "";
+      this.direccionInfo.PAIS = nombrePais?.toUpperCase() || ''
+      this.direccionInfo.DEPARTAMENTO = nombreDepartamento?.toUpperCase() || ''
+      this.direccionInfo.MUNICIPIO = nombreMunicipio?.toUpperCase() || ''
+      this.direccionInfo.ZONA = nombreZona?.toUpperCase() || ''
+      this.direccionInfo.NOTAS_ADICIONALES = this.direccionFormGroup.get('notaAdicionalControl')?.value?.toUpperCase() || "";
+
+      this.dataSource.push(this.direccionInfo);
       this.table.renderRows();
       this.direccionFormGroup.reset();
-      this.formDirectionsGroup.reset();
 
-      this.isTableEmpty = false;
-      this.isAddButtonClickedSelect = false;
+
     } else {
-      alert('Los datos de la dirección no son válidos');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        text: 'Llenar campos obligatorios.',
+        showConfirmButton: false,
+        timer: 2500
+      })
     }
+
+    this.isTableEmpty = this.dataSource.length === 0;
+    this.disableValidations = this.dataSource.length > 0;
+  }
+
+  direccionNextStep() {
+    this.stepper.next();
+
+    this.clienteInfo.DIRECCION_CLIENTE = this.direccionInfo['DESCRIPCION DIRECCION']
+      + ' zona: ' + this.direccionInfo.ZONA
+      + ' municipio: ' + this.direccionInfo.MUNICIPIO
+      + ' departamento: ' + this.direccionInfo.DEPARTAMENTO
+      + ' pais: ' + this.direccionInfo.PAIS + ', '
+      + this.direccionInfo.NOTAS_ADICIONALES
   }
 
   removeData() {
     this.dataSource.pop();
     this.table.renderRows();
+    this.direccionFormGroup.reset();
+    this.datosFormGroup.reset();
 
     this.isTableEmpty = this.dataSource.length === 0;
   }
 
 
-  // crearCliente(){
-  //   if(this.datosFormGroup.valid && this.direccionFormGroup.valid && this.formDirectionsGroup.valid){
+  crearCliente() {
 
-  //     const clientData: datosCliente = {
-  //       primeR_NOMBRE: this.datosFormGroup.get('primerNombre')?.value || '',
-  //       segundO_NOMBRE: this.datosFormGroup.get('segundoNombre')?.value || '',
-  //       primeR_APELLIDO: this.datosFormGroup.get('primerApellido')?.value || '',
-  //       segundO_APELLIDO: this.datosFormGroup.get('segundoApellido')?.value || '',
-  //       nit: this.datosFormGroup.get('nit')?.value || 0,
-  //       codigO_ESTADO    
-
-  //     }
+    if (this.datosFormGroup.valid && !this.isTableEmpty) {
 
 
-  //   }
-  // }
+      this.clienteservice.createClient(this.clienteInfo).subscribe(
+        (response: ConsultaCliente[]) => {
+          if (response) {
+            
+            // La inserción en la base de datos se realizó correctamente.
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              text: 'Cliente creado exitosamente.',
+              showConfirmButton: false,
+              timer: 3000,
+              allowOutsideClick: false
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                
+                this.removeData();
+                location.reload();
+              }
+            });
+          } else {
+            // Hubo un error en la inserción en la base de datos.
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              text: 'Error al crear el cliente.',
+              showConfirmButton: false,
+              timer: 3000,
+              allowOutsideClick: false
+            });
+          }
+        },
+        (error) => {
+          // Error de comunicación con el servidor.
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            text: 'Error en la comunicación con el servidor.',
+            showConfirmButton: false,
+            timer: 2500
+          });
+        }
+      );
+
+
+    } else {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        text: 'Alguno de los campos ingresados no es válido.',
+        showConfirmButton: false,
+        timer: 2500
+      })
+    }
+  }
+
 
 }
-
-
-
-
-
-//todo lo relacionado con el campo de email.
-//valida correo
-// email = new FormControl('', [Validators.required, Validators.email]);
-
-// getErrorMessage() {
-//   if (this.email.hasError('required')) {
-//     return 'Valor requerido';
-//   }
-
-//   return this.email.hasError('email') ? 'Correo electrónico no válido' : '';
-// }
-
-
-//validación de tipo de usuario logeado
-// usuario: number = 1;

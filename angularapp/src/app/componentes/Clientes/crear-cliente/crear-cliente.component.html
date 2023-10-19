@@ -1,184 +1,201 @@
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button> -->
+<div class="app-container">
+    <!-- <div class="center">
+        <div class="overlay" *ngIf="isLoading">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div> -->
+    <ng-container [ngSwitch]="stepperOrientation | async">
+        <div *ngSwitchCase="'horizontal'"></div>
+        <div *ngSwitchCase="'vertical'"></div>
+    </ng-container>
+    <div class="contenedor">
+        <h4><strong>CREACIÓN DE CLIENTES</strong></h4>
+        <mat-divider></mat-divider>
+        <!-- [linear]="isLinear" -->
+        <mat-stepper [linear]="isLinear" class="example-stepper" #stepper [orientation]="(stepperOrientation | async)!">
 
-<ng-container [ngSwitch]="stepperOrientation | async">
-    <div *ngSwitchCase="'horizontal'"></div>
-    <div *ngSwitchCase="'vertical'"></div>
-</ng-container>
+            <mat-step [stepControl]="datosFormGroup">
+                <form [formGroup]="datosFormGroup">
 
-<div class="contenedor">
-    <h4><strong>CREACIÓN DE CLIENTES</strong></h4>
-    <mat-divider></mat-divider>
-    <!-- [linear]="isLinear" -->
-    <mat-stepper class="example-stepper" #stepper [orientation]="(stepperOrientation | async)!">
+                    <ng-template matStepLabel>Datos personales del cliente</ng-template>
 
-        <mat-step [stepControl]="datosFormGroup">
-            <form [formGroup]="datosFormGroup">
+                    <h5>Código de cliente</h5>
+                    <div class="containercod">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ingrese código de cliente</mat-label>
+                            <input matInput placeholder="Código de cliente" formControlName="codclienteControl"
+                                required [appMaxlength]="36" uppercase appNumbersAndLetters>
+                        </mat-form-field>
+                    </div>
 
-                <ng-template matStepLabel>Datos personales del cliente</ng-template>
+                    <mat-divider></mat-divider><br>
 
-                <h5>Código de cliente</h5>
-                <div class="containercod">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Ingrese código de cliente</mat-label>
-                        <input matInput placeholder="Primer nombre" formControlName="codcliente" required>
-                    </mat-form-field>
-                </div>
+                    <h5>Información personal</h5>
+                    <div class="infcontainer">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Primer nombre</mat-label>
+                            <input matInput placeholder="Primer nombre" formControlName="primerNombreControl" 
+                            required [appMaxlength]="15" uppercase appLettersOnly>
+                        </mat-form-field>
 
-                <mat-divider></mat-divider><br>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Segundo nombre</mat-label>
+                            <input matInput placeholder="Segundo nombre" formControlName="segundoNombreControl" 
+                            [appMaxlength]="15" uppercase>
+                        </mat-form-field>
+                        <!-- </div>
+                <div class="container"> -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Primer apellido</mat-label>
+                            <input matInput placeholder="Primer apellido" formControlName="primerApellidoControl"
+                                required [appMaxlength]="15" uppercase appLettersOnly>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Segundo apellido</mat-label>
+                            <input matInput placeholder="Segundo apellido" formControlName="segundoApellidoControl" 
+                            [appMaxlength]="15" uppercase appLettersOnly>
+                        </mat-form-field>
+                    </div>
+                    <mat-divider></mat-divider><br>
 
-                <h5>Información personal</h5>
-                <div class="container">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Primer nombre</mat-label>
-                        <input matInput placeholder="Primer nombre" formControlName="primerNombre" required>
-                    </mat-form-field>
+                    <h5>Información extra</h5>
+                    <div class="infcontainer">
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Segundo nombre</mat-label>
-                        <input matInput placeholder="Segundo nombre" formControlName="segundoNombre" required>
-                    </mat-form-field>
-                </div>
-                <div class="container">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Primer apellido</mat-label>
-                        <input matInput placeholder="Primer apellido" formControlName="primerApellido" required>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Segundo apellido</mat-label>
-                        <input matInput placeholder="Segundo apellido" formControlName="segundoApellido" required>
-                    </mat-form-field>
-                </div>
-                <mat-divider></mat-divider><br>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ingrese No. NIT</mat-label>
+                            <input matInput placeholder="No. NIT" formControlName="nit" 
+                            required [appMaxlength]="10" uppercase>
+                        </mat-form-field>
 
-                <h5>Información extra</h5>
-                <div class="container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>número de teléfono</mat-label>
+                            <input matInput placeholder="Número de teléfono" formControlName="numtelefono"
+                            [appMaxlength]="8" required appNumbersOnly>
+                        </mat-form-field>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Ingrese No. NIT</mat-label>
-                        <input matInput placeholder="No. NIT" formControlName="nit" required>
-                    </mat-form-field>
+                        <!-- </div>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>número de teléfono</mat-label>
-                        <input matInput placeholder="Número de teléfono" formControlName="numtelefono" required>
-                    </mat-form-field>
+                <div class="container"> -->
+                        <mat-form-field>
+                            <mat-label>Estado</mat-label>
+                            <mat-select formControlName="estadoControl" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let estado of estadosInfo" [value]="estado.codigO_ESTADO">
+                                    {{estado.estado}}
+                                </mat-option>
+                            </mat-select>
 
-                    <!-- <mat-form-field>
-                        <mat-label>Ingrese correo</mat-label>
-                        <input matInput placeholder="adc@guatex.com" [formControl]="email" required>
-                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                    </mat-form-field> -->
+                            <mat-error *ngIf="datosFormGroup.get('estadoControl')?.hasError('required')">Selecciona una
+                                opción</mat-error>
+                        </mat-form-field>
 
+                        <mat-form-field>
+                            <mat-label>Categoria</mat-label>
+                            <mat-select formControlName="categoriaControl" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let categoria of categoriasInfo"
+                                    [value]="categoria.codigO_CATEGORIA">
+                                    {{categoria.nombrE_CATEGORIA}}
+                                </mat-option>
+                            </mat-select>
 
-                </div>
-
-                <div class="container">
-                    <mat-form-field>
-                        <mat-label>Estado</mat-label>
-                        <mat-select [formControl]="estadoControl" [errorStateMatcher]="matcher">
-                            <mat-option *ngFor="let estado of estadosInfo" [value]="estado.codigO_ESTADO">
-                                {{estado.estado}}
-                            </mat-option>
-                        </mat-select>
-
-                        <mat-error *ngIf="estadoControl.hasError('required')">Selecciona una opción</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Categoria</mat-label>
-                        <mat-select [formControl]="categoriaControl" [errorStateMatcher]="matcher">
-                            <mat-option *ngFor="let categoria of categoriasInfo" [value]="categoria.codigO_CATEGORIA">
-                                {{categoria.nombrE_CATEGORIA}}
-                            </mat-option>
-                        </mat-select>
-
-                        <mat-error *ngIf="categoriaControl.hasError('required')">Selecciona una opción</mat-error>
-                    </mat-form-field>
-                </div>
-
-
-                <button (click)="logs()" mat-fab extended color="primary" style="margin-top: 20px;"
-                    matStepperNext><mat-icon>keyboard_arrow_right</mat-icon>Siguiente</button>
-
-
-            </form>
-        </mat-step>
+                            <mat-error *ngIf="datosFormGroup.get('categoriaControl')?.hasError('required')">Selecciona
+                                una
+                                opción</mat-error>
+                        </mat-form-field>
+                    </div>
 
 
+                    <button (click)="clienteNextStep()" mat-fab extended color="primary"
+                        style="margin-top: 20px;"><mat-icon>keyboard_arrow_right</mat-icon>Siguiente</button>
 
-        <mat-step [stepControl]="direccionFormGroup" label="Dirección/Direcciones">
-            <form [formGroup]="direccionFormGroup">
-                <h5>Dirección</h5>
 
-                <div class="containercod">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Descripción de dirección</mat-label>
-                        <input matInput placeholder="Calle, Avenida y/o numeral" formControlName="direccion"
-                            [required]="isAddButtonClickedSelect">
-                    </mat-form-field>
-                </div>
-
-                <div class="containerdireccion">
-                    <mat-form-field class="zona-field">
-                        <mat-label>Pais</mat-label>
-                        <mat-select [formControl]="paisControl" [errorStateMatcher]="matcher"
-                            [required]="isAddButtonClickedSelect">
-                            <mat-option *ngFor="let pais of paisInfo" [value]="pais.codigO_PAIS">
-                                {{pais.pais}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="paisControl.hasError('required')">Selecciona una opción</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="zona-field">
-                        <mat-label>Departamento</mat-label>
-                        <mat-select [formControl]="departamentoControl" [errorStateMatcher]="matcher"
-                            [required]="isAddButtonClickedSelect">
-                            <mat-option *ngFor="let depto of departamentoInfo" [value]="depto.codigO_DEPARTAMENTO">
-                                {{depto.departamento}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="departamentoControl.hasError('required')">Selecciona una opción</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="zona-field">
-                        <mat-label>Municipio</mat-label>
-                        <mat-select [formControl]="municipioControl" [errorStateMatcher]="matcher"
-                            [required]="isAddButtonClickedSelect">
-                            <mat-option *ngFor="let muni of municipioInfo" [value]="muni.codigO_MUNICIPIO">
-                                {{muni.municipio}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="municipioControl.hasError('required')">Selecciona una opción</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="zona-field">
-                        <mat-label>Zona</mat-label>
-                        <mat-select [formControl]="zonaControl" [errorStateMatcher]="matcher"
-                            [required]="isAddButtonClickedSelect">
-                            <mat-option *ngFor="let zonas of zonasInfo" [value]="zonas.codigO_ZONA">
-                                {{zonas.zona}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="zonaControl.hasError('required')">Selecciona una opción</mat-error>
-                    </mat-form-field>
-                </div>
-
-                <div class="containercod">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Notas adicionales</mat-label>
-                        <input matInput placeholder="" formControlName="notaAdicionalControl">
-                    </mat-form-field>
-                </div>
-
-                <button (click)="addData()" mat-fab extended color="warn"><mat-icon>plus_one</mat-icon>
-                    Agregar</button>
+                </form>
+            </mat-step>
 
 
 
-                <!-- <div class="demo-button-container">
+            <mat-step [stepControl]="direccionFormGroup" label="Dirección/Direcciones">
+                <form [formGroup]="direccionFormGroup">
+                    <h5>Dirección</h5>
+
+                    <div class="containercod">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Descripción de dirección</mat-label>
+                            <input matInput placeholder="Calle, Avenida y/o numeral" formControlName="direccionControl"
+                                [required]="isTableEmpty" [appMaxlength]="60" uppercase appNumbersAndLetters>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="containerdireccion">
+                        <mat-form-field class="zona-field">
+                            <mat-label>Pais</mat-label>
+                            <mat-select formControlName="paisControl" [errorStateMatcher]="matcher"
+                                [required]="isTableEmpty">
+                                <mat-option *ngFor="let pais of paisInfo" [value]="pais.codigO_PAIS">
+                                    {{pais.pais}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="direccionFormGroup.get('paisControl')?.hasError('required')">Selecciona
+                                una
+                                opción</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="zona-field">
+                            <mat-label>Departamento</mat-label>
+                            <mat-select formControlName="departamentoControl" [errorStateMatcher]="matcher"
+                                [required]="isTableEmpty">
+                                <mat-option *ngFor="let depto of departamentoInfo" [value]="depto.codigO_DEPARTAMENTO">
+                                    {{depto.departamento}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="direccionFormGroup.get('departamentoControl')?.hasError('required')">Selecciona
+                                una
+                                opción</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="zona-field">
+                            <mat-label>Municipio</mat-label>
+                            <mat-select formControlName="municipioControl" [errorStateMatcher]="matcher"
+                                [required]="isTableEmpty">
+                                <mat-option *ngFor="let muni of municipioInfo" [value]="muni.codigO_MUNICIPIO">
+                                    {{muni.municipio}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error
+                                *ngIf="direccionFormGroup.get('municipioControl')?.hasError('required')">Selecciona
+                                una opción</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="zona-field">
+                            <mat-label>Zona</mat-label>
+                            <mat-select formControlName="zonaControl" [errorStateMatcher]="matcher"
+                                [required]="isTableEmpty">
+                                <mat-option *ngFor="let zonas of zonasInfo" [value]="zonas.codigO_ZONA">
+                                    {{zonas.zona}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="direccionFormGroup.get('zonaControl')?.hasError('required')">Selecciona
+                                una
+                                opción</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="containercod">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Notas adicionales</mat-label>
+                            <input matInput placeholder="" formControlName="notaAdicionalControl" [appMaxlength]="100" 
+                            uppercase appLettersOnly>
+                        </mat-form-field>
+                    </div>
+
+                    <div style=" text-align: center; align-items: center;">
+                        <button style="width: 250px;" (click)="agregarDatosTabla()" mat-fab extended
+                            [disabled]="!isTableEmpty" color="primary">Agregar</button>
+                    </div>
+
+
+
+                    <!-- <div class="demo-button-container">
 
                     <button mat-raised-button [disabled]="!dataSource.length" (click)="removeData()"
                         class="demo-button">
@@ -186,71 +203,155 @@
                     </button>
                 </div> -->
 
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table"
-                    style="margin-top: 25px;">
-                    <!-- Position Column ['numeral', 'type', 'zona', 'departamento', 'municipio']; -->
-                    <ng-container matColumnDef="numeral">
-                        <th mat-header-cell *matHeaderCellDef>Avenida y numeral</th>
-                        <td mat-cell *matCellDef="let element">{{element.numeral}}</td>
-                    </ng-container>
+                    <div *ngIf="showTable" class="contenedor" style="overflow-x: auto; max-width: 100%;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"
+                            style="margin-top: 25px; min-width: 100%;">
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="type">
-                        <th mat-header-cell *matHeaderCellDef>Tipo dirección</th>
-                        <td mat-cell *matCellDef="let element">{{element.type}}</td>
-                    </ng-container>
+                            <ng-container matColumnDef="Descripción">
+                                <th mat-header-cell *matHeaderCellDef>Avenida y numeral</th>
+                                <td mat-cell *matCellDef="let element">{{element['DESCRIPCION DIRECCION']}}</td>
+                            </ng-container>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="zona">
-                        <th mat-header-cell *matHeaderCellDef>Zona</th>
-                        <td mat-cell *matCellDef="let element">{{element.zona}}</td>
-                    </ng-container>
+                            <ng-container matColumnDef="Pais">
+                                <th mat-header-cell *matHeaderCellDef>Pais</th>
+                                <td mat-cell *matCellDef="let element">{{element.PAIS}}</td>
+                            </ng-container>
 
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="departamento">
-                        <th mat-header-cell *matHeaderCellDef>Departamento</th>
-                        <td mat-cell *matCellDef="let element">{{element.departamento}}</td>
-                    </ng-container>
+                            <ng-container matColumnDef="Departamento">
+                                <th mat-header-cell *matHeaderCellDef>Departamento</th>
+                                <td mat-cell *matCellDef="let element">{{element.DEPARTAMENTO}}</td>
+                            </ng-container>
 
-                    <ng-container matColumnDef="municipio">
-                        <th mat-header-cell *matHeaderCellDef>Municipio</th>
-                        <td mat-cell *matCellDef="let element">{{element.municipio}}</td>
-                    </ng-container>
+                            <ng-container matColumnDef="Municipio">
+                                <th mat-header-cell *matHeaderCellDef>Municipio</th>
+                                <td mat-cell *matCellDef="let element">{{element.MUNICIPIO}}</td>
+                            </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+                            <ng-container matColumnDef="Zona">
+                                <th mat-header-cell *matHeaderCellDef>Zona</th>
+                                <td mat-cell *matCellDef="let element">{{element.ZONA}}</td>
+                            </ng-container>
 
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
 
+                    <div class="botones" style="margin-top: 20px;">
+                        <button mat-fab extended color="accent"
+                            matStepperPrevious><mat-icon>keyboard_arrow_left</mat-icon>
+                            Regresar</button>
+                        <button (click)="direccionNextStep()" mat-fab extended color="primary"
+                            [disabled]="isTableEmpty"><mat-icon>keyboard_arrow_right</mat-icon>
+                            Siguiente</button>
+                    </div>
 
-
-
-                <div class="botones" style="margin-top: 20px;">
-                    <button mat-fab extended color="accent" matStepperPrevious><mat-icon>keyboard_arrow_left</mat-icon>
-                        Regresar</button>
-                    <button mat-fab extended color="primary" [disabled]="isTableEmpty"
-                        matStepperNext><mat-icon>keyboard_arrow_right</mat-icon> Siguiente</button>
-                </div>
-
-
-                <!-- <button mat-fab extended color="primary" style="margin-top: 20px;"
-                    matStepperNext><mat-icon>keyboard_arrow_right</mat-icon>Siguiente</button> -->
-
-            </form>
-        </mat-step>
+                </form>
+            </mat-step>
 
 
 
-        <mat-step>
-            <ng-template matStepLabel>Validación de datos</ng-template>
-            <p>You are now done.</p>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-            </div>
-        </mat-step>
+
+            <mat-step [stepControl]="validacionFormGroup" label="Dirección/Direcciones">
+                <form [formGroup]="validacionFormGroup">
+                    <ng-template matStepLabel>Validación de datos</ng-template>
+                    <p></p>
+                    <h5>Información personal</h5>
+                    <div class="containerVerificacion">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Código cliente</mat-label>
+                            <input matInput formControlName="codigoClienteVerificacionControl"
+                                [value]="clienteInfo.CODIGO_CLIENTE">
+                        </mat-form-field>
+
+                        <!-- <mat-form-field appearance="outline">
+                        <mat-label>Nombre de cliente</mat-label>
+                        <input matInput formControlName="nombreCompletoVerificacionControl"
+                            [value]="validacionFormGroup.get('nombreCompletoVerificacionControl')?.value">
+                    </mat-form-field> -->
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombre de cliente</mat-label>
+                            <input matInput formControlName="nombreCompletoVerificacionControl"
+                                [value]="clienteInfo.PRIMER_NOMBRE + ' ' + clienteInfo.SEGUNDO_NOMBRE + ' ' + clienteInfo.PRIMER_APELLIDO + ' ' + clienteInfo.SEGUNDO_APELLIDO">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput formControlName="telefonoVerificacionControl"
+                                [value]="clienteInfo.TELEFONO">
+                        </mat-form-field>
+
+                    </div>
+                    <div class="containerVerificacion">
+                        <mat-form-field appearance="outline">
+                            <mat-label>NIT</mat-label>
+                            <input matInput formControlName="nitVerificacionControl" [value]="clienteInfo.NIT">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Estado</mat-label>
+                            <input matInput formControlName="estadoVerificacionControl" [value]="nombreEstadoi">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Categoria</mat-label>
+                            <input matInput formControlName="categoriaVerificacionControl" [value]="nombreCategoriai">
+                        </mat-form-field>
+                    </div>
 
 
-    </mat-stepper>
+                    <mat-divider></mat-divider><br>
 
+                    <div class="contenedor" style="overflow-x: auto; max-width: 100%;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"
+                            style="margin-top: 25px; min-width: 100%;">
+
+                            <ng-container matColumnDef="Descripción">
+                                <th mat-header-cell *matHeaderCellDef>Avenida y numeral</th>
+                                <td mat-cell *matCellDef="let element">{{element['DESCRIPCION DIRECCION']}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Pais">
+                                <th mat-header-cell *matHeaderCellDef>Pais</th>
+                                <td mat-cell *matCellDef="let element">{{element.PAIS}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Departamento">
+                                <th mat-header-cell *matHeaderCellDef>Departamento</th>
+                                <td mat-cell *matCellDef="let element">{{element.DEPARTAMENTO}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Municipio">
+                                <th mat-header-cell *matHeaderCellDef>Municipio</th>
+                                <td mat-cell *matCellDef="let element">{{element.MUNICIPIO}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Zona">
+                                <th mat-header-cell *matHeaderCellDef>Zona</th>
+                                <td mat-cell *matCellDef="let element">{{element.ZONA}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+
+
+
+                    <div class="botones" style="margin-top: 20px;">
+                        <button mat-fab extended color="accent"
+                            matStepperPrevious><mat-icon>keyboard_arrow_left</mat-icon>
+                            Regresar</button>
+                        <button (click)="crearCliente()" mat-fab extended color="primary">
+                            <mat-icon>library_add</mat-icon>
+                            CREAR CLIENTE
+                        </button>
+                    </div>
+
+                </form>
+            </mat-step>
+
+
+        </mat-stepper>
+
+    </div>
 </div>

@@ -13,7 +13,6 @@ namespace ModelsStore.DTO.TABLES
         public string? SEGUNDO_NOMBRE { get; set; }
         public string? PRIMER_APELLIDO { get; set; }
         public string? SEGUNDO_APELLIDO { get; set; }
-        public DateTime FECHA_EMISION { get; set; }
         public string? NIT { get; set; }
         public string? DIRECCION_CLIENTE { get; set; }
         public string? ESTADO { get; set; }
