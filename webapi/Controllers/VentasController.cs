@@ -5,6 +5,8 @@ using SqlKata;
 using ClassDB.SqlKataTools;
 using Microsoft.AspNetCore.Http;
 using ModelsStore.DTO.PARAM;
+using Microsoft.VisualBasic;
+using Microsoft.IdentityModel.Tokens;
 
 namespace webapi.Controllers
 {
@@ -12,6 +14,30 @@ namespace webapi.Controllers
     [ApiController]
     public class VentasController : ControllerBase
     {
+        [HttpGet("BitacoraEntrega")]//recibe el estado a consultar nota si necesita todos los estados enviar estado en null
+        public ActionResult BitacoraEntrega([FromQuery] CONSULTA_CODIGO_ESTADO request)
+        {
+            var execute = new ExecuteFromDBMSProvider();
+
+            var query = new Query("VENTAS");
+
+            if (request.CODIGO_ESTADO.IsNullOrEmpty() == false)
+            {
+                query.Where("ESTADO", request.CODIGO_ESTADO);
+
+            };
+          
+            var sql = execute.ExecuterCompiler(query);
+
+            var list = new List<VENTAS>();
+
+            execute.DataReader(sql, reader =>
+            {
+                list = DataReaderMapper<VENTAS>.MapToList(reader);
+            });
+
+            return Ok(list.ToList());
+        }
         [HttpGet("ListVentasAll")]//consulta con filtro puede recibir codigo cliente , estado ,aplica nota, fecha de venta, codigo de venta
         public IActionResult ListVentasAll([FromQuery] VENTAS request)
         {
@@ -68,9 +94,7 @@ namespace webapi.Controllers
                 {
                     ESTADO = request.ESTADO,
 
-                    APLICA_NOTA = request.APLICA_NOTA,
-
-                    CODIGO_NOTA = request.CODIGO_NOTA
+                    FECHA_ACTUALIZACION = DateAndTime.Now
 
                 }).Where("CODIGO_VENTA", request.CODIGO_VENTA);
 
