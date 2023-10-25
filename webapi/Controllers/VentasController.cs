@@ -115,6 +115,13 @@ namespace webapi.Controllers
             }
         }
 
+        [HttpPost("Venta")]
+        public IActionResult Venta([FromBody] List<INVENTARIO> request) 
+        {
+
+
+            return Ok();
+        } 
 
     }
 }

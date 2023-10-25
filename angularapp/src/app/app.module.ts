@@ -56,6 +56,7 @@ import { LettersOnlyDirective } from './directivas/letters-only.directive';
 import { NumbersOnlyDirective } from './directivas/numbers-only.directive';
 import { NumbersAndLettersDirective } from './directivas/numbers-and-letters.directive';
 import { NitdirectiveDirective } from './directivas/nitdirective.directive';
+import { ActualizaNotaComponent } from './componentes/NotasCredito/actualiza-nota/actualiza-nota.component';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { NitdirectiveDirective } from './directivas/nitdirective.directive';
     EliminarProductoComponent,
     VentaMayorComponent,
     VentaMenorComponent,
+    ActualizaNotaComponent,
     AnularVentaComponent,
     DevolucionProductoComponent,
     IngresoEntregaComponent,
