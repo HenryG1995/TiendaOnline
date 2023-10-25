@@ -38,6 +38,7 @@ namespace webapi.Controllers
 
             return Ok(list.ToList());
         }
+       
         [HttpGet("ListVentasAll")]//consulta con filtro puede recibir codigo cliente , estado ,aplica nota, fecha de venta, codigo de venta
         public IActionResult ListVentasAll([FromQuery] VENTAS request)
         {
@@ -105,6 +106,7 @@ namespace webapi.Controllers
                 var queryFR = new Query("FACTURA_RESUMEN").AsUpdate(new
                 {
                     estado = request.ESTADO
+                
                 }).Where("CODIGO_VENTA", request.CODIGO_VENTA);
 
                 var queryDV = new Query("DETALLE_VENTAS").AsUpdate(new
@@ -113,6 +115,7 @@ namespace webapi.Controllers
                 });
 
                 var sqlFR = execute.ExecuterCompiler(queryFR);
+
                 var sqlDV = execute.ExecuterCompiler(queryDV);
 
                 return Ok("Venta :" + execute.ExecuteDecider(sql).ToString() + " FACTURA_RESUMEN :" + execute.ExecuteDecider(sqlFR).ToString() + " DETALLE_VENTAS :" + execute.ExecuteDecider(sqlDV).ToString());
@@ -301,6 +304,7 @@ namespace webapi.Controllers
                 venta.ESTADO = ESTADOS.ESTADO;
 
                 var list = new List<string>();
+
                 foreach (var item in detalle_venta_list)
                 {
                     var QI = new Query("INVENTARIO").Select("NOMBRE_PRODUCTO,UNIDADES_EXISTENTES").Where("CODIGO_PRODUCTO", item.CODIGO_PRODUCTO);
@@ -319,6 +323,7 @@ namespace webapi.Controllers
                         list.Add("Errror CANTIDAD DEL PRODUCTO " + dtoInventario.NOMBRE_PRODUCTO.ToString() + " insuficiente " + dtoInventario.UNIDADES_EXISTENTES + " cantidad solicitada :" + item.CANTIDAD);
                     }
                 }
+                
                 if (list.Count > 0)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, list.ToList());
@@ -511,7 +516,9 @@ namespace webapi.Controllers
             });
 
             var sqlV = execute.ExecuterCompiler(QVenta);
+            
             var sqlF = execute.ExecuterCompiler(QFactura);
+            
             var sqlD = execute.ExecuterCompiler(QDetalle);
 
 
