@@ -65,7 +65,7 @@ namespace webapi.Controllers
                 {
 
                     var query1 = new Query("ESTADOS").Select("ESTADO").Where("CODIGO_ESTADO", request.CODIGO_ESTADO);
-                    
+
                     var sql1 = execute.ExecuterCompiler(query1);
 
                     var obj = new ESTADOS();
@@ -74,7 +74,6 @@ namespace webapi.Controllers
                     {
                         obj = DataReaderMapper<ESTADOS>.MapToObject(reader);
                     });
-
                     query.Where("ESTADO", obj.ESTADO);
                 }
 
@@ -96,18 +95,18 @@ namespace webapi.Controllers
 
                 if (request.CODIGO_CLIENTE.IsNullOrEmpty() == false)
                 {
-                
+
                     var vlist = new V_CLIENTE_R();
 
                     var list = new List<CLIENTE>();
 
-                    var query2 = new Query("CLIENTE").Where("CODIGO_CLIENTE",request.CODIGO_CLIENTE);
+                    var query2 = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
 
                     var sql2 = execute.ExecuterCompiler(query2);
 
                     execute.DataReader(sql2, reader =>
                     {
-                      list   = DataReaderMapper<CLIENTE>.MapToList(reader);
+                        list = DataReaderMapper<CLIENTE>.MapToList(reader);
                     });
 
                     var querycategoria = new Query("CATALOGO_CATEGORIAS").Select("*").Where("CODIGO_CATEGORIA", list[0].CODIGO_CATEGORIA.ToString());
@@ -129,20 +128,27 @@ namespace webapi.Controllers
                         obj = DataReaderMapper<ESTADOS>.MapToObject(reader);
                     });
 
-                   vlist.CODIGO_CLIENTE = request.CODIGO_CLIENTE;
-                   vlist.PRIMER_NOMBRE = list[0].PRIMER_NOMBRE;
-                   vlist.SEGUNDO_NOMBRE = list[0].SEGUNDO_NOMBRE;
-                   vlist.NIT = list[0].NIT ?? null;
-                   vlist.CATEGORIA = categorias.NOMBRE_CATEGORIA;
-                   vlist.PRIMER_APELLIDO = list[0].PRIMER_APELLIDO;
-                   vlist.SEGUNDO_APELLIDO = list[0].SEGUNDO_APELLIDO;
-                   vlist.ESTADO = obj.ESTADO;
-                   vlist.DIRECCION_CLIENTE = list[0].DIRECCION_CLIENTE;
+                    vlist.CODIGO_CLIENTE = request.CODIGO_CLIENTE;
+                    vlist.PRIMER_NOMBRE = list[0].PRIMER_NOMBRE;
+                    vlist.SEGUNDO_NOMBRE = list[0].SEGUNDO_NOMBRE;
+                    vlist.NIT = list[0].NIT ?? null;
+                    vlist.CATEGORIA = categorias.NOMBRE_CATEGORIA;
+                    vlist.PRIMER_APELLIDO = list[0].PRIMER_APELLIDO;
+                    vlist.SEGUNDO_APELLIDO = list[0].SEGUNDO_APELLIDO;
+                    vlist.ESTADO = obj.ESTADO;
+                    vlist.DIRECCION_CLIENTE = list[0].DIRECCION_CLIENTE;
                     vlist.TELEFONO = list[0].TELEFONO;
 
                     var nl = new List<V_CLIENTE_R>();
 
                     nl.Add(vlist);
+
+                    return Ok(nl.ToList());
+
+                };
+
+
+                var sql = execute.ExecuterCompiler(query);
 
                     return Ok(nl.ToList());
 
@@ -210,6 +216,7 @@ public IActionResult CreaCliente([FromBody] CLIENTE request)
 
         var sql = execute.ExecuterCompiler(query);
 
+<<<<<<< HEAD
 
         return Ok(execute.ExecuteDecider(sql));
 
@@ -233,6 +240,11 @@ public IActionResult ActualizaCliente([FromBody] CLIENTE request)
         connection.InitRead();
 
         var query = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE).AsUpdate(new
+=======
+        }
+        [HttpPost("CreaCliente")]
+        public IActionResult CreaCliente([FromBody] CLIENTE request)
+>>>>>>> RPR_FULL_DEV
         {
             PRIMER_NOMBRE = request.PRIMER_NOMBRE,
             SEGUNDO_NOMBRE = request.SEGUNDO_NOMBRE,
@@ -276,8 +288,30 @@ public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)
 
         execute.DataReader(sql2, reader =>
         {
+<<<<<<< HEAD
             estado = DataReaderMapper<ESTADOS>.MapToObject(reader);
         });
+=======
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+            var connection = new ConectionDecider();
+            try
+            {
+                connection.InitRead();
+
+                var query = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE).AsUpdate(new
+                {
+                    PRIMER_NOMBRE = request.PRIMER_NOMBRE,
+                    SEGUNDO_NOMBRE = request.SEGUNDO_NOMBRE,
+                    PRIMER_APELLIDO = request.PRIMER_APELLIDO,
+                    SEGUNDO_APELLIDO = request.SEGUNDO_APELLIDO,
+                    NIT = request.NIT,
+                    DIRECCION_CLIENTE = request.DIRECCION_CLIENTE,
+                    TELEFONO = request.TELEFONO,
+                }).Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
+
+                var sql = execute.ExecuterCompiler(query);
+>>>>>>> RPR_FULL_DEV
 
 
         var query = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE).AsUpdate(new
@@ -292,7 +326,16 @@ public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)
             ESTADO = estado.CODIGO_ESTADO
         });
 
+<<<<<<< HEAD
         var sql3 = execute.ExecuterCompiler(query3);
+=======
+            {
+                var estado = new ESTADOS();
+
+                var query2 = new Query("ESTADOS").Select("CODIGO_ESTADO").Where("ACTIVO", 1).Where("ESTADO", "BAJA").Limit(1);
+
+                var sql2 = execute.ExecuterCompiler(query2);
+>>>>>>> RPR_FULL_DEV
 
         var result = execute.ExecuteDecider(sql3);
 
@@ -303,8 +346,31 @@ public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)
     {
         return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
 
+<<<<<<< HEAD
     }
 }
+=======
+                var sql = execute.ExecuterCompiler(query);
+
+                var query3 = new Query("USUARIOS").Where("CODIGO_USUARIO", request.CODIGO_CLIENTE).AsUpdate(new
+                {
+                    ESTADO = estado.CODIGO_ESTADO
+                });
+
+                var sql3 = execute.ExecuterCompiler(query3);
+
+                var result = execute.ExecuteDecider(sql3);
+
+                return Ok(execute.ExecuteDecider(sql));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+
+            }
+        }
+>>>>>>> RPR_FULL_DEV
 
 
     }

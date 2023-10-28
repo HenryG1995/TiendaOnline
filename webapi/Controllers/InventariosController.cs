@@ -48,7 +48,7 @@ namespace webapi.Controllers
                     }
                     else
                     {
-                       imagen  = Encoding.UTF8.GetString(itemOra.IMAGEN);
+                        imagen = Encoding.UTF8.GetString(itemOra.IMAGEN);
                     }
 
                     if (imagen.Length > 0)
@@ -66,10 +66,15 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                            PRECIO = itemOra.PRECIO,
+                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
+                            DESCUENTO = itemOra.DESCUENTO,
+
                         };
 
                         lista1.Add(nuevoInventario);
-                    }else
+                    }
+                    else
                     {
                         INVENTARIO nuevoInventario = new INVENTARIO()
                         {
@@ -84,12 +89,16 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                            PRECIO = itemOra.PRECIO,
+                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
+                            DESCUENTO = itemOra.DESCUENTO,
+
                         };
 
                         lista1.Add(nuevoInventario);
                     }
 
-                   
+
                 }
 
 
@@ -131,7 +140,7 @@ namespace webapi.Controllers
                 {
                     lista = DataReaderMapper<INVENTARIOORA>.MapToList(reader);
                 });
-               
+
                 var lista1 = new List<INVENTARIO>();
                 foreach (var itemOra in lista)
                 {
@@ -161,6 +170,10 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                            PRECIO = itemOra.PRECIO,
+                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
+                            DESCUENTO = itemOra.DESCUENTO,
+
                         };
 
                         lista1.Add(nuevoInventario);
@@ -180,6 +193,10 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
+                            PRECIO = itemOra.PRECIO,
+                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
+                            DESCUENTO = itemOra.DESCUENTO,
+
                         };
 
                         lista1.Add(nuevoInventario);
@@ -216,7 +233,7 @@ namespace webapi.Controllers
 
                 var sql = execute.ExecuterCompiler(query);
 
-                return Ok(execute.ExecuteDecider(sql,blob));
+                return Ok(execute.ExecuteDecider(sql, blob));
             }
             catch (Exception ex)
             {
@@ -239,22 +256,26 @@ namespace webapi.Controllers
 
                 var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO).AsUpdate(new
                 {
-                       
-                        NOMBRE_PRODUCTO = request.NOMBRE_PRODUCTO,
-                        DESCRIPCION_PRODUCTO = request.DESCRIPCION_PRODUCTO,
-                        UNIDADES_EXISTENTES = request.UNIDADES_EXISTENTES,
-                        FECHA_CARGA = request.FECHA_CARGA,
-                        FECHA_INGRESO = request.FECHA_INGRESO,
-                        UUID_ESTADO = request.UUID_ESTADO,
-                        ACTIVO = request.ACTIVO,
-                        CADUCIDAD = request.CADUCIDAD,
-                        IMAGEN = "data:img"
 
-            });
+                    NOMBRE_PRODUCTO = request.NOMBRE_PRODUCTO,
+                    DESCRIPCION_PRODUCTO = request.DESCRIPCION_PRODUCTO,
+                    UNIDADES_EXISTENTES = request.UNIDADES_EXISTENTES,
+                    FECHA_CARGA = request.FECHA_CARGA,
+                    FECHA_INGRESO = request.FECHA_INGRESO,
+                    UUID_ESTADO = request.UUID_ESTADO,
+                    ACTIVO = request.ACTIVO,
+                    CADUCIDAD = request.CADUCIDAD,
+                    IMAGEN = "data:img",
+                    PRECIO = request.PRECIO,
+                    ACTIVA_DESCUENTO = request.ACTIVA_DESCUENTO,
+                    DESCUENTO = request.DESCUENTO,
+
+
+                });
 
                 var sql = execute.ExecuterCompiler(query);
 
-                return Ok(execute.ExecuteDecider(sql,blob));
+                return Ok(execute.ExecuteDecider(sql, blob));
             }
             catch (Exception ex)
             {
@@ -270,7 +291,8 @@ namespace webapi.Controllers
 
             try
             {
-                var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO",request.CODIGO_PRODUCTO).AsUpdate(new{
+                var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO).AsUpdate(new
+                {
                     ACTIVO = 0
                 });
 
