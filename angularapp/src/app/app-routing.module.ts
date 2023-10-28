@@ -19,30 +19,29 @@ import { SeguimientoEntregaComponent } from './componentes/EntregasPaquete/segui
 import { ConsultaBitacoraEntregaComponent } from './componentes/EntregasPaquete/consulta-bitacora-entrega/consulta-bitacora-entrega.component';
 import { NosotrosComponent } from './componentes/nosotros/nosotros.component';
 import { ActualizaNotaComponent } from './componentes/NotasCredito/actualiza-nota/actualiza-nota.component';
+import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 
 const routes: Routes = [
   { path: '', component:HomeComponent},
   { path: 'login', component:LoginComponent},
   { path: 'home', component:HomeComponent},
-  { path: 'clientes/crearCliente', component:CrearClienteComponent},
-  { path: 'clientes/consultarCliente', component:ConsultarClienteComponent},
-  { path: 'clientes/actualizarCliente', component:ActualizarClienteComponent},
-  { path: 'clientes/eliminarCliente', component:EliminarClienteComponent},
+  { path: 'side', component: SideBarComponent},
+  { path: 'crearCliente', component:CrearClienteComponent},
+  { path: 'consultarCliente', component:ConsultarClienteComponent},
+  { path: 'actualizarCliente', component:ActualizarClienteComponent},
+  { path: 'eliminarCliente', component:EliminarClienteComponent},
   { path: 'crearProducto', component:CrearProductoComponent},
   { path: 'consultarProducto', component:ConsultarProductoComponent},
   { path: 'actualizarProducto', component:ActualizarProductoComponent},
   { path: 'eliminarProducto', component:EliminarProductoComponent},
-  { path: 'ventaMayor', component:VentaMayorComponent},
-  { path: 'ventaMenor', component:VentaMenorComponent},
+  { path: 'venta', component:VentaMayorComponent},
   { path: 'anularVenta', component:AnularVentaComponent},
   { path: 'actualizaNota', component:ActualizaNotaComponent},
   { path: 'devolucionProducto', component:DevolucionProductoComponent},
   { path: 'ingresoEntrega', component:IngresoEntregaComponent},
   { path: 'seguimientoEntrega', component:SeguimientoEntregaComponent},
   { path: 'bitacoraEntrega', component:ConsultaBitacoraEntregaComponent},
-  { path: 'nosotros', component:NosotrosComponent},
-
-  // { path: '**', pathMatch: 'full', component:HomeComponent},
+  { path: '**', pathMatch: 'full', component:HomeComponent},
 ];
 
 @NgModule({

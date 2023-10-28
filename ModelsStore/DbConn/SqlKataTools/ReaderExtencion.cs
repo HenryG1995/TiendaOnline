@@ -8,7 +8,11 @@ namespace ClassDB.SqlKataTools
     {
         public static List<T> MapToList(IDataReader reader)
         {
+            var a = "prueba";
             List<T> list = new List<T>();
+            try
+            {
+
             while (reader.Read())
             {
                 T obj = Activator.CreateInstance<T>();
@@ -24,6 +28,11 @@ namespace ClassDB.SqlKataTools
                 list.Add(obj);
             }
             return list;
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return list;
+            }
         }
         public static T MapToObject(IDataReader reader)
         {

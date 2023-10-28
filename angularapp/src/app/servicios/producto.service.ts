@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProductoModel } from '../modelos/producto.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environmet';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { Observable } from 'rxjs';
 export class ProductoService {
 
   constructor(private http: HttpClient) { }
+
+  private urlglobal = environment.apiUrl;
 
   private URLAPI = 'https://localhost:7065/Inventarios/';
 
@@ -37,6 +40,10 @@ export class ProductoService {
 
   public obtenerListadoProductos(): Observable<ProductoModel[]> {
     return this.http.get<ProductoModel[]>('https://localhost:7065/Inventarios/GetAllInventario')
+  }
+
+  public eliminarProducto(id: string): Observable<any>{
+    return this.http.delete<any>(this.urlglobal + "Inventarios/BajaProducto/" + id )
   }
 
 

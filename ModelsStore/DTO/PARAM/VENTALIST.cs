@@ -14,7 +14,7 @@ namespace ModelsStore.DTO.PARAM
         public Int32 APLICA_NOTA { get; set; }//NOTA esto solo se recibe la primera vez para llenar el objeto de la clase ventas
         public string CODIGO_NOTA { get; set; }//NOTA esto solo se recibe la primera vez para llenar el objeto de la clase ventas
         public string? CODIGO_PRODUCTO { get; set; }//NOTA esto se recibe por cada item
-        public double CANTIDAD {  get; set; }//NOTA esto se recibe por cada item
+        public Int64? CANTIDAD {  get; set; }//NOTA esto se recibe por cada item
 
     }
 }

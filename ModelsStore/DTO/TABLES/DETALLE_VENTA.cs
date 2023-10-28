@@ -14,8 +14,8 @@ namespace ModelsStore.DTO.TABLES
         
         public String ESTADO { get; set; }
         
-        public int CANTIDAD { get; set; }
+        public Int64? CANTIDAD { get; set; }
 
-        public Double TOTAL { get; set; }
+        public Int64? TOTAL { get; set; }
     }
 }

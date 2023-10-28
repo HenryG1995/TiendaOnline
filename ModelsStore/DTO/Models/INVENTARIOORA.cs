@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.ManagedDataAccess;
 
 namespace ModelsStore.DTO.TABLES
 {
@@ -16,12 +19,11 @@ namespace ModelsStore.DTO.TABLES
         public DateTime FECHA_CARGA { get; set; }
         public DateTime FECHA_INGRESO { get; set; }
         public string? UUID_ESTADO { get; set; }
-        public Int32 ACTIVO { get; set; }
+        public Int64? ACTIVO { get; set; }
         public string? CODIGO_PROVEEDOR { get; set; }
         public DateTime? CADUCIDAD { get; set; }
         public Byte[]? IMAGEN { get; set; }
-        public Double PRECIO {  get; set; }
-        public double? DESCUENTO { get; set; }
-        public int ACTIVA_DESCUENTO { get; set; }
+        public Int64? PRECIO {  get; set; }
+        public Int64? ACTIVA_DESCUENTO { get; set; }
     }
 }

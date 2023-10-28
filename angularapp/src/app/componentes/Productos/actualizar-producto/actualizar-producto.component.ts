@@ -23,7 +23,7 @@ export class ActualizarProductoComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   productoInfo = new ProductoModel();
   datosProducto: ProductoModel[] = [];
-
+  existeProducto = false
   ngOnInit(): void {
 
   }
@@ -83,6 +83,8 @@ export class ActualizarProductoComponent implements OnInit {
               fechaIngreso: response[0].fechA_INGRESO ? new Date(response[0].fechA_INGRESO) : null,
               fechaVencimiento: response[0].caducidad ? new Date(response[0].caducidad) : null
             });
+
+            this.existeProducto = true;
 
             // this.productoFormGroupConsulta.reset()
           } else {
@@ -164,9 +166,9 @@ export class ActualizarProductoComponent implements OnInit {
 
   actualizarProducto() {
 
+    
 
-
-    if (this.productoFormGroup.valid) {
+    // if (this.productoFormGroup.valid) {
       this.productoInfo.codigO_PRODUCTO = ''
       this.productoInfo.nombrE_PRODUCTO = this.productoFormGroup.get('nombreProductoControl')?.value || ''
       this.productoInfo.descripcioN_PRODUCTO = this.productoFormGroup.get('descripcionProductoControl')?.value || ''
@@ -188,10 +190,11 @@ export class ActualizarProductoComponent implements OnInit {
       this.productoservice.crearProducto(this.productoInfo).subscribe(
         (response) => {
 
+          
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            text: 'Cliente creado exitosamente.',
+            text: 'Producto actualizado exitosamente.',
             showConfirmButton: false,
             timer: 3000,
             allowOutsideClick: false
@@ -208,7 +211,7 @@ export class ActualizarProductoComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'error',
-            text: 'Error al crear el cliente.',
+            text: 'Error al actualizar el producto.',
             showConfirmButton: false,
             timer: 3000,
             allowOutsideClick: false
@@ -217,16 +220,50 @@ export class ActualizarProductoComponent implements OnInit {
         }
 
       );
-    } else {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'info',
-        text: 'Completar valores obligatorios.',
-        showConfirmButton: false,
-        timer: 3000,
-        allowOutsideClick: false
-      });
+    // } else {
+    //   Swal.fire({
+    //     position: 'top-end',
+    //     icon: 'info',
+    //     text: 'Completar valores obligatorios.',
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     allowOutsideClick: false
+    //   });
+    // }
+
+  }
+
+
+  eliminarProducto(){
+    //  6d93d2bd-0393-499e-a5a5-237e3eacff34
+
+    //6d93d2bd-0393-499e-a5a5-237e3eacff34
+
+    if(this.productoFormGroupConsulta.valid){
+      this.productoservice.eliminarProducto(this.productoFormGroupConsulta.get('codigoProductoControl')?.value || '').subscribe(
+        (response) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Producto eliminado exitosamente.',
+            showConfirmButton: false,
+            timer: 3000,
+            allowOutsideClick: false
+          })
+        }, 
+        (error) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            text: 'Error al eliminar el producto.',
+            showConfirmButton: false,
+            timer: 3000,
+            allowOutsideClick: false
+          });
+        }
+      )
     }
+
 
   }
 }

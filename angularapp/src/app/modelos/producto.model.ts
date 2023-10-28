@@ -11,5 +11,7 @@ export class ProductoModel {
     imagen: string = "";
     codigO_PROVEEDOR: string = "";
     caducidad: Date | null = null;
-    
+    precio: number = 0;
+    descuento: number = 0;
+    activA_DESCUENTO: number = 0;
 }

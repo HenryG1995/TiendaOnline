@@ -66,9 +66,7 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
-                            PRECIO = itemOra.PRECIO,
-                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
-                            DESCUENTO = itemOra.DESCUENTO,
+                            PRECIO = itemOra.PRECIO
 
                         };
 
@@ -89,9 +87,7 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
-                            PRECIO = itemOra.PRECIO,
-                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
-                            DESCUENTO = itemOra.DESCUENTO,
+                            PRECIO = itemOra.PRECIO
 
                         };
 
@@ -170,9 +166,7 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
-                            PRECIO = itemOra.PRECIO,
-                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
-                            DESCUENTO = itemOra.DESCUENTO,
+                            PRECIO = itemOra.PRECIO
 
                         };
 
@@ -193,9 +187,7 @@ namespace webapi.Controllers
                             UUID_ESTADO = itemOra.UUID_ESTADO,
                             CODIGO_PROVEEDOR = itemOra.CODIGO_PROVEEDOR,
                             FECHA_INGRESO = itemOra.FECHA_INGRESO,
-                            PRECIO = itemOra.PRECIO,
-                            ACTIVA_DESCUENTO = itemOra.ACTIVA_DESCUENTO,
-                            DESCUENTO = itemOra.DESCUENTO,
+                            PRECIO = itemOra.PRECIO
 
                         };
 
@@ -267,8 +259,6 @@ namespace webapi.Controllers
                     CADUCIDAD = request.CADUCIDAD,
                     IMAGEN = "data:img",
                     PRECIO = request.PRECIO,
-                    ACTIVA_DESCUENTO = request.ACTIVA_DESCUENTO,
-                    DESCUENTO = request.DESCUENTO,
 
 
                 });
@@ -282,8 +272,8 @@ namespace webapi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpDelete("BajaProducto")]
-        public IActionResult BajaProducto([FromBody] INVENTARIO request)
+        [HttpDelete("BajaProducto/{id}")]
+        public IActionResult BajaProducto(string id)
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -291,7 +281,7 @@ namespace webapi.Controllers
 
             try
             {
-                var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO", request.CODIGO_PRODUCTO).AsUpdate(new
+                var query = new Query("INVENTARIO").Where("CODIGO_PRODUCTO", id).AsUpdate(new
                 {
                     ACTIVO = 0
                 });

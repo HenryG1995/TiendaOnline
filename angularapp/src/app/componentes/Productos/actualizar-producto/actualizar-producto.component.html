@@ -1,5 +1,5 @@
 <div class="contenedor">
-    <h4><strong>ACTUALIZACIÓN DE PRODUCTOS</strong></h4>
+    <h4><strong>Administración de productos</strong></h4>
     <mat-divider></mat-divider>
 
 
@@ -23,7 +23,7 @@
             
         </form>
         
-        <div style="margin-top: 10px;">
+        <div  style="margin-top: 10px;">
             <form [formGroup]="productoFormGroup">
                 <div class="" style="display: grid; grid-template-columns: 1fr 2fr; gap: 25px;">
                     <mat-form-field appearance="outline">
@@ -122,10 +122,15 @@
     
                 <div class="botones"
                     style="display: flex; justify-content: center; align-items: center; text-align: center; height: 120px;">
-                    <button (click)="actualizarProducto()" mat-fab extended color="primary"
-                        style="text-align: center; align-items: center;">
-                        <mat-icon>library_add</mat-icon>
-                        CREAR CLIENTE
+                    <button (click)="actualizarProducto()" mat-raised-button color="primary"
+                    style="text-align: center; align-items: center; margin-right: 10px;">
+                        <mat-icon>edit</mat-icon>
+                        Actualizar
+                    </button>
+                    <button (click)="eliminarProducto()" mat-raised-button color="accent"
+                    style="text-align: center; align-items: center; margin-right: 10px;">
+                        <mat-icon>delete</mat-icon>
+                        Eliminar
                     </button>
                 </div>
     

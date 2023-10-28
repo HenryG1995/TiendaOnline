@@ -56,6 +56,7 @@ import { NumbersOnlyDirective } from './directivas/numbers-only.directive';
 import { NumbersAndLettersDirective } from './directivas/numbers-and-letters.directive';
 import { NitdirectiveDirective } from './directivas/nitdirective.directive';
 import { ActualizaNotaComponent } from './componentes/NotasCredito/actualiza-nota/actualiza-nota.component';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { ActualizaNotaComponent } from './componentes/NotasCredito/actualiza-not
     NumbersOnlyDirective,
     NumbersAndLettersDirective,
     NitdirectiveDirective,
+    SpinnerComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -8,6 +8,6 @@ namespace ModelsStore.DTO.PARAM
 {
     public class CONSULTA_CODIGO_ESTADO
     {
-        public string CODIGO_ESTADO? {  get; set; }
+        public string CODIGO_ESTADO {  get; set; }
     }
 }

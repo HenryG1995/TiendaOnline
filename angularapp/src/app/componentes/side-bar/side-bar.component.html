@@ -12,7 +12,7 @@
 
         <nav id="sidebar">
             <div class="p-4 pt-5">
-                <a class="img logo rounded-circle mb-5" href="/principalside"
+                <a class="img logo rounded-circle mb-5" [routerLink]="['/home']"
                     style="background-image: url(assets/logitohome.png);"></a>
 
                 <ul class="list-unstyled components mb-5">
@@ -22,19 +22,19 @@
                         <ul *ngIf="submenusState.clienteSubmenu && submenuAbierto === 'clienteSubmenu'"
                             class=" list-unstyled">
                             <li>
-                                <a href="/principalside/clientes/crearCliente"><i class="fa fa-user-plus"></i>
+                                <a [routerLink]="['/crearCliente']"><i class="fa fa-user-plus"></i>
                                     Crear cliente</a>
                             </li>
                             <li>
-                                <a href="/principalside/clientes/consultarCliente"><i class="fa fa-search"></i>
+                                <a [routerLink]="['/consultarCliente']"><i class="fa fa-search"></i>
                                     Consulta cliente</a>
                             </li>
                             <li>
-                                <a href="/principalside/clientes/actualizarCliente"><i class="fa fa-edit"></i>
+                                <a [routerLink]="['/actualizarCliente']"><i class="fa fa-edit"></i>
                                     Actualizar cliente</a>
                             </li>
                             <li>
-                                <a href="/principalside/clientes/eliminarCliente"><i class="fa fa-trash"></i>
+                                <a [routerLink]="['/eliminarCliente']"><i class="fa fa-trash"></i>
                                     Eliminar cliente</a>
                             </li>
                         </ul>
@@ -45,31 +45,34 @@
                         <ul *ngIf="submenusState.productoSubmenu && submenuAbierto === 'productoSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/principalside/crearProducto">Crear producto</a>
+                                <a [routerLink]="['/crearProducto']">Crear producto</a>
                             </li>
                             <li>
-                                <a href="/principalside/consultarProducto">Consultar producto</a>
+                                <a [routerLink]="['/consultarProducto']">Productos</a>
                             </li>
                             <li>
-                                <a href="/principalside/actualizarProducto">Actualizar producto</a>
+                                <a [routerLink]="['/actualizarProducto']">Administración de producto</a>
                             </li>
-                            <li>
-                                <a href="/principalside/eliminarProducto">Eliminar producto</a>
-                            </li>
+                            <!-- <li>
+                                <a [routerLink]="['/eliminarProducto']">Eliminar producto</a>
+                            </li> -->
                         </ul>
                     </li>
                     <li>
-                        <a (click)="toggleSubmenu('ventaSubmenu')" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"><i class="fa fa-shopping-cart"></i> Ventas</a>
-                        <ul *ngIf="submenusState.ventaSubmenu && submenuAbierto === 'ventaSubmenu'"
+                        <a [routerLink]="['/venta']"  ><i class="fa fa-shopping-cart"></i> Ventas (carrito de compras)</a>
+
+                        <!-- (click)="toggleSubmenu('ventaSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle" -->
+                            <!-- <a >Venta</a> -->
+                        <!-- <ul *ngIf="submenusState.ventaSubmenu && submenuAbierto === 'ventaSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/principalside/ventaMayor">Venta</a>
-                            </li>
+                                
+                            </li> -->
                             <!-- <li>
                                 <a href="/principalside/ventaMenor">Venta por menor</a>
                             </li> -->
-                        </ul>
+                        <!-- </ul> -->
                     </li>
                     <li>
                         <a (click)="toggleSubmenu('notaCreditoSubmenu')" data-toggle="collapse" aria-expanded="false"
@@ -78,13 +81,13 @@
                         <ul *ngIf="submenusState.notaCreditoSubmenu && submenuAbierto === 'notaCreditoSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/actualizaNota/">Actualiza notas</a>
+                                <a [routerLink]="['/actualizaNota']">Actualiza notas</a>
                             </li>
                             <li>
-                                <a href="/anularVenta">Anular venta</a>
+                                <a [routerLink]="['/anularVenta']">Anular venta</a>
                             </li>
                             <li>
-                                <a href="/principalside/devolucionProducto">Devolución de producto</a>
+                                <a [routerLink]="['/devolucionProducto']">Devolución de producto</a>
                             </li>
                         </ul>
                     </li>
@@ -95,13 +98,13 @@
                         <ul *ngIf="submenusState.entregaPaqueteSubmenu && submenuAbierto === 'entregaPaqueteSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/principalside/ingresoEntrega">Ingreso de entrega</a>
+                                <a [routerLink]="['/ingresoEntrega']">Ingreso de entrega</a>
                             </li>
                             <li>
-                                <a href="/principalside/seguimientoEntrega">Seguimiento de entrega</a>
+                                <a [routerLink]="['/seguimientoEntrega']">Seguimiento de entrega</a>
                             </li>
                             <li>
-                                <a href="/principalside/bitacoraEntrega">Consulta de bitácora de entrega</a>
+                                <a [routerLink]="['/bitacoraEntrega']">Consulta de bitácora de entrega</a>
                             </li>
                         </ul>
                     </li>

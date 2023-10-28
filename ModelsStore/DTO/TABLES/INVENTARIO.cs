@@ -15,13 +15,12 @@ namespace ModelsStore.DTO.TABLES
         public DateTime? FECHA_CARGA { get; set; }
         public DateTime? FECHA_INGRESO { get; set; }
         public string? UUID_ESTADO { get; set; }
-        public Int32? ACTIVO { get; set; }
+        public Int64? ACTIVO { get; set; }
         public string? CODIGO_PROVEEDOR { get; set; }
         public DateTime? CADUCIDAD { get; set; } 
         public string? IMAGEN { get; set; }
-        public Double PRECIO { get; set; }
-        public Double? DESCUENTO { get; set; }
-        public int? ACTIVA_DESCUENTO { get; set; }
+        public Int64? PRECIO { get; set; }
+        public Int64? ACTIVA_DESCUENTO { get; set; }
     }
 }
 

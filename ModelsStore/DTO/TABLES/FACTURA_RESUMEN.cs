@@ -12,7 +12,7 @@ namespace ModelsStore.DTO.TABLES
 
         public string CODIGO_VENTA { get; set; }
 
-        public double TOTAL { get; set; }
+        public Int64? TOTAL { get; set; }
         
         public DateTime FECHA_EMISION { get; set; }
         

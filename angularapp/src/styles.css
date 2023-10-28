@@ -3,3 +3,13 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.titulo {
+    font-size: 1.8rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .subtitulo {
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+  }

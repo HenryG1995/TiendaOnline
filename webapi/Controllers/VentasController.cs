@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using ModelsStore.DTO.PARAM;
 using Microsoft.VisualBasic;
 using Microsoft.IdentityModel.Tokens;
+using System.Text.RegularExpressions;
 
 namespace webapi.Controllers
 {
@@ -26,7 +27,7 @@ namespace webapi.Controllers
                 query.Where("ESTADO", request.CODIGO_ESTADO);
 
             };
-          
+
             var sql = execute.ExecuterCompiler(query);
 
             var list = new List<VENTAS>();
@@ -38,7 +39,7 @@ namespace webapi.Controllers
 
             return Ok(list.ToList());
         }
-       
+
         [HttpGet("ListVentasAll")]//consulta con filtro puede recibir codigo cliente , estado ,aplica nota, fecha de venta, codigo de venta
         public IActionResult ListVentasAll([FromQuery] VENTAS request)
         {
@@ -81,7 +82,7 @@ namespace webapi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        
+
         [HttpPut("ActualizaVenta")] //RECIBO CODIGO DE VENTA llave para todos ,CODIGO ESTADO = actual o nuevo, CODIGO NOTA = actual o nuevo, APLICA NOTA = 0 o  1
         public IActionResult ActualizaVenta([FromBody] VENTAS request)
         {
@@ -106,7 +107,7 @@ namespace webapi.Controllers
                 var queryFR = new Query("FACTURA_RESUMEN").AsUpdate(new
                 {
                     estado = request.ESTADO
-                
+
                 }).Where("CODIGO_VENTA", request.CODIGO_VENTA);
 
                 var queryDV = new Query("DETALLE_VENTAS").AsUpdate(new
@@ -217,7 +218,7 @@ namespace webapi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error internal server " + ex.Message);
             }
         }
-        
+
         [HttpPost("Venta")] //LISTA DE VENTALIST ESTA SOLO OBTENGO CODIGO DE PRODUCTO , CODIGO DE CLIENTE CANTIDAD DE PRODUCTOS 
         public IActionResult Venta([FromBody] List<VENTALIST> request)
         {
@@ -232,8 +233,9 @@ namespace webapi.Controllers
                 var venta = new VENTAS();
 
                 var FACTURA_RESUMEN = new FACTURA_RESUMEN();
+                long total = 0;
 
-                var pos = 0;
+                var pos = 1;
 
                 var QUERY2 = new Query("ESTADOS").Select("CODIGO_ESTADO").Where("ESTADO", "FACTURADO").Limit(1);
 
@@ -260,8 +262,9 @@ namespace webapi.Controllers
                 foreach (var item in request)
                 {
                     var list2 = new INVENTARIO();
-
-                    var QUERY = new Query("INVENTARIO").Select("PRECIO,UNIDADES_EXISTENTES,DESCUENTO,ACTIVA_DESCUENTO").Where("CODIGO_PRODUCTO", item.CODIGO_PRODUCTO);
+                    var detalleventa = new DETALLE_VENTA();
+                    //var QUERY = new Query("INVENTARIO").Select("PRECIO,UNIDADES_EXISTENTES,DESCUENTO,ACTIVA_DESCUENTO").Where("CODIGO_PRODUCTO", item.CODIGO_PRODUCTO);
+                    var QUERY = new Query("INVENTARIO").Select("PRECIO", "UNIDADES_EXISTENTES").Where("CODIGO_PRODUCTO", item.CODIGO_PRODUCTO);
 
                     var sql2 = execute.ExecuterCompiler(QUERY);
 
@@ -270,44 +273,40 @@ namespace webapi.Controllers
                         list2 = DataReaderMapper<INVENTARIO>.MapToObject(reader);
                     });
 
-                    detalle_venta_list[pos].CODIGO_PRODUCTO = item.CODIGO_PRODUCTO;
+                    detalleventa.CODIGO_PRODUCTO = item.CODIGO_PRODUCTO;
+                    detalleventa.CODIGO_VENTA = codigo_venta.ToString();
+                    detalleventa.ESTADO = ESTADOS.CODIGO_ESTADO;
+                    detalleventa.CANTIDAD = item.CANTIDAD;
 
-                    detalle_venta_list[pos].CODIGO_VENTA = codigo_venta;
 
 
-                    detalle_venta_list[pos].ESTADO = ESTADOS.CODIGO_ESTADO;
+                    //detalle_venta_list[pos].ESTADO = ESTADOS.CODIGO_ESTADO;
+                    long desc = 0;
 
-                    if (list2.ACTIVA_DESCUENTO == 1)
-                    {
+                    desc = list2.PRECIO.Value * item.CANTIDAD.Value;
 
-                        var total = (list2.PRECIO * list2.DESCUENTO) * (item.CANTIDAD);
+                    detalleventa.TOTAL = desc;
 
-                        detalle_venta_list[pos].TOTAL = total.Value;
-                    }
-                    else
-                    {
-                        detalle_venta_list[pos].TOTAL = (list2.PRECIO * item.CANTIDAD);
-
-                    }
-
-                    FACTURA_RESUMEN.TOTAL = FACTURA_RESUMEN.TOTAL + detalle_venta_list[pos].TOTAL;
+                    detalle_venta_list.Add(detalleventa);
+                    total = total + desc;
 
                     pos++;
                 }
 
+                FACTURA_RESUMEN.TOTAL = total;
                 venta.FECHA_ENTREGA = request[0].FECHA_ENTREGA;
 
                 venta.APLICA_NOTA = request[0].APLICA_NOTA;
 
                 venta.CODIGO_CLIENTE = request[0].CODIGO_CLIENTE;
-
-                venta.ESTADO = ESTADOS.ESTADO;
+                venta.CODIGO_VENTA = codigo_venta.ToString();
+                venta.ESTADO = ESTADOS.CODIGO_ESTADO;
 
                 var list = new List<string>();
 
                 foreach (var item in detalle_venta_list)
                 {
-                    var QI = new Query("INVENTARIO").Select("NOMBRE_PRODUCTO,UNIDADES_EXISTENTES").Where("CODIGO_PRODUCTO", item.CODIGO_PRODUCTO);
+                    var QI = new Query("INVENTARIO").Select("NOMBRE_PRODUCTO","UNIDADES_EXISTENTES").Where("CODIGO_PRODUCTO", item.CODIGO_PRODUCTO);
 
                     var sqli = execute.ExecuterCompiler(QI);
 
@@ -323,7 +322,7 @@ namespace webapi.Controllers
                         list.Add("Errror CANTIDAD DEL PRODUCTO " + dtoInventario.NOMBRE_PRODUCTO.ToString() + " insuficiente " + dtoInventario.UNIDADES_EXISTENTES + " cantidad solicitada :" + item.CANTIDAD);
                     }
                 }
-                
+
                 if (list.Count > 0)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, list.ToList());
@@ -331,9 +330,9 @@ namespace webapi.Controllers
 
                 var QINSERT2 = new Query("FACTURA_RESUMEN").AsInsert(FACTURA_RESUMEN);
 
-                var QINSERT3 = new Query("DETALLE_VENTA").AsInsert(detalle_venta_list);
+                
 
-                var QINSERT = new Query("VENTA").AsInsert(venta);
+                var QINSERT = new Query("VENTAS").AsInsert(venta);
 
                 var sql = execute.ExecuterCompiler(QINSERT);
 
@@ -371,13 +370,16 @@ namespace webapi.Controllers
 
                 }
 
+               
+                foreach (var item in detalle_venta_list)
+                {
+                    var QINSERT3 = new Query("DETALLE_VENTA").AsInsert(item);
+                    var sql4 = execute.ExecuterCompiler(QINSERT3);
+                    ok = execute.ExecuteDecider(sql4);
+                }
                 var sql3 = execute.ExecuterCompiler(QINSERT2);
 
                 ok = execute.ExecuteDecider(sql3);
-
-                var sql4 = execute.ExecuterCompiler(QINSERT3);
-
-                ok = execute.ExecuteDecider(sql4);
 
                 return Ok();
 
@@ -480,13 +482,13 @@ namespace webapi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error internal server " + ex.Message);
             }
         }
-        
+
         [HttpPost("IngresoEntrega")]//recibe el codigo de venta
-        public IActionResult IngresoEntrega([FromBody] CONSULTA_CODIGO_VENTA request) 
+        public IActionResult IngresoEntrega([FromBody] CONSULTA_CODIGO_VENTA request)
         {
             var execute = new ExecuteFromDBMSProvider();
 
-            var query = new Query("ESTADOS").Where("ESTADO","ENTREGADO");
+            var query = new Query("ESTADOS").Where("ESTADO", "ENTREGADO");
 
             var sql = execute.ExecuterCompiler(query);
 
@@ -501,13 +503,13 @@ namespace webapi.Controllers
             {
                 ESTADO = estado.CODIGO_ESTADO,
                 FECHA_ACTUALIZACION = DateTime.Now,
-           
+
             });
 
             var QFactura = new Query("FACTURA_RESUMEN").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
             {
                 estado = estado.CODIGO_ESTADO,
-                 FECHA_ACTUALIZACION = DateTime.Now,
+                FECHA_ACTUALIZACION = DateTime.Now,
             });
 
             var QDetalle = new Query("DETALLE_VENTA").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
@@ -516,13 +518,13 @@ namespace webapi.Controllers
             });
 
             var sqlV = execute.ExecuterCompiler(QVenta);
-            
+
             var sqlF = execute.ExecuterCompiler(QFactura);
-            
+
             var sqlD = execute.ExecuterCompiler(QDetalle);
 
 
-            return Ok("VENTAS :"+execute.ExecuteDecider(sqlV) + "FACTURA_RESUMEN :" + execute.ExecuteDecider(sqlF) + "DETALLE_VENTA :" + execute.ExecuteDecider(sqlD));
+            return Ok("VENTAS :" + execute.ExecuteDecider(sqlV) + "FACTURA_RESUMEN :" + execute.ExecuteDecider(sqlF) + "DETALLE_VENTA :" + execute.ExecuteDecider(sqlD));
         }
     }
 }
