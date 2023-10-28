@@ -20,7 +20,6 @@ namespace webapi.Controllers
 
             try
             {
-
                 var query = new Query("BITACORA_GENERAL").Select("*");
 
                 var sql = execute.ExecuterCompiler(query);

@@ -33,10 +33,9 @@ namespace ClassDB.SqlKataTools
             {
                 stringquery = stringquery.Replace(", '0001-01-01'", ", to_date('2003-01-01 01:01:01','YYYY-MM-DD HH24:MI:SS') ");
             }
-            // Definimos un patrón de búsqueda que coincida con la fecha en el formato 'YYYY-MM-DD HH:mm:ss'
+
             string patron = @"'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})'";
 
-            // Reemplazamos la fecha por 'to_date(fecha)'
             string resultado = Regex.Replace(stringquery, patron, "to_date('$1','YYYY-MM-DD HH24:MI:SS')");
 
             stringquery = resultado;

@@ -14,5 +14,7 @@ namespace ModelsStore.DTO.TABLES
         public string ESTADO { get; set; }
         public Int32 APLICA_NOTA { get; set; }
         public string CODIGO_NOTA { get; set; }
+        public DateTime FECHA_ENTREGA { get; set; }
+        public DateTime FECHA_ACTUALIZACION { get; set; }
     }
 }

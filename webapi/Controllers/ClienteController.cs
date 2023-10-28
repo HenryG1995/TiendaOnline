@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿﻿using Microsoft.AspNetCore.Mvc;
 using ModelsStore.DTO.PARAM;
 using ModelsStore.DTO.TABLES;
 using ModelsStore.DTO.VIEWS;
@@ -74,6 +74,7 @@ namespace webapi.Controllers
                     {
                         obj = DataReaderMapper<ESTADOS>.MapToObject(reader);
                     });
+
                     query.Where("ESTADO", obj.ESTADO);
                 }
 
@@ -150,148 +151,80 @@ namespace webapi.Controllers
 
                 var sql = execute.ExecuterCompiler(query);
 
-                    return Ok(nl.ToList());
+                var lista = new List<V_CLIENTE_R>();
 
-                };
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<V_CLIENTE_R>.MapToList(reader);
+                });
 
-
-            var sql = execute.ExecuterCompiler(query);
-
-            var lista = new List<V_CLIENTE_R>();
-
-            execute.DataReader(sql, reader =>
-            {
-                lista = DataReaderMapper<V_CLIENTE_R>.MapToList(reader);
-            });
-
-            return Ok(lista.ToList());
-        }
+                return Ok(lista.ToList());
+            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-    }
+            }
 
-}
+        }
 
 
-[HttpPost("InfoCliente")]
-public IActionResult InfoCliente([FromBody] CLIENTE_CONSULTA request)
-{
-    try
-    {
-        var connection = new ConectionDecider();
-        connection.InitRead();
-
-        var query = new Query("CLIENTE").Select("*").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
-
-        ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-        var sql = execute.ExecuterCompiler(query);
-
-        var lista = new List<CLIENTE>();
-
-        execute.DataReader(sql, reader =>
+        [HttpPost("InfoCliente")]
+        public IActionResult InfoCliente([FromBody] CLIENTE_CONSULTA request)
         {
-            lista = DataReaderMapper<CLIENTE>.MapToList(reader);
-        });
+            try
+            {
+                var connection = new ConectionDecider();
+                connection.InitRead();
 
-        return Ok(lista.ToList());
-    }
-    catch (Exception ex)
-    {
-        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-    }
+                var query = new Query("CLIENTE").Select("*").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
 
-}
-[HttpPost("CreaCliente")]
-public IActionResult CreaCliente([FromBody] CLIENTE request)
-{
-    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+                var sql = execute.ExecuterCompiler(query);
 
-    var connection = new ConectionDecider();
-    try
-    {
-        connection.InitRead();
+                var lista = new List<CLIENTE>();
 
-        var query = new Query("CLIENTE").AsInsert(request);
+                execute.DataReader(sql, reader =>
+                {
+                    lista = DataReaderMapper<CLIENTE>.MapToList(reader);
+                });
 
-        var sql = execute.ExecuterCompiler(query);
+                return Ok(lista.ToList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
 
-<<<<<<< HEAD
-
-        return Ok(execute.ExecuteDecider(sql));
-
-    }
-    catch (Exception ex)
-    {
-        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-
-    }
-
-}
-
-[HttpPut("ActualizaCliente")]
-public IActionResult ActualizaCliente([FromBody] CLIENTE request)
-{
-    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-    var connection = new ConectionDecider();
-    try
-    {
-        connection.InitRead();
-
-        var query = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE).AsUpdate(new
-=======
         }
         [HttpPost("CreaCliente")]
         public IActionResult CreaCliente([FromBody] CLIENTE request)
->>>>>>> RPR_FULL_DEV
         {
-            PRIMER_NOMBRE = request.PRIMER_NOMBRE,
-            SEGUNDO_NOMBRE = request.SEGUNDO_NOMBRE,
-            PRIMER_APELLIDO = request.PRIMER_APELLIDO,
-            SEGUNDO_APELLIDO = request.SEGUNDO_APELLIDO,
-            NIT = request.NIT,
-            DIRECCION_CLIENTE = request.DIRECCION_CLIENTE,
-            TELEFONO = request.TELEFONO,
-        }).Where("CODIGO_CLIENTE",request.CODIGO_CLIENTE);
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-        var sql = execute.ExecuterCompiler(query);
+            var connection = new ConectionDecider();
+            try
+            {
+                connection.InitRead();
 
+                var query = new Query("CLIENTE").AsInsert(request);
 
-        return Ok(execute.ExecuteDecider(sql));
-
-    }
-    catch (Exception ex)
-    {
-        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-
-    }
+                var sql = execute.ExecuterCompiler(query);
 
 
+                return Ok(execute.ExecuteDecider(sql));
 
-}
-[HttpDelete("BajaCliente")]
-public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)
-{
-    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
 
-    var connection = new ConectionDecider();
-    try
+            }
 
+        }
 
-    {
-        var estado = new ESTADOS();
-
-        var query2 = new Query("ESTADOS").Select("CODIGO_ESTADO").Where("ACTIVO", 1).Where("ESTADO", "BAJA").Limit(1);
-
-        var sql2 = execute.ExecuterCompiler(query2);
-
-        execute.DataReader(sql2, reader =>
+        [HttpPut("ActualizaCliente")]
+        public IActionResult ActualizaCliente([FromBody] CLIENTE request)
         {
-<<<<<<< HEAD
-            estado = DataReaderMapper<ESTADOS>.MapToObject(reader);
-        });
-=======
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
             var connection = new ConectionDecider();
@@ -311,45 +244,47 @@ public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)
                 }).Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE);
 
                 var sql = execute.ExecuterCompiler(query);
->>>>>>> RPR_FULL_DEV
 
 
-        var query = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE).AsUpdate(new
+                return Ok(execute.ExecuteDecider(sql));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+
+            }
+
+
+
+        }
+        [HttpDelete("BajaCliente")]
+        public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)
         {
-            CODIGO_ESTADO = estado.CODIGO_ESTADO
-        });
+            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-        var sql = execute.ExecuterCompiler(query);
+            var connection = new ConectionDecider();
+            try
 
-        var query3 = new Query("USUARIOS").Where("CODIGO_USUARIO", request.CODIGO_CLIENTE).AsUpdate(new
-        {
-            ESTADO = estado.CODIGO_ESTADO
-        });
 
-<<<<<<< HEAD
-        var sql3 = execute.ExecuterCompiler(query3);
-=======
             {
                 var estado = new ESTADOS();
 
                 var query2 = new Query("ESTADOS").Select("CODIGO_ESTADO").Where("ACTIVO", 1).Where("ESTADO", "BAJA").Limit(1);
 
                 var sql2 = execute.ExecuterCompiler(query2);
->>>>>>> RPR_FULL_DEV
 
-        var result = execute.ExecuteDecider(sql3);
+                execute.DataReader(sql2, reader =>
+                {
+                    estado = DataReaderMapper<ESTADOS>.MapToObject(reader);
+                });
 
-        return Ok(execute.ExecuteDecider(sql));
 
-    }
-    catch (Exception ex)
-    {
-        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+                var query = new Query("CLIENTE").Where("CODIGO_CLIENTE", request.CODIGO_CLIENTE).AsUpdate(new
+                {
+                    CODIGO_ESTADO = estado.CODIGO_ESTADO
+                });
 
-<<<<<<< HEAD
-    }
-}
-=======
                 var sql = execute.ExecuterCompiler(query);
 
                 var query3 = new Query("USUARIOS").Where("CODIGO_USUARIO", request.CODIGO_CLIENTE).AsUpdate(new
@@ -370,7 +305,6 @@ public IActionResult BajaCliente([FromBody] CLIENTE_CONSULTA request)
 
             }
         }
->>>>>>> RPR_FULL_DEV
 
 
     }

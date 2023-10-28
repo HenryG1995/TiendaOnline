@@ -87,7 +87,7 @@ namespace ModelsStore.DbConn.DbConect
             try
             {
                 var STR = Environment.GetEnvironmentVariable("STR");
-
+                
                 if (blob.IsNullOrEmpty() == false)
                 {
                     var STR2 = Environment.GetEnvironmentVariable("STR");

@@ -15,7 +15,6 @@ namespace webapi.Controllers
         [HttpGet("AllFacturas")]
         public IActionResult AllFacturas()
         {
-
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
             var connection = new ConectionDecider();
@@ -40,29 +39,29 @@ namespace webapi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
             }
         }
-        [HttpPost("GuardaFact")]
-        public IActionResult GuardaFact([FromBody] FACTURA_RESUMEN request)
-        {
+        //[HttpPost("GuardaFact")]
+        //public IActionResult GuardaFact([FromBody] FACTURA_RESUMEN request)
+        //{
 
-            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+        //    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-            var connection = new ConectionDecider();
+        //    var connection = new ConectionDecider();
 
-            try
-            {
-                request.CODIGO_VENTA = Guid.NewGuid().ToString();
+        //    try
+        //    {
+        //        request.CODIGO_VENTA = Guid.NewGuid().ToString();
 
-                var query = new Query("FACTURA_RESUMEN").AsInsert(request);
+        //        var query = new Query("FACTURA_RESUMEN").AsInsert(request);
 
-                var sql = execute.ExecuterCompiler(query);
+        //        var sql = execute.ExecuterCompiler(query);
 
-                return Ok(execute.ExecuteDecider(sql));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-            }
-        }
+        //        return Ok(execute.ExecuteDecider(sql));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+        //    }
+        //}
      
      
 

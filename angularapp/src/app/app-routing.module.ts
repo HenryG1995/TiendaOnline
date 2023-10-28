@@ -18,33 +18,29 @@ import { IngresoEntregaComponent } from './componentes/EntregasPaquete/ingreso-e
 import { SeguimientoEntregaComponent } from './componentes/EntregasPaquete/seguimiento-entrega/seguimiento-entrega.component';
 import { ConsultaBitacoraEntregaComponent } from './componentes/EntregasPaquete/consulta-bitacora-entrega/consulta-bitacora-entrega.component';
 import { NosotrosComponent } from './componentes/nosotros/nosotros.component';
-import { SideBarComponent } from './componentes/side-bar/side-bar.component';
+import { ActualizaNotaComponent } from './componentes/NotasCredito/actualiza-nota/actualiza-nota.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'principalside', pathMatch: 'full' },//component:HomeComponent},
-  {
-    path: 'principalside', component: SideBarComponent, children: [
-      { path: '', component: HomeComponent },
-      { path: 'clientes/crearCliente', component: CrearClienteComponent },
-      { path: 'clientes/consultarCliente', component: ConsultarClienteComponent },
-      { path: 'clientes/actualizarCliente', component: ActualizarClienteComponent },
-      { path: 'clientes/eliminarCliente', component: EliminarClienteComponent },
-      { path: 'crearProducto', component: CrearProductoComponent },
-      { path: 'consultarProducto', component: ConsultarProductoComponent },
-      { path: 'actualizarProducto', component: ActualizarProductoComponent },
-      { path: 'eliminarProducto', component: EliminarProductoComponent },
-      { path: 'ventaMayor', component: VentaMayorComponent },
-      { path: 'ventaMenor', component: VentaMenorComponent },
-      { path: 'anularVenta', component: AnularVentaComponent },
-      { path: 'devolucionProducto', component: DevolucionProductoComponent },
-      { path: 'ingresoEntrega', component: IngresoEntregaComponent },
-      { path: 'seguimientoEntrega', component: SeguimientoEntregaComponent },
-      { path: 'bitacoraEntrega', component: ConsultaBitacoraEntregaComponent },
-      { path: 'nosotros', component: NosotrosComponent },
-    ]
-  },
-  { path: 'login', component: LoginComponent },
-
+  { path: '', component:HomeComponent},
+  { path: 'login', component:LoginComponent},
+  { path: 'home', component:HomeComponent},
+  { path: 'clientes/crearCliente', component:CrearClienteComponent},
+  { path: 'clientes/consultarCliente', component:ConsultarClienteComponent},
+  { path: 'clientes/actualizarCliente', component:ActualizarClienteComponent},
+  { path: 'clientes/eliminarCliente', component:EliminarClienteComponent},
+  { path: 'crearProducto', component:CrearProductoComponent},
+  { path: 'consultarProducto', component:ConsultarProductoComponent},
+  { path: 'actualizarProducto', component:ActualizarProductoComponent},
+  { path: 'eliminarProducto', component:EliminarProductoComponent},
+  { path: 'ventaMayor', component:VentaMayorComponent},
+  { path: 'ventaMenor', component:VentaMenorComponent},
+  { path: 'anularVenta', component:AnularVentaComponent},
+  { path: 'actualizaNota', component:ActualizaNotaComponent},
+  { path: 'devolucionProducto', component:DevolucionProductoComponent},
+  { path: 'ingresoEntrega', component:IngresoEntregaComponent},
+  { path: 'seguimientoEntrega', component:SeguimientoEntregaComponent},
+  { path: 'bitacoraEntrega', component:ConsultaBitacoraEntregaComponent},
+  { path: 'nosotros', component:NosotrosComponent},
 
   // { path: '**', pathMatch: 'full', component:HomeComponent},
 ];
