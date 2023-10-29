@@ -176,7 +176,7 @@ namespace webapi.Controllers
 
                 }
                 //consulto estado DEVOLUCION
-                var estado = new ESTADOS();
+                var ESTADO = new ESTADOS();
 
                 var queryEstado = new Query("ESTADOS").Where("ESTADO", "CANCELADO").Limit(1);
 
@@ -184,20 +184,20 @@ namespace webapi.Controllers
 
                 execute.DataReader(sqlEstado, reader =>
                 {
-                    estado = DataReaderMapper<ESTADOS>.MapToObject(reader);
+                    ESTADO = DataReaderMapper<ESTADOS>.MapToObject(reader);
                 });
 
                 //actualiza DetalleVentas
                 var queryU = new Query("DETALLE_VENTA").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
                 {
-                    CODIGO_ESTADO = estado.CODIGO_ESTADO
+                    ESTADO = ESTADO.CODIGO_ESTADO
                 });
                 var sqlU = execute.ExecuterCompiler(queryU);
                 // execute.ExecuteDecider(sqlU);
                 //actualiza Ventas
                 var queryVU = new Query("VENTAS").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
                 {
-                    estado = estado.CODIGO_ESTADO
+                    ESTADO = ESTADO.CODIGO_ESTADO
                 });
 
                 var sqlUV = execute.ExecuterCompiler(queryVU);
@@ -206,12 +206,15 @@ namespace webapi.Controllers
 
                 var queryFU = new Query("FACTURA_RESUMEN").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
                 {
-                    estado = estado.CODIGO_ESTADO
+                    ESTADO = ESTADO.CODIGO_ESTADO
                 });
                 var sqlFU = execute.ExecuterCompiler(queryFU);
                 // execute.ExecuteDecider(sqlFU);
+                execute.ExecuteDecider(sqlUV); 
+                
+                execute.ExecuteDecider(sqlU);
 
-                return Ok("FACTURA_RESUMEN :" + execute.ExecuteDecider(sqlFU + " VENTAS : " + execute.ExecuteDecider(sqlUV) + " DETALLE_VENTA :" + execute.ExecuteDecider(sqlU) + " INVENTARIO : TRUE"));
+                return Ok(execute.ExecuteDecider(sqlFU) );
             }
             catch (Exception ex)
             {
@@ -454,14 +457,14 @@ namespace webapi.Controllers
                 //actualiza DetalleVentas
                 var queryU = new Query("DETALLE_VENTA").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
                 {
-                    CODIGO_ESTADO = estado.CODIGO_ESTADO
+                    ESTADO = estado.CODIGO_ESTADO
                 });
                 var sqlU = execute.ExecuterCompiler(queryU);
                 // execute.ExecuteDecider(sqlU);
                 //actualiza Ventas
                 var queryVU = new Query("VENTAS").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
                 {
-                    estado = estado.CODIGO_ESTADO
+                    ESTADO = estado.CODIGO_ESTADO
                 });
 
                 var sqlUV = execute.ExecuterCompiler(queryVU);
@@ -470,12 +473,15 @@ namespace webapi.Controllers
 
                 var queryFU = new Query("FACTURA_RESUMEN").Where("CODIGO_VENTA", request.CODIGO_VENTA).AsUpdate(new
                 {
-                    estado = estado.CODIGO_ESTADO
+                    ESTADO = estado.CODIGO_ESTADO
                 });
                 var sqlFU = execute.ExecuterCompiler(queryFU);
                 // execute.ExecuteDecider(sqlFU);
 
-                return Ok("FACTURA_RESUMEN :" + execute.ExecuteDecider(sqlFU + " VENTAS : " + execute.ExecuteDecider(sqlUV) + " DETALLE_VENTA :" + execute.ExecuteDecider(sqlU) + " INVENTARIO : TRUE"));
+                execute.ExecuteDecider(sqlUV); 
+                execute.ExecuteDecider(sqlU);
+
+                return Ok(execute.ExecuteDecider(sqlFU) );
             }
             catch (Exception ex)
             {

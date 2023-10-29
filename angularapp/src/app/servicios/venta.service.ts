@@ -17,4 +17,12 @@ export class VentaService {
     return this.http.post<any>(this.uri + 'Ventas/Venta', datos)
   }
 
+  public anularVenta(codigo: string):Observable<any>{
+    return this.http.post(this.uri + 'Ventas/Cancelar?CODIGO_VENTA=' + codigo, codigo)
+  }
+
+  public devolucion(codigo: string):Observable<any>{
+    return this.http.post(this.uri + 'Ventas/Devolucion?CODIGO_VENTA=' + codigo, codigo)
+  }
+
 }

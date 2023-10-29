@@ -1,1 +1,29 @@
-<p>Anular-producto works!</p>
+<div class="wrapper">
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="titulo">Anular venta</span>
+
+                        <form class="example-form mt-4" [formGroup]="codigoventa">
+                            <mat-form-field class="example-full-width mt-3">
+                                <mat-label>Ingrese código de venta</mat-label>
+                                <input matInput placeholder="Código de venta" formControlName="codigo">
+                            </mat-form-field>
+
+                            <div>
+                                <button mat-raised-button color="warn" (click)="eliminar()">Eliminar venta</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
