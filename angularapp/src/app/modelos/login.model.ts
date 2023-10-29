@@ -1,8 +1,9 @@
 export class loginModel {
-    codigO_CLIENTE: string = ''
+    usuario: string = ''
+    pass: string = ''
 }
 
-export class loginModelo{
+export class login{
     codigO_USUARIO: string = ''
     useR_ID: string = ''
     passworD_USER: string = ''

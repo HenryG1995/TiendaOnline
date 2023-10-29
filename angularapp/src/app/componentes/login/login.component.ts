@@ -1,8 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { loginModel, loginModelo } from 'src/app/modelos/login.model';
-import { LoginserviceService } from 'src/app/servicios/loginservice.service';
+import { Subscription } from 'rxjs';
+import { loginModel } from 'src/app/modelos/login.model';
+import { LoginService } from 'src/app/servicios/loginservice.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -26,31 +29,43 @@ import { LoginserviceService } from 'src/app/servicios/loginservice.service';
 })
 export class LoginComponent implements OnInit {
 
-  usuario = "A7EC6AC892634170BE7BE46B8FB0E179"
+  isLoading = false
+  usuario = ""//A7EC6AC892634170BE7BE46B8FB0E179
   pass = ""
   respuesta: string = "";
 
+  loginn = true;
+  logon = false;
+
   user = new loginModel()
 
+  private subscription?: Subscription[] = [];
 
   constructor(
-    private loginService: LoginserviceService,
+    private loginService: LoginService,
     private router: Router
-  ) { }
+  ) {
+
+    window.addEventListener('beforeunload', () => {
+      this.isLoading = true;
+    });
+  }
 
   ngOnInit(): void {
     sessionStorage.clear();
   }
 
   login() {
-    this.user.codigO_CLIENTE = this.usuario;
+    this.user.usuario = this.usuario;
+    this.user.pass = this.pass;
+
 
     this.loginService.login(this.user).subscribe(async (data: any) => {
       this.validarLogin(await data)
     })
   }
 
-  validarLogin(cadena: loginModelo[]) {
+  validarLogin(cadena: loginModel[]) {
 
     console.log(cadena.length)
 
@@ -58,24 +73,26 @@ export class LoginComponent implements OnInit {
 
     if (cadena.length === 0) {
       console.log("HOLA TESTER")
-
+      this.passIncorrect();
     }
     else {
 
-      let usuario = cadena[0];
-
-      console.log("BIENVENIDO A ESTA APLICACION: " + usuario.codigO_USUARIO + " " + usuario.useR_ID + " " + usuario.estado);
-
-      sessionStorage.setItem('codigo', usuario.codigO_USUARIO);
-      sessionStorage.setItem('correo', usuario.correo);
-      sessionStorage.setItem('estado', String(usuario.estado));
-      sessionStorage.setItem('ID', String(usuario.useR_ID));
-
-      let misesion = window.sessionStorage.getItem("ID");
-      console.log("VARIABLE DE SESION -- " + misesion);
-
-      this.router.navigate(['/principalside']);
+      this.loginn = false;
+      this.logon = true;
+      this.router.navigate(['/']);
     }
+  }
+
+  passIncorrect() {
+    this.isLoading = false
+    Swal.fire({
+      position: 'top-end',
+      icon: 'info',
+      text: 'Código o contraseña incorrecto.',
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      timer: 2500
+    })
   }
 
 

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/servicios/loginservice.service';
 
 declare var $: any;
 
@@ -60,5 +61,11 @@ export class SideBarComponent implements OnInit, AfterViewInit{
     $('#sidebarCollapse').on('click', function () {
       $('#sidebar').toggleClass('active');
     });
+  }
+
+  constructor(private loginservice: LoginService){}
+
+  logout(){
+    this.loginservice.logout();
   }
 }

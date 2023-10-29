@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { VentaService } from 'src/app/servicios/venta.service';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+
 
 import Swal from 'sweetalert2';
 
@@ -12,17 +14,29 @@ import Swal from 'sweetalert2';
 })
 export class IngresoEntregaComponent implements OnInit, OnDestroy {
   isLoading = false
+  isventa = false
 
   private subscription?: Subscription[] = [];
 
   constructor(
     private _formBuilder: FormBuilder,
-    private ventaServicio: VentaService
+    private ventaServicio: VentaService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     window.addEventListener('beforeunload', () => {
       this.isLoading = true;
+    });
+
+    this.route.paramMap.subscribe((params) => {
+      const codigoVenta = params.get('id'); 
+  
+      if (codigoVenta) {
+        this.isventa = true
+
+        this.codigoventa.patchValue({ codigo: codigoVenta });
+      }
     });
   }
 

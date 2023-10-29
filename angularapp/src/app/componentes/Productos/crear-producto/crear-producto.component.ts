@@ -162,7 +162,7 @@ export class CrearProductoComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            text: 'Cliente creado exitosamente,',
+            text: 'Producto creado exitosamente,',
             // timer: 3000,
             allowOutsideClick: false
           }).then((result) => {
@@ -178,7 +178,7 @@ export class CrearProductoComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'error',
-            text: 'Error al crear el cliente.',
+            text: 'Error al crear el producto.',
             showConfirmButton: false,
             timer: 3000,
             allowOutsideClick: false

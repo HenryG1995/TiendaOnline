@@ -364,7 +364,7 @@ namespace webapi.Controllers
                 venta.FECHA_ENTREGA = request[0].FECHA_ENTREGA;
 
                 venta.APLICA_NOTA = request[0].APLICA_NOTA;
-
+                venta.FECHA_VENTA = DateTime.Now;
                 venta.CODIGO_CLIENTE = request[0].CODIGO_CLIENTE;
                 venta.CODIGO_VENTA = codigo_venta.ToString();
                 venta.ESTADO = ESTADOS.CODIGO_ESTADO;

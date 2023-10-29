@@ -10,6 +10,7 @@ using ModelsStore.DTO.VIEWS;
 using Azure.Core;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 
 namespace webapi.Controllers
 {
@@ -94,7 +95,13 @@ namespace webapi.Controllers
 
                 request.PASSWORD_USER = pass;
 
-                request.CODIGO_USUARIO =  Guid.NewGuid().ToString();
+                string guidString = Guid.NewGuid().ToString();
+
+                string guidSinGuiones = guidString.Replace("-", "");
+
+                string codigo = guidSinGuiones.Substring(guidSinGuiones.Length - 12);
+
+                request.CODIGO_USUARIO = codigo.ToUpper();
 
                 request.ESTADO = estado.CODIGO_ESTADO;
 
@@ -102,7 +109,24 @@ namespace webapi.Controllers
 
                 var sql = execute.ExecuterCompiler(query);
 
-                return Ok(execute.ExecuteDecider(sql));
+                if (execute.ExecuteDecider(sql))
+                {
+                    var respuesta = new
+                    {
+                        RESPUESTA = "0000",
+                        CODIGO = request.CODIGO_USUARIO
+                    };
+                    return Ok(respuesta);
+                } else
+                {
+                    var respuesta = new
+                    {
+                        RESPUESTA = "9999",
+                        CODIGO = "Nombre de usuario ya existe"
+                    };
+                    return Ok(respuesta);
+                }
+
             }
             catch (Exception ex)
             {
@@ -128,7 +152,7 @@ namespace webapi.Controllers
                     estado = DataReaderMapper<ESTADOS>.MapToObject(reader);
                 });
 
-                var query = new Query("USUARIO").Where("CODIGO_USUARIO", request.CODIGO_CLIENTE).AsUpdate(new
+                var query = new Query("USUARIOS").Where("CODIGO_USUARIO", request.CODIGO_CLIENTE).AsUpdate(new
                 {
                     ESTADO = estado.CODIGO_ESTADO
                 });
@@ -180,7 +204,7 @@ namespace webapi.Controllers
                     list = DataReaderMapper<USUARIOS>.MapToObject(reader);
                 });
 
-                if (list.PASSWORD_USER.IsNullOrEmpty()== false)
+                if (list != null && list.CODIGO_USUARIO != null)
                     {
                     var query23 = new Query("V_USUARIOS").Select("*").Where("CODIGO_USUARIO", list.CODIGO_USUARIO);
                     var sql23 = execute.ExecuterCompiler(query);

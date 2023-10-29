@@ -5,4 +5,5 @@
     </div>
 </div>
 <!-- <router-outlet></router-outlet> -->
-<app-side-bar></app-side-bar>
+<app-side-bar *ngIf="menu"></app-side-bar>
+<app-login *ngIf="loggin"></app-login>

@@ -6,7 +6,11 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <span class="titulo">Realizar entrega</span>
-
+                        <button class="btn btn-outline-danger float-end botoncrear"
+                            [routerLink]="['/seguimientoEntrega']">
+                            <i class="fa fa-backward" aria-hidden="true"></i>
+                            Regresar
+                        </button>
                         <form class="example-form mt-4" [formGroup]="codigoventa">
                             <mat-form-field class="example-full-width mt-3">
                                 <mat-label>Ingrese código de venta</mat-label>

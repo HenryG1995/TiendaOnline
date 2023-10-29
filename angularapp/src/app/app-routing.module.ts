@@ -20,12 +20,13 @@ import { ConsultaBitacoraEntregaComponent } from './componentes/EntregasPaquete/
 import { NosotrosComponent } from './componentes/nosotros/nosotros.component';
 import { ActualizaNotaComponent } from './componentes/NotasCredito/actualiza-nota/actualiza-nota.component';
 import { SideBarComponent } from './componentes/side-bar/side-bar.component';
+import { AuthGuard } from './componentes/Security/Auth.guard';
 
 const routes: Routes = [
   { path: '', component:HomeComponent},
   { path: 'login', component:LoginComponent},
-  { path: 'home', component:HomeComponent},
-  { path: 'side', component: SideBarComponent},
+  { path: 'home', component:HomeComponent, canActivate:[AuthGuard]},
+  { path: 'side', component: SideBarComponent, canActivate:[AuthGuard]},
   { path: 'crearCliente', component:CrearClienteComponent},
   { path: 'consultarCliente', component:ConsultarClienteComponent},
   { path: 'actualizarCliente', component:ActualizarClienteComponent},
