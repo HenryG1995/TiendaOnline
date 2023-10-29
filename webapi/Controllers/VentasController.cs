@@ -16,17 +16,23 @@ namespace webapi.Controllers
     public class VentasController : ControllerBase
     {
         [HttpGet("BitacoraEntrega")]//recibe el estado a consultar nota si necesita todos los estados enviar estado en null
-        public ActionResult BitacoraEntrega([FromQuery] CONSULTA_CODIGO_ESTADO request)
+        public ActionResult BitacoraEntrega()
         {
             var execute = new ExecuteFromDBMSProvider();
 
-            var query = new Query("VENTAS");
+            var queryEstado = new Query("ESTADOS").Select("*");
 
-            if (request.CODIGO_ESTADO.IsNullOrEmpty() == false)
+            var sqlEstado = execute.ExecuterCompiler(queryEstado);
+
+            var listEstado = new List<ESTADOS>();
+
+            execute.DataReader(sqlEstado, reader =>
             {
-                query.Where("ESTADO", request.CODIGO_ESTADO);
+                listEstado = DataReaderMapper<ESTADOS>.MapToList(reader);
+            });
 
-            };
+
+            var query = new Query("VENTAS").Select("*");
 
             var sql = execute.ExecuterCompiler(query);
 
@@ -36,6 +42,64 @@ namespace webapi.Controllers
             {
                 list = DataReaderMapper<VENTAS>.MapToList(reader);
             });
+
+
+            foreach (var item in list)
+            {
+                var estado = item.ESTADO;
+
+                var estadoEncontrado = listEstado.FirstOrDefault(e => e.CODIGO_ESTADO == estado);
+
+                if (estadoEncontrado != null)
+                {
+                    item.ESTADO = estadoEncontrado.ESTADO;
+                }
+
+            }
+
+            return Ok(list.ToList());
+        }
+
+        [HttpGet("SeguimientoEntregas")]//recibe el estado a consultar nota si necesita todos los estados enviar estado en null
+        public ActionResult SeguimientoEntregas()
+        {
+            var execute = new ExecuteFromDBMSProvider();
+
+            var queryEstado = new Query("ESTADOS").Where("ESTADO", "PENDIENTE").Limit(1);
+
+            var sqlEstado = execute.ExecuterCompiler(queryEstado);
+
+            var listEstado = new List<ESTADOS>();
+
+            execute.DataReader(sqlEstado, reader =>
+            {
+                listEstado = DataReaderMapper<ESTADOS>.MapToList(reader);
+            });
+
+            var query = new Query("VENTAS").Where("ESTADO", listEstado[0].CODIGO_ESTADO);
+
+            var sql = execute.ExecuterCompiler(query);
+
+            var list = new List<VENTAS>();
+
+            execute.DataReader(sql, reader =>
+            {
+                list = DataReaderMapper<VENTAS>.MapToList(reader);
+            });
+
+
+            foreach (var item in list)
+            {
+                var estado = item.ESTADO;
+
+                var estadoEncontrado = listEstado.FirstOrDefault(e => e.CODIGO_ESTADO == estado);
+
+                if (estadoEncontrado != null)
+                {
+                    item.ESTADO = estadoEncontrado.ESTADO;
+                }
+
+            }
 
             return Ok(list.ToList());
         }
@@ -490,7 +554,7 @@ namespace webapi.Controllers
         }
 
         [HttpPost("IngresoEntrega")]//recibe el codigo de venta
-        public IActionResult IngresoEntrega([FromBody] CONSULTA_CODIGO_VENTA request)
+        public IActionResult IngresoEntrega([FromQuery] CONSULTA_CODIGO_VENTA request)
         {
             var execute = new ExecuteFromDBMSProvider();
 
@@ -529,8 +593,10 @@ namespace webapi.Controllers
 
             var sqlD = execute.ExecuterCompiler(QDetalle);
 
+            execute.ExecuteDecider(sqlF);
+            execute.ExecuteDecider(sqlD);
 
-            return Ok("VENTAS :" + execute.ExecuteDecider(sqlV) + "FACTURA_RESUMEN :" + execute.ExecuteDecider(sqlF) + "DETALLE_VENTA :" + execute.ExecuteDecider(sqlD));
+            return Ok(execute.ExecuteDecider(sqlV));
         }
     }
 }

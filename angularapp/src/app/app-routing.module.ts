@@ -39,6 +39,7 @@ const routes: Routes = [
   { path: 'actualizaNota', component:ActualizaNotaComponent},
   { path: 'devolucionProducto', component:DevolucionProductoComponent},
   { path: 'ingresoEntrega', component:IngresoEntregaComponent},
+  { path: 'ingresoEntrega/:id', component:IngresoEntregaComponent},
   { path: 'seguimientoEntrega', component:SeguimientoEntregaComponent},
   { path: 'bitacoraEntrega', component:ConsultaBitacoraEntregaComponent},
   { path: '**', pathMatch: 'full', component:HomeComponent},

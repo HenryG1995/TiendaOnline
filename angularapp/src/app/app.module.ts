@@ -16,10 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { StepperOrientation, MatStepperModule } from '@angular/material/stepper';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, SortDirection, matSortAnimations } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -119,7 +116,6 @@ import { SpinnerComponent } from './componentes/spinner/spinner.component';
     DatePipe,
     MatDatepickerModule,
     MatNativeDateModule,
-
   ],
   providers: [
     DatePipe,

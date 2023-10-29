@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environmet';
-import { ventaModelo } from '../modelos/venta.model';
+import { bitacoraModelo, ventaModelo } from '../modelos/venta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,18 @@ export class VentaService {
 
   public devolucion(codigo: string):Observable<any>{
     return this.http.post(this.uri + 'Ventas/Devolucion?CODIGO_VENTA=' + codigo, codigo)
+  }
+
+  public entrega(codigo: string):Observable<any>{
+    return this.http.post(this.uri + 'Ventas/IngresoEntrega?CODIGO_VENTA=' + codigo, codigo)
+  }
+
+  public bitacora():Observable<bitacoraModelo[]>{
+    return this.http.get<bitacoraModelo[]>(this.uri + 'Ventas/BitacoraEntrega')
+  }
+
+  public seguimiento():Observable<bitacoraModelo[]>{
+    return this.http.get<bitacoraModelo[]>(this.uri + 'Ventas/SeguimientoEntregas')
   }
 
 }
