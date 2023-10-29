@@ -1,15 +1,141 @@
-.card {
+.fa {
+  cursor: pointer;
+}
+
+.boton {
+  margin-left: 7px;
+}
+
+.wrapper {
+  position: relative;
+}
+
+
+
+.tarjeta-flotante {
+  position: fixed;
+  z-index: 1000;
+  /* Asegura que esté en la parte superior de otras capas */
+  top: 50%;
+  /* Centra verticalmente */
+  left: 50%;
+  /* Centra horizontalmente */
+  transform: translate(-50%, -50%);
+  /* Centra en la pantalla */
+  width: 75%;
+  height: 60%;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.overlay {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.286);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+
+
+.containercard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+
+
+
+@media (max-width: 768px) {
+
+  .botoncrear {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .titulo {
+
+    font-size: 22px;
+    display: block;
+    margin-top: 45px;
+  }
+
+  .subtitulo{
+    font-size: 14px;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  th {
+    font-size: 10px;
+  }
+
+  td {
+    font-size: 10px;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+
+}
+
+
+
+@media (max-width: 767px) {
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .card {
     max-width: 250px;
     background-color: #ffff;
     padding: 20px;
     text-align: center;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.02);
-    /* border: 1px solid #afaeae; */
 }
 
 .card:hover {
     background-color: rgb(224, 240, 247);
-    /* color: #ffffff; */
 }
 
 .imagen {
@@ -40,11 +166,11 @@
   }
   
   .quantity-input {
-    width: 40px; /* Ancho del campo de entrada numérica */
+    width: 40px; 
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin: 0 10px; /* Espacio entre el campo de entrada y los botones */
+    margin: 0 10px;
   }
   
   .decrement-button,
@@ -59,9 +185,9 @@
   }
   
   .decrement-button {
-    margin-right: 5px; /* Espacio entre el botón de menos y el campo de entrada */
+    margin-right: 5px; 
   }
   
   .increment-button {
-    margin-left: 5px; /* Espacio entre el botón de más y el campo de entrada */
-  }
+    margin-left: 5px; 
+  } */

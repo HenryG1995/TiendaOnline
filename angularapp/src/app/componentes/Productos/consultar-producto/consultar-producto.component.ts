@@ -6,6 +6,8 @@ import { Moment } from 'moment';
 import Swal from 'sweetalert2'
 import * as _moment from 'moment';
 import { ProductoService } from 'src/app/servicios/producto.service';
+import { ventaModelo } from 'src/app/modelos/venta.model';
+import { DataSharingService } from 'src/app/servicios/data-sharing.service';
 
 @Component({
   selector: 'app-consultar-producto',
@@ -16,6 +18,8 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
 
   productos: ProductoModel[] = [];
   fechaVencimiento: Date | null = null;
+  datosVenta: ventaModelo[] = [];
+  productoEnvio: ProductoModel[] = []
 
 
   productoFormGroupConsulta = this._formBuilder.group({
@@ -28,6 +32,7 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
     private dateAdapter: DateAdapter<Date>,
     private _formBuilder: FormBuilder,
     private productosservice: ProductoService,
+    private dataSharingService: DataSharingService
   ) {
     this.dateAdapter.setLocale('es')
   }
@@ -45,7 +50,6 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
       (response: ProductoModel[]) => {
 
         this.productos = response;
-        console.log('productos: ', response[0].codigO_PRODUCTO)
       },
       (error) => {
         console.log('Ocurrio un error al obtener los productos.')
@@ -75,6 +79,42 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
         if (quantity > 0 && quantity <= item.unidadeS_EXISTENTES) {
           console.log('Cantidad seleccionada:', quantity);
 
+          const productoEnCarrito: ventaModelo = {
+            codigO_CLIENTE: '570E86CD8F284555B64BED139BC75AA6',
+            fechA_ENTREGA: new Date,
+            estado: '',
+            aplicA_NOTA: 0,
+            codigO_NOTA: '',
+            codigO_PRODUCTO: item.codigO_PRODUCTO,
+            cantidad: quantity
+          };
+
+          const producto: ProductoModel = {
+            codigO_PRODUCTO: '',
+            nombrE_PRODUCTO: item.nombrE_PRODUCTO,
+            descripcioN_PRODUCTO: item.descripcioN_PRODUCTO,
+            unidadeS_EXISTENTES: 0,
+            fechA_CARGA: new Date,
+            fechA_INGRESO: new Date,
+            uuiD_ESTADO: '',
+            activo: 0,
+            imagen: '',
+            codigO_PROVEEDOR: '',
+            caducidad: new Date,
+            precio: 0,
+            descuento: 0,
+            activA_DESCUENTO: 0
+
+          }
+
+          this.datosVenta.push(productoEnCarrito);
+          this.productoEnvio.push(producto)
+
+          this.dataSharingService.setDatosVenta(this.datosVenta);
+          this.dataSharingService.setDatosProdcuto(this.productoEnvio)
+
+          Swal.fire('Agregado al carrito', 'El producto se ha añadido al carrito.', 'success');
+
         } else {
           Swal.fire('Cantidad no válida', 'Por favor, ingrese una cantidad válida.', 'error');
         }
@@ -82,7 +122,6 @@ export class ConsultarProductoComponent implements OnInit, AfterViewInit {
     });
 
   }
-
 
   buscarProducto() {
     this.productos = []

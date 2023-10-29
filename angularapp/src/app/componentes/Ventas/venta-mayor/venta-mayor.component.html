@@ -1,13 +1,58 @@
-<div class="contenedor">
-  <h4 style="text-align: center;"><strong>Ventas</strong></h4>
-  <mat-divider></mat-divider>
+<div class="wrapper">
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="container mt-2" >
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <span class="titulo">Venta</span>
+            <button class="btn btn-outline-danger float-end botoncrear" [routerLink]="['/consultarProducto']">
+              <i class="fa fa-backward" aria-hidden="true"></i>
+              Regresar
+            </button>
 
-  <div class="contenedorcards">
+            <div class="table-container">
+              <table class="table table-striped mt-4">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Código producto</th>
+                    <th scope="col">Nombre producto</th>
+                    <th scope="col">Descripción producto</th>
+                    <th scope="col">Cantidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let venta of datosMuestra">
+                    <td>{{venta.codigo}}</td>
+                    <td>{{venta.nombre}}</td>
+                    <td>{{venta.descripcion}}</td>
+                    <td>{{venta.cantidad}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button *ngIf="!datos" (click)="realizarVenta()" class="btn btn-success float-end ">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Finalizar venta
+              </button>
 
-    <mat-card class="card" *ngFor="let item of dataSource">
+            </div>
+            <h5 *ngIf="datos" class="subtitulo m-4">No existen productos agregados</h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!--
+
+  <mat-card class="card" *ngFor="let item of dataSource">
       <mat-card-header>
         <mat-card-title>{{item.cardTitle}}</mat-card-title>
-        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+         <mat-card-subtitle>Dog Breed</mat-card-subtitle> 
       </mat-card-header>
       <img (click)="alertaCompra(item)" mat-card-image src="{{item.imagecard}}" alt="Photo of a Shiba Inu">
       <mat-card-content>
@@ -21,5 +66,4 @@
         <button (click)="alertaCompra(item)" mat-button color="primary"><mat-icon>add_shopping_cart</mat-icon></button>
       </div>
     </mat-card>
-  </div>
-</div>
+-->

@@ -1,124 +1,120 @@
-import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ProductoModel } from 'src/app/modelos/producto.model';
+import { ventaModelo } from 'src/app/modelos/venta.model';
+import { DataSharingService } from 'src/app/servicios/data-sharing.service';
+import { VentaService } from 'src/app/servicios/venta.service';
 import Swal from 'sweetalert2'
-
-
-export interface cardsinterface {
-  idcard: number;
-  cardTitle: string;
-  imagecard: string;
-  price: number;
-}
-
-const ELEMENT_DATA: cardsinterface[] = [
-  { idcard: 1, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 2, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 3, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 4, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 5, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 6, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 7, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 8, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 9, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 10, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 11, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 12, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 13, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 14, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 15, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 16, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 17, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 18, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 19, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-  { idcard: 20, cardTitle: 'Shiba Inu', imagecard: 'https://material.angular.io/assets/img/examples/shiba2.jpg', price: 1500 },
-];
 
 @Component({
   selector: 'app-venta-mayor',
   templateUrl: './venta-mayor.component.html',
   styleUrls: ['./venta-mayor.component.css']
 })
-export class VentaMayorComponent {
-
-  dataSource = ELEMENT_DATA;
+export class VentaMayorComponent implements OnInit, OnDestroy {
 
 
+  isLoading = false;
+  ventaInfo: ventaModelo[] = [];
+  productoInfo: ProductoModel[] = [];
+  datosMuestra: mostrarDatos[] = []
+  datos = true
 
-  alertaCompra(item: cardsinterface) {
+  private subscription?: Subscription[] = [];
 
-    // Swal.fire({
-    //   title: 'Enter the amount',
-    //   html: '<duet-number-input value="0" min="-999999" step="1" unit="€" />',
-    //   didOpen: () => {
-    //     const input = Swal.getContainer()?.querySelector('duet-number-input') as HTMLInputElement | null;
-    //     if (input) {
-    //       input.addEventListener('duetChange', (e: Event) => {
-    //         const customEvent = e as CustomEvent;
-    //         const value = parseInt(customEvent.detail.value, 10); // Convierte el valor a un número entero
-            
-    //         const confirmButton = Swal.getConfirmButton();
-    //         if (confirmButton) {
-    //           confirmButton.disabled = value < 0;
-    //         }
-    //       });
-    //     }
-    //   },
-    //   preConfirm: () => {
-    //     const input = Swal.getContainer()?.querySelector('duet-number-input') as HTMLInputElement | null;
-    //     if (input) {
-    //       const value = parseInt(input.value, 10); // Convierte el valor a un número entero
-    //       return value < 0 ? Swal.showValidationMessage('Please enter a positive value') : value;
-    //     }
-    //     return null;
-    //   },
-    // }).then(function (result) {
-    //   if (result.isConfirmed) {
-    //     Swal.fire(`Entered amount: ${result.value}`);
-    //   }
-    // });
-    
-    
-    
-    
-    
-    
+  constructor(
+    private dataSharingService: DataSharingService,
+    private ventaservice: VentaService
+  ) {
 
-
-    // const inputElement = document.createElement('input');
-    // inputElement.type = 'number';
-    // inputElement.min = '1'; // Establece un valor mínimo
-    // inputElement.value = '1'; // Establece un valor inicial
-
-    // Swal.fire({
-    //   title: item.cardTitle,
-    //   text: 'Precio: Q' + item.price,
-    //   imageUrl: item.imagecard,
-    //   imageWidth: 400,
-    //   imageHeight: 300,
-    //   imageAlt: item.cardTitle,
-    //   html: inputElement.outerHTML, // Agrega el elemento de entrada numérica al contenido HTML de la alerta
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Agregar al carrito',
-    //   cancelButtonText: 'Cancelar',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     const quantity = parseInt(inputElement.value, 10); // Obtiene la cantidad ingresada
-    //     // Ahora puedes realizar alguna acción con la cantidad, como agregarla al carrito
-    //     console.log('Cantidad seleccionada:', quantity);
-    //   }
-    // });
-
-
-
-    //   Swal.fire({
-    //     title: item.cardTitle,
-    //     text: 'Precio: Q' + item.price,
-    //     imageUrl: item.imagecard,
-    //     imageWidth: 400,
-    //     imageHeight: 300,
-    //     imageAlt: item.cardTitle,
-    //   })
   }
+
+  ngOnInit(): void {
+    this.ventaInfo = this.dataSharingService.getDatosVenta();
+    this.productoInfo = this.dataSharingService.getDatosProducto();
+
+    this.datosMuestra = [];
+
+    for (let index = 0; index < this.ventaInfo.length; index++) {
+      this.datosMuestra.push({
+        codigo: this.ventaInfo[index].codigO_PRODUCTO,
+        nombre: this.productoInfo[index].nombrE_PRODUCTO,
+        descripcion: this.productoInfo[index].descripcioN_PRODUCTO,
+        cantidad: this.ventaInfo[index].cantidad
+      });
+    }
+
+    if (this.datosMuestra.length > 0) {
+      this.datos = false
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.forEach((sub) => {
+      sub.unsubscribe();
+    })
+  }
+
+  realizarVenta() {
+    this.isLoading = true
+    console.log(this.ventaInfo)
+    this.subscription?.push(
+      this.ventaservice.realizarVenta(this.ventaInfo).subscribe(
+        (response) => {
+          this.ventaRealizada()
+
+        },
+        (error) => {
+          this.errorServidor()
+        }
+      )
+    )
+  }
+
+  ventaRealizada() {
+    this.isLoading = false;
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      text: 'Venta realizada exitosamente.',
+      showConfirmButton: true,
+      allowOutsideClick: false,
+    }).then((e) => {
+      if (e.isConfirmed) {
+        window.location.reload();
+      }
+    }
+    )
+  }
+
+  errorVenta() {
+    this.isLoading = false;
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      text: 'Ocurrio un error al realizar venta.',
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      timer: 2500
+    })
+  }
+
+  errorServidor() {
+    this.isLoading = false;
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      text: 'Ocurrio un error con el servidor.',
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      timer: 2500
+    })
+  }
+}
+
+export interface mostrarDatos {
+  codigo: string
+  nombre: string
+  descripcion: string
+  cantidad: number
 }
